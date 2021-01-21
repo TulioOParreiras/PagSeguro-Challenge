@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		D256A39125BA47F10010C33F /* BeerList.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D256A38725BA47F10010C33F /* BeerList.framework */; };
+		D256A3A625BA4B4A0010C33F /* Beer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D256A3A525BA4B4A0010C33F /* Beer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -25,6 +26,7 @@
 		D256A38B25BA47F10010C33F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D256A39025BA47F10010C33F /* BeerListTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BeerListTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D256A39725BA47F10010C33F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D256A3A525BA4B4A0010C33F /* Beer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Beer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +70,7 @@
 			isa = PBXGroup;
 			children = (
 				D256A38B25BA47F10010C33F /* Info.plist */,
+				D256A3A525BA4B4A0010C33F /* Beer.swift */,
 			);
 			path = BeerList;
 			sourceTree = "<group>";
@@ -140,6 +143,7 @@
 				TargetAttributes = {
 					D256A38625BA47F10010C33F = {
 						CreatedOnToolsVersion = 12.2;
+						LastSwiftMigration = 1220;
 					};
 					D256A38F25BA47F10010C33F = {
 						CreatedOnToolsVersion = 12.2;
@@ -187,6 +191,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D256A3A625BA4B4A0010C33F /* Beer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -332,6 +337,7 @@
 		D256A39C25BA47F10010C33F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
@@ -348,6 +354,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = br.com.tulioparreiras.BeerList;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
@@ -355,6 +362,7 @@
 		D256A39D25BA47F10010C33F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
@@ -378,6 +386,7 @@
 		D256A39F25BA47F10010C33F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = BeerListTests/Info.plist;
@@ -395,6 +404,7 @@
 		D256A3A025BA47F10010C33F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = BeerListTests/Info.plist;
