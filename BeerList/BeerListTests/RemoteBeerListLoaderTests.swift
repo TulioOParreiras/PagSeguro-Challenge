@@ -12,13 +12,19 @@ final class RemoteBeerListLoader {
     private let url: URL
     private let client: HTTPClient
     
+    enum Error: Swift.Error {
+        case invalidData
+    }
+    
     init(url: URL, client: HTTPClient) {
         self.url = url
         self.client = client
     }
     
     func load(completion: @escaping (Swift.Result<[Beer], Error>) -> Void) {
-        self.client.get(from: self.url, completion: { _ in })
+        self.client.get(from: self.url, completion: { _ in
+            completion(.failure(Error.invalidData))
+        })
     }
 }
 
@@ -31,12 +37,19 @@ protocol HTTPClient {
 
 
 class HTTPClientSpy: HTTPClient {
-    var requestedURLs = [URL]()
+    var messages = [(url: URL, completion: HTTPClient.Response)]()
+    var requestedURLs: [URL] {
+        self.messages.map { $0.url }
+    }
     
-    typealias Result = HTTPClient.Result
+    typealias Response = HTTPClient.Response
     
-    func get(from url: URL, completion: @escaping (Result) -> Void) {
-        self.requestedURLs.append(url)
+    func get(from url: URL, completion: @escaping Response) {
+        self.messages.append((url, completion))
+    }
+    
+    func complete(with error: Error, at index: Int = 0) {
+        self.messages[index].completion(.failure(error))
     }
 }
 
@@ -63,6 +76,26 @@ class RemoteBeerListLoaderTests: XCTestCase {
         sut.load { _ in }
         
         XCTAssertEqual(client.requestedURLs, [url, url])
+    }
+    
+    func test_requestLoad_deliversErrorOnClientError() {
+        let (sut, client) = makeSUT()
+        
+        let exp = expectation(description: "Wait for request completion")
+        
+        sut.load { receivedResult in
+            switch receivedResult {
+            case let .success(receivedItem):
+                XCTFail("Expected failure, got \(receivedItem) instead")
+            case let .failure(receivedError):
+                XCTAssertEqual(receivedError, RemoteBeerListLoader.Error.invalidData)
+            }
+            exp.fulfill()
+        }
+        let error = NSError(domain: "Any error", code: 0)
+        client.complete(with: error)
+        
+        wait(for: [exp], timeout: 1.0)
     }
     
     // MARK: - Helpers
