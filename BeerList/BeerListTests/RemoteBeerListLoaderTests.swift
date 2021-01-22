@@ -31,12 +31,12 @@ protocol HTTPClient {
 
 
 class HTTPClientSpy: HTTPClient {
-    var requestedURL: URL?
+    var requestedURLs = [URL]()
     
     typealias Result = HTTPClient.Result
     
     func get(from url: URL, completion: @escaping (Result) -> Void) {
-        self.requestedURL = url
+        self.requestedURLs.append(url)
     }
 }
 
@@ -45,14 +45,24 @@ class RemoteBeerListLoaderTests: XCTestCase {
     func test_init_doesNotRequestDataFromURL() {
         let (_, client) = makeSUT()
         
-        XCTAssertNil(client.requestedURL)
+        XCTAssertTrue(client.requestedURLs.isEmpty)
     }
     
     func test_requestLoad_requestDataFromURL() {
-        let (sut, client) = makeSUT()
+        let url = URL(string: "https://a-url.com")!
+        let (sut, client) = makeSUT(url: url)
         sut.load { _ in }
         
-        XCTAssertNotNil(client.requestedURL)
+        XCTAssertEqual(client.requestedURLs, [url])
+    }
+    
+    func test_requestLoadTwice_requestDataFromURLTwice() {
+        let url = URL(string: "https://a-url.com")!
+        let (sut, client) = makeSUT(url: url)
+        sut.load { _ in }
+        sut.load { _ in }
+        
+        XCTAssertEqual(client.requestedURLs, [url, url])
     }
     
     // MARK: - Helpers
