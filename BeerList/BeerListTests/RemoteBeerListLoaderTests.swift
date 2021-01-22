@@ -57,11 +57,11 @@ class RemoteBeerListLoaderTests: XCTestCase {
     
     // MARK: - Helpers
     
-    private func makeSUT(url: URL = URL(string: "https://any-url.com")!) -> (sut: RemoteBeerListLoader, client: HTTPClientSpy) {
+    private func makeSUT(url: URL = URL(string: "https://any-url.com")!, file: StaticString = #file, line: UInt = #line) -> (sut: RemoteBeerListLoader, client: HTTPClientSpy) {
         let client = HTTPClientSpy()
         let sut = RemoteBeerListLoader(url: url, client: client)
-        trackForMemoryLeaks(client)
-        trackForMemoryLeaks(sut)
+        trackForMemoryLeaks(client, file: file, line: line)
+        trackForMemoryLeaks(sut, file: file, line: line)
         return (sut, client)
     }
     
