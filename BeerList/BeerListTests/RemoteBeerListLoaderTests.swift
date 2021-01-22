@@ -128,8 +128,7 @@ class RemoteBeerListLoaderTests: XCTestCase {
         let (sut, client) = makeSUT()
         
         let item = self.makeBeerItem()
-        let json = self.makeBeerJSON(item)
-        let data = try! JSONSerialization.data(withJSONObject: [json])
+        let data = self.makeBeerData(item)
         
         let samples = [199, 300, 400, 500]
         samples.enumerated().forEach { index, code in
@@ -154,8 +153,7 @@ class RemoteBeerListLoaderTests: XCTestCase {
         let item = self.makeBeerItem()
         
         self.expect(sut: sut, toCompleteWith: .success([item])) {
-            let json = self.makeBeerJSON(item)
-            let data = try! JSONSerialization.data(withJSONObject: [json])
+            let data = self.makeBeerData(item)
             client.complete(withStatusCode: 200, data: data)
         }
     }
@@ -171,8 +169,7 @@ class RemoteBeerListLoaderTests: XCTestCase {
         sut = nil
         
         let item = self.makeBeerItem()
-        let json = self.makeBeerJSON(item)
-        let data = try! JSONSerialization.data(withJSONObject: [json])
+        let data = self.makeBeerData(item)
         client.complete(withStatusCode: 200, data: data)
         
         XCTAssertTrue(capturedResults.isEmpty)
@@ -233,6 +230,11 @@ class RemoteBeerListLoaderTests: XCTestCase {
             "abv": item.abv,
             "ibu": item.ibu
         ]
+    }
+    
+    func makeBeerData(_ item: Beer) -> Data {
+        let json = makeBeerJSON(item)
+        return try! JSONSerialization.data(withJSONObject: json)
     }
 
 }
