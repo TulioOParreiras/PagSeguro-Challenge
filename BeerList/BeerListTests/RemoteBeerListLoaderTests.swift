@@ -141,7 +141,7 @@ class RemoteBeerListLoaderTests: XCTestCase {
         }
     }
     
-    func test_requestLogin_deliversItemOn200HTTPResponseWithJSONItem() {
+    func test_requestLoad_deliversItemOn200HTTPResponseWithJSONItem() {
         let (sut, client) = makeSUT()
         
         let item = Beer(id: 0, name: "a name", tagline: "a tagline", description: "a description", imageURL: URL(string: "https://a-image-url.com")!, abv: 0, ibu: 0)
@@ -159,6 +159,32 @@ class RemoteBeerListLoaderTests: XCTestCase {
             let data = try! JSONSerialization.data(withJSONObject: [json])
             client.complete(withStatusCode: 200, data: data)
         }
+    }
+    
+    func test_requestLoad_deliversNoResultWhenSUTInstanceHasBeenDeallocated() {
+        let url = URL(string: "http://-a-url.com")!
+        let client = HTTPClientSpy()
+        var sut: RemoteBeerListLoader? = RemoteBeerListLoader(url: url, client: client)
+        
+        var capturedResults = [RemoteBeerListLoader.Result]()
+        sut?.load(completion: { capturedResults.append($0) })
+        
+        sut = nil
+        
+        let item = Beer(id: 0, name: "a name", tagline: "a tagline", description: "a description", imageURL: URL(string: "https://a-image-url.com")!, abv: 0, ibu: 0)
+        let json: [String: Any] = [
+            "id": item.id,
+            "name": item.name,
+            "tagline": item.tagline,
+            "description": item.description,
+            "image_url": item.imageURL.absoluteString,
+            "abv": item.abv,
+            "ibu": item.ibu
+        ]
+        let data = try! JSONSerialization.data(withJSONObject: [json])
+        client.complete(withStatusCode: 200, data: data)
+        
+        XCTAssertTrue(capturedResults.isEmpty)
     }
     
     // MARK: - Helpers
