@@ -60,7 +60,15 @@ class RemoteBeerListLoaderTests: XCTestCase {
     private func makeSUT(url: URL = URL(string: "https://any-url.com")!) -> (sut: RemoteBeerListLoader, client: HTTPClientSpy) {
         let client = HTTPClientSpy()
         let sut = RemoteBeerListLoader(url: url, client: client)
+        trackForMemoryLeaks(client)
+        trackForMemoryLeaks(sut)
         return (sut, client)
+    }
+    
+    func trackForMemoryLeaks(_ instance: AnyObject, file: StaticString = #file, line: UInt = #line) {
+        addTeardownBlock { [weak instance] in
+            XCTAssertNil(instance, "Instance should have been deallocated. Potential memory leak.", file: file, line: line)
+        }
     }
 
 }
