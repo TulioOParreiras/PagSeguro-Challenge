@@ -11,6 +11,7 @@
 		D256A3A625BA4B4A0010C33F /* Beer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D256A3A525BA4B4A0010C33F /* Beer.swift */; };
 		D256A3AA25BA4C2E0010C33F /* BeerListLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D256A3A925BA4C2E0010C33F /* BeerListLoader.swift */; };
 		D256A3B925BA4DDE0010C33F /* RemoteBeerListLoaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D256A3B825BA4DDE0010C33F /* RemoteBeerListLoaderTests.swift */; };
+		D256A3C125BB0B480010C33F /* RemoteBeerListLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D256A3C025BB0B480010C33F /* RemoteBeerListLoader.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -31,6 +32,7 @@
 		D256A3A525BA4B4A0010C33F /* Beer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Beer.swift; sourceTree = "<group>"; };
 		D256A3A925BA4C2E0010C33F /* BeerListLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeerListLoader.swift; sourceTree = "<group>"; };
 		D256A3B825BA4DDE0010C33F /* RemoteBeerListLoaderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteBeerListLoaderTests.swift; sourceTree = "<group>"; };
+		D256A3C025BB0B480010C33F /* RemoteBeerListLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteBeerListLoader.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +75,7 @@
 		D256A38925BA47F10010C33F /* BeerList */ = {
 			isa = PBXGroup;
 			children = (
+				D256A3BF25BB0B3D0010C33F /* BeerList API */,
 				D256A3BC25BB09000010C33F /* BeerList Feature */,
 				D256A38B25BA47F10010C33F /* Info.plist */,
 			);
@@ -95,6 +98,14 @@
 				D256A3A925BA4C2E0010C33F /* BeerListLoader.swift */,
 			);
 			path = "BeerList Feature";
+			sourceTree = "<group>";
+		};
+		D256A3BF25BB0B3D0010C33F /* BeerList API */ = {
+			isa = PBXGroup;
+			children = (
+				D256A3C025BB0B480010C33F /* RemoteBeerListLoader.swift */,
+			);
+			path = "BeerList API";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -208,6 +219,7 @@
 			files = (
 				D256A3AA25BA4C2E0010C33F /* BeerListLoader.swift in Sources */,
 				D256A3A625BA4B4A0010C33F /* Beer.swift in Sources */,
+				D256A3C125BB0B480010C33F /* RemoteBeerListLoader.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
