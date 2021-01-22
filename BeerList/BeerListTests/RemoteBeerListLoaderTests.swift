@@ -43,18 +43,24 @@ class HTTPClientSpy: HTTPClient {
 class RemoteBeerListLoaderTests: XCTestCase {
 
     func test_init_doesNotRequestDataFromURL() {
-        let client = HTTPClientSpy()
-        _ = RemoteBeerListLoader(url: URL(string: "https://any-url.com")!, client: client)
+        let (_, client) = makeSUT()
         
         XCTAssertNil(client.requestedURL)
     }
     
     func test_requestLoad_requestDataFromURL() {
-        let client = HTTPClientSpy()
-        let sut = RemoteBeerListLoader(url: URL(string: "https://any-url.com")!, client: client)
+        let (sut, client) = makeSUT()
         sut.load { _ in }
         
         XCTAssertNotNil(client.requestedURL)
+    }
+    
+    // MARK: - Helpers
+    
+    private func makeSUT(url: URL = URL(string: "https://any-url.com")!) -> (sut: RemoteBeerListLoader, client: HTTPClientSpy) {
+        let client = HTTPClientSpy()
+        let sut = RemoteBeerListLoader(url: url, client: client)
+        return (sut, client)
     }
 
 }
