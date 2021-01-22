@@ -16,14 +16,36 @@ final class RemoteBeerListLoader {
         case invalidData
     }
     
+    private struct BeerItem: Decodable {
+        let id: Int
+        let name: String
+        let tagline: String
+        let description: String
+        let image_url: URL
+        let abv: Double
+        let ibu: Double
+    }
+    
     init(url: URL, client: HTTPClient) {
         self.url = url
         self.client = client
     }
     
     func load(completion: @escaping (Swift.Result<[Beer], Error>) -> Void) {
-        self.client.get(from: self.url, completion: { _ in
-            completion(.failure(Error.invalidData))
+        self.client.get(from: self.url, completion: { [weak self] result in
+            guard self != nil else { return }
+            switch result {
+            case let .success((data, response)):
+                do {
+                    let item = try JSONDecoder().decode([BeerItem].self, from: data)
+                    let beers = item.compactMap { Beer(id: $0.id, name: $0.name, tagline: $0.tagline, description: $0.description, imageURL: $0.image_url, abv: $0.abv, ibu: $0.ibu)}
+                    completion(.success(beers))
+                } catch {
+                    completion(.failure(Error.invalidData))
+                }
+            case .failure:
+                completion(.failure(Error.invalidData))
+            }
         })
     }
 }
@@ -52,14 +74,14 @@ class HTTPClientSpy: HTTPClient {
         self.messages[index].completion(.failure(error))
     }
     
-    func complete(withStatusCode code: Int, data: [String: String] = [:], at index: Int = 0) {
+    func complete(withStatusCode code: Int, data: Data = Data(), at index: Int = 0) {
         let response = HTTPURLResponse(
             url: requestedURLs[index],
             statusCode: code,
             httpVersion: nil,
-            headerFields: data
+            headerFields: nil
         )!
-        messages[index].completion(.success((Data(), response)))
+        messages[index].completion(.success((data, response)))
     }
 }
 
@@ -144,10 +166,44 @@ class RemoteBeerListLoaderTests: XCTestCase {
             }
             exp.fulfill()
         }
-        let invalidJSON = [String: String]()
-        client.complete(withStatusCode: 200, data: invalidJSON)
+        let invalidData = Data("invalid json".utf8)
+        client.complete(withStatusCode: 200, data: invalidData)
         
         wait(for: [exp], timeout: 1.0)
+    }
+    
+    func test_requestLogin_deliversItemOn200HTTPResponseWithJSONItem() {
+        let (sut, client) = makeSUT()
+        
+        let exp = expectation(description: "Wait for request completion")
+        
+        let item = Beer(id: 0, name: "a name", tagline: "a tagline", description: "a description", imageURL: URL(string: "https://a-image-url.com")!, abv: 0, ibu: 0)
+        
+        sut.load { receivedResult in
+            switch receivedResult {
+            case let .success(receivedItem):
+                XCTAssertEqual(receivedItem, [item])
+            case let .failure(receivedError):
+                XCTFail("Expected success, got \(receivedError) instead")
+            }
+            exp.fulfill()
+        }
+        let json: [String: Any] = [
+            "id": item.id,
+            "name": item.name,
+            "tagline": item.tagline,
+            "description": item.description,
+            "image_url": item.imageURL.absoluteString,
+            "abv": item.abv,
+            "ibu": item.ibu
+        ]
+        let data = try! JSONSerialization.data(withJSONObject: [json])
+        client.complete(withStatusCode: 200, data: data)
+        
+//        let data = try! JSONSerialization.data(withJSONObject: [json])
+//        client.complete(withStatusCode: 200, data: data)
+        
+        wait(for: [exp], timeout: 5.0)
     }
     
     // MARK: - Helpers

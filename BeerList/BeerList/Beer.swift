@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Beer {
+struct Beer: Equatable {
     let id: Int
     let name: String
     let tagline: String
