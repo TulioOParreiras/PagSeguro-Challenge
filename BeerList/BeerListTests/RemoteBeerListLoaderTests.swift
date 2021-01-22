@@ -127,7 +127,7 @@ class RemoteBeerListLoaderTests: XCTestCase {
     func test_requestLoad_deliversErrorOnNon200HTTPResponse() {
         let (sut, client) = makeSUT()
         
-        let item = self.makeBeerItem()
+        let item = [self.makeBeerItem()]
         let data = self.makeBeerData(item)
         
         let samples = [199, 300, 400, 500]
@@ -150,9 +150,9 @@ class RemoteBeerListLoaderTests: XCTestCase {
     func test_requestLoad_deliversItemOn200HTTPResponseWithJSONItem() {
         let (sut, client) = makeSUT()
         
-        let item = self.makeBeerItem()
+        let item = [self.makeBeerItem()]
         
-        self.expect(sut: sut, toCompleteWith: .success([item])) {
+        self.expect(sut: sut, toCompleteWith: .success(item)) {
             let data = self.makeBeerData(item)
             client.complete(withStatusCode: 200, data: data)
         }
@@ -168,7 +168,7 @@ class RemoteBeerListLoaderTests: XCTestCase {
         
         sut = nil
         
-        let item = self.makeBeerItem()
+        let item = [self.makeBeerItem()]
         let data = self.makeBeerData(item)
         client.complete(withStatusCode: 200, data: data)
         
@@ -232,8 +232,8 @@ class RemoteBeerListLoaderTests: XCTestCase {
         ]
     }
     
-    func makeBeerData(_ item: Beer) -> Data {
-        let json = makeBeerJSON(item)
+    func makeBeerData(_ item: [Beer]) -> Data {
+        let json = item.map { self.makeBeerJSON($0) }
         return try! JSONSerialization.data(withJSONObject: json)
     }
 
