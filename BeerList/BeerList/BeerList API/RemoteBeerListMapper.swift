@@ -29,8 +29,10 @@ final class RemoteBeerListMapper {
         }
     }
     
+    private static var OK_200: Int { 200 }
+    
     static func map(data: Data, from response: HTTPURLResponse) throws -> [Beer] {
-        guard (response as HTTPURLResponse).statusCode == 200 else {
+        guard response.statusCode == OK_200 else {
             throw RemoteBeerListLoader.Error.invalidData
         }
         do {
