@@ -51,6 +51,16 @@ class HTTPClientSpy: HTTPClient {
     func complete(with error: Error, at index: Int = 0) {
         self.messages[index].completion(.failure(error))
     }
+    
+    func complete(withStatusCode code: Int, data: [String: String] = [:], at index: Int = 0) {
+        let response = HTTPURLResponse(
+            url: requestedURLs[index],
+            statusCode: code,
+            httpVersion: nil,
+            headerFields: data
+        )!
+        messages[index].completion(.success((Data(), response)))
+    }
 }
 
 class RemoteBeerListLoaderTests: XCTestCase {
@@ -96,6 +106,28 @@ class RemoteBeerListLoaderTests: XCTestCase {
         client.complete(with: error)
         
         wait(for: [exp], timeout: 1.0)
+    }
+    
+    func test_requestLoad_deliversErrorOnNon200HTTPResponse() {
+        let (sut, client) = makeSUT()
+        
+        let samples = [199, 300, 400, 500]
+        samples.enumerated().forEach { index, code in
+            let exp = expectation(description: "Wait for request completion")
+            
+            sut.load { receivedResult in
+                switch receivedResult {
+                case let .success(receivedItem):
+                    XCTFail("Expected failure, got \(receivedItem) instead")
+                case let .failure(receivedError):
+                    XCTAssertEqual(receivedError, RemoteBeerListLoader.Error.invalidData)
+                }
+                exp.fulfill()
+            }
+            client.complete(withStatusCode: code, at: index)
+            
+            wait(for: [exp], timeout: 1.0)
+        }
     }
     
     // MARK: - Helpers
