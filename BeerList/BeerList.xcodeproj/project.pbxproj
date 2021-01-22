@@ -73,9 +73,8 @@
 		D256A38925BA47F10010C33F /* BeerList */ = {
 			isa = PBXGroup;
 			children = (
+				D256A3BC25BB09000010C33F /* BeerList Feature */,
 				D256A38B25BA47F10010C33F /* Info.plist */,
-				D256A3A525BA4B4A0010C33F /* Beer.swift */,
-				D256A3A925BA4C2E0010C33F /* BeerListLoader.swift */,
 			);
 			path = BeerList;
 			sourceTree = "<group>";
@@ -87,6 +86,15 @@
 				D256A3B825BA4DDE0010C33F /* RemoteBeerListLoaderTests.swift */,
 			);
 			path = BeerListTests;
+			sourceTree = "<group>";
+		};
+		D256A3BC25BB09000010C33F /* BeerList Feature */ = {
+			isa = PBXGroup;
+			children = (
+				D256A3A525BA4B4A0010C33F /* Beer.swift */,
+				D256A3A925BA4C2E0010C33F /* BeerListLoader.swift */,
+			);
+			path = "BeerList Feature";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
