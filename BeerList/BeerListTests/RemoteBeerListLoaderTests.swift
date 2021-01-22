@@ -127,7 +127,7 @@ class RemoteBeerListLoaderTests: XCTestCase {
     func test_requestLoad_deliversErrorOnNon200HTTPResponse() {
         let (sut, client) = makeSUT()
         
-        let item = Beer(id: 0, name: "a name", tagline: "a tagline", description: "a description", imageURL: URL(string: "https://a-image-url.com")!, abv: 0, ibu: 0)
+        let item = self.makeBeerItem()
         let json: [String: Any] = [
             "id": item.id,
             "name": item.name,
@@ -159,7 +159,7 @@ class RemoteBeerListLoaderTests: XCTestCase {
     func test_requestLoad_deliversItemOn200HTTPResponseWithJSONItem() {
         let (sut, client) = makeSUT()
         
-        let item = Beer(id: 0, name: "a name", tagline: "a tagline", description: "a description", imageURL: URL(string: "https://a-image-url.com")!, abv: 0, ibu: 0)
+        let item = self.makeBeerItem()
         
         self.expect(sut: sut, toCompleteWith: .success([item])) {
             let json: [String: Any] = [
@@ -186,7 +186,7 @@ class RemoteBeerListLoaderTests: XCTestCase {
         
         sut = nil
         
-        let item = Beer(id: 0, name: "a name", tagline: "a tagline", description: "a description", imageURL: URL(string: "https://a-image-url.com")!, abv: 0, ibu: 0)
+        let item = self.makeBeerItem()
         let json: [String: Any] = [
             "id": item.id,
             "name": item.name,
@@ -235,6 +235,16 @@ class RemoteBeerListLoaderTests: XCTestCase {
         
         action()
         wait(for: [exp], timeout: 1.0)
+    }
+    
+    func makeBeerItem() -> Beer {
+        return Beer(id: 0,
+                    name: "a name",
+                    tagline: "a tagline",
+                    description: "a description",
+                    imageURL: URL(string: "https://a-image-url.com")!,
+                    abv: 0,
+                    ibu: 0)
     }
 
 }
