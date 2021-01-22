@@ -18,25 +18,39 @@ final class RemoteBeerListLoader {
     }
     
     func load(completion: @escaping (Swift.Result<[Beer], Error>) -> Void) {
-        self.client.requestedURL = self.url
+        self.client.get(from: self.url, completion: { _ in })
     }
 }
 
-class HTTPClient {
+protocol HTTPClient {
+    typealias Result = Swift.Result<(Data, HTTPURLResponse), Error>
+    typealias Response = (Result) -> Void
+    
+    func get(from url: URL, completion: @escaping (Result) -> Void)
+}
+
+
+class HTTPClientSpy: HTTPClient {
     var requestedURL: URL?
+    
+    typealias Result = HTTPClient.Result
+    
+    func get(from url: URL, completion: @escaping (Result) -> Void) {
+        self.requestedURL = url
+    }
 }
 
 class RemoteBeerListLoaderTests: XCTestCase {
 
     func test_init_doesNotRequestDataFromURL() {
-        let client = HTTPClient()
+        let client = HTTPClientSpy()
         _ = RemoteBeerListLoader(url: URL(string: "https://any-url.com")!, client: client)
         
         XCTAssertNil(client.requestedURL)
     }
     
     func test_requestLoad_requestDataFromURL() {
-        let client = HTTPClient()
+        let client = HTTPClientSpy()
         let sut = RemoteBeerListLoader(url: URL(string: "https://any-url.com")!, client: client)
         sut.load { _ in }
         
