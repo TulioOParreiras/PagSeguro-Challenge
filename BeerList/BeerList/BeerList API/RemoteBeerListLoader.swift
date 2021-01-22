@@ -7,13 +7,6 @@
 
 import Foundation
 
-public protocol HTTPClient {
-    typealias Result = Swift.Result<(Data, HTTPURLResponse), Error>
-    typealias Response = (Result) -> Void
-    
-    func get(from url: URL, completion: @escaping (Result) -> Void)
-}
-
 public final class RemoteBeerListLoader {
     private let url: URL
     private let client: HTTPClient
