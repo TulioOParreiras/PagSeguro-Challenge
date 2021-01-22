@@ -130,6 +130,26 @@ class RemoteBeerListLoaderTests: XCTestCase {
         }
     }
     
+    func test_requestLoad_deliversErrorOn200HTTPResponseWithInvalidJSON() {
+        let (sut, client) = makeSUT()
+        
+        let exp = expectation(description: "Wait for request completion")
+        
+        sut.load { receivedResult in
+            switch receivedResult {
+            case let .success(receivedItem):
+                XCTFail("Expected failure, got \(receivedItem) instead")
+            case let .failure(receivedError):
+                XCTAssertEqual(receivedError, RemoteBeerListLoader.Error.invalidData)
+            }
+            exp.fulfill()
+        }
+        let invalidJSON = [String: String]()
+        client.complete(withStatusCode: 200, data: invalidJSON)
+        
+        wait(for: [exp], timeout: 1.0)
+    }
+    
     // MARK: - Helpers
     
     private func makeSUT(url: URL = URL(string: "https://any-url.com")!, file: StaticString = #file, line: UInt = #line) -> (sut: RemoteBeerListLoader, client: HTTPClientSpy) {
