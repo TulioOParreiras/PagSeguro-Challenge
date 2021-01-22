@@ -17,6 +17,16 @@ final class RemoteBeerListMapper {
         let image_url: URL
         let abv: Double
         let ibu: Double
+        
+        var item: Beer {
+            Beer(id: self.id,
+                 name: self.name,
+                 tagline: self.tagline,
+                 description: self.description,
+                 imageURL: self.image_url,
+                 abv: self.abv,
+                 ibu: self.ibu)
+        }
     }
     
     static func map(data: Data, from response: HTTPURLResponse) throws -> [Beer] {
@@ -25,7 +35,7 @@ final class RemoteBeerListMapper {
         }
         do {
             let item = try JSONDecoder().decode([BeerItem].self, from: data)
-            let beers = item.compactMap { Beer(id: $0.id, name: $0.name, tagline: $0.tagline, description: $0.description, imageURL: $0.image_url, abv: $0.abv, ibu: $0.ibu)}
+            let beers = item.compactMap { $0.item }
             return beers
         } catch {
             throw RemoteBeerListLoader.Error.invalidData
