@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol BeerListLoader  {
+public protocol BeerListLoader  {
     typealias LoadResult = Swift.Result<[Beer], Error>
     typealias LoadResponse = (LoadResult) -> Void
     
