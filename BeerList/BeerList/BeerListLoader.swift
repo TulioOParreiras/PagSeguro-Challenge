@@ -8,7 +8,7 @@
 import Foundation
 
 protocol BeerListLoader  {
-    typealias LoadResult = Swift.Result<Beer, Error>
+    typealias LoadResult = Swift.Result<[Beer], Error>
     typealias LoadResponse = (LoadResult) -> Void
     
     func load(completion: @escaping LoadResponse)
