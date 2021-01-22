@@ -38,6 +38,9 @@ final class RemoteBeerListLoader {
             guard self != nil else { return }
             switch result {
             case let .success((data, response)):
+                guard (response as HTTPURLResponse).statusCode == 200 else {
+                    return completion(.failure(.invalidData))
+                }
                 do {
                     let item = try JSONDecoder().decode([BeerItem].self, from: data)
                     let beers = item.compactMap { Beer(id: $0.id, name: $0.name, tagline: $0.tagline, description: $0.description, imageURL: $0.image_url, abv: $0.abv, ibu: $0.ibu)}
@@ -124,10 +127,22 @@ class RemoteBeerListLoaderTests: XCTestCase {
     func test_requestLoad_deliversErrorOnNon200HTTPResponse() {
         let (sut, client) = makeSUT()
         
+        let item = Beer(id: 0, name: "a name", tagline: "a tagline", description: "a description", imageURL: URL(string: "https://a-image-url.com")!, abv: 0, ibu: 0)
+        let json: [String: Any] = [
+            "id": item.id,
+            "name": item.name,
+            "tagline": item.tagline,
+            "description": item.description,
+            "image_url": item.imageURL.absoluteString,
+            "abv": item.abv,
+            "ibu": item.ibu
+        ]
+        let data = try! JSONSerialization.data(withJSONObject: [json])
+        
         let samples = [199, 300, 400, 500]
         samples.enumerated().forEach { index, code in
             self.expect(sut: sut, toCompleteWith: .failure(.invalidData)) {
-                client.complete(withStatusCode: code, at: index)
+                client.complete(withStatusCode: code, data: data, at: index)
             }
         }
     }
