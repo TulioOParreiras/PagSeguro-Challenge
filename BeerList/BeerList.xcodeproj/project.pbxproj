@@ -10,6 +10,7 @@
 		D256A39125BA47F10010C33F /* BeerList.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D256A38725BA47F10010C33F /* BeerList.framework */; };
 		D256A3A625BA4B4A0010C33F /* Beer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D256A3A525BA4B4A0010C33F /* Beer.swift */; };
 		D256A3AA25BA4C2E0010C33F /* BeerListLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D256A3A925BA4C2E0010C33F /* BeerListLoader.swift */; };
+		D256A3B925BA4DDE0010C33F /* RemoteBeerListLoaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D256A3B825BA4DDE0010C33F /* RemoteBeerListLoaderTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,6 +30,7 @@
 		D256A39725BA47F10010C33F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D256A3A525BA4B4A0010C33F /* Beer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Beer.swift; sourceTree = "<group>"; };
 		D256A3A925BA4C2E0010C33F /* BeerListLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeerListLoader.swift; sourceTree = "<group>"; };
+		D256A3B825BA4DDE0010C33F /* RemoteBeerListLoaderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteBeerListLoaderTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +84,7 @@
 			isa = PBXGroup;
 			children = (
 				D256A39725BA47F10010C33F /* Info.plist */,
+				D256A3B825BA4DDE0010C33F /* RemoteBeerListLoaderTests.swift */,
 			);
 			path = BeerListTests;
 			sourceTree = "<group>";
@@ -150,6 +153,7 @@
 					};
 					D256A38F25BA47F10010C33F = {
 						CreatedOnToolsVersion = 12.2;
+						LastSwiftMigration = 1220;
 					};
 				};
 			};
@@ -203,6 +207,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D256A3B925BA4DDE0010C33F /* RemoteBeerListLoaderTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -391,6 +396,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = BeerListTests/Info.plist;
@@ -401,6 +407,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = br.com.tulioparreiras.BeerListTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
@@ -409,6 +416,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = BeerListTests/Info.plist;
