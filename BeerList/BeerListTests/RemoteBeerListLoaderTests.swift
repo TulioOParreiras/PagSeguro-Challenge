@@ -12,6 +12,8 @@ final class RemoteBeerListLoader {
     private let url: URL
     private let client: HTTPClient
     
+    typealias Result = Swift.Result<[Beer], Error>
+    
     enum Error: Swift.Error {
         case invalidData
     }
@@ -31,7 +33,7 @@ final class RemoteBeerListLoader {
         self.client = client
     }
     
-    func load(completion: @escaping (Swift.Result<[Beer], Error>) -> Void) {
+    func load(completion: @escaping (Result) -> Void) {
         self.client.get(from: self.url, completion: { [weak self] result in
             guard self != nil else { return }
             switch result {
@@ -113,21 +115,10 @@ class RemoteBeerListLoaderTests: XCTestCase {
     func test_requestLoad_deliversErrorOnClientError() {
         let (sut, client) = makeSUT()
         
-        let exp = expectation(description: "Wait for request completion")
-        
-        sut.load { receivedResult in
-            switch receivedResult {
-            case let .success(receivedItem):
-                XCTFail("Expected failure, got \(receivedItem) instead")
-            case let .failure(receivedError):
-                XCTAssertEqual(receivedError, RemoteBeerListLoader.Error.invalidData)
-            }
-            exp.fulfill()
+        expect(sut: sut, toCompleteWith: .failure(.invalidData)) {
+            let error = NSError(domain: "Any error", code: 0)
+            client.complete(with: error)
         }
-        let error = NSError(domain: "Any error", code: 0)
-        client.complete(with: error)
-        
-        wait(for: [exp], timeout: 1.0)
     }
     
     func test_requestLoad_deliversErrorOnNon200HTTPResponse() {
@@ -135,75 +126,39 @@ class RemoteBeerListLoaderTests: XCTestCase {
         
         let samples = [199, 300, 400, 500]
         samples.enumerated().forEach { index, code in
-            let exp = expectation(description: "Wait for request completion")
-            
-            sut.load { receivedResult in
-                switch receivedResult {
-                case let .success(receivedItem):
-                    XCTFail("Expected failure, got \(receivedItem) instead")
-                case let .failure(receivedError):
-                    XCTAssertEqual(receivedError, RemoteBeerListLoader.Error.invalidData)
-                }
-                exp.fulfill()
+            self.expect(sut: sut, toCompleteWith: .failure(.invalidData)) {
+                client.complete(withStatusCode: code, at: index)
             }
-            client.complete(withStatusCode: code, at: index)
-            
-            wait(for: [exp], timeout: 1.0)
         }
     }
     
     func test_requestLoad_deliversErrorOn200HTTPResponseWithInvalidJSON() {
         let (sut, client) = makeSUT()
         
-        let exp = expectation(description: "Wait for request completion")
-        
-        sut.load { receivedResult in
-            switch receivedResult {
-            case let .success(receivedItem):
-                XCTFail("Expected failure, got \(receivedItem) instead")
-            case let .failure(receivedError):
-                XCTAssertEqual(receivedError, RemoteBeerListLoader.Error.invalidData)
-            }
-            exp.fulfill()
+        self.expect(sut: sut, toCompleteWith: .failure(.invalidData)) {
+            let invalidData = Data("invalid json".utf8)
+            client.complete(withStatusCode: 200, data: invalidData)
         }
-        let invalidData = Data("invalid json".utf8)
-        client.complete(withStatusCode: 200, data: invalidData)
-        
-        wait(for: [exp], timeout: 1.0)
     }
     
     func test_requestLogin_deliversItemOn200HTTPResponseWithJSONItem() {
         let (sut, client) = makeSUT()
         
-        let exp = expectation(description: "Wait for request completion")
-        
         let item = Beer(id: 0, name: "a name", tagline: "a tagline", description: "a description", imageURL: URL(string: "https://a-image-url.com")!, abv: 0, ibu: 0)
         
-        sut.load { receivedResult in
-            switch receivedResult {
-            case let .success(receivedItem):
-                XCTAssertEqual(receivedItem, [item])
-            case let .failure(receivedError):
-                XCTFail("Expected success, got \(receivedError) instead")
-            }
-            exp.fulfill()
+        self.expect(sut: sut, toCompleteWith: .success([item])) {
+            let json: [String: Any] = [
+                "id": item.id,
+                "name": item.name,
+                "tagline": item.tagline,
+                "description": item.description,
+                "image_url": item.imageURL.absoluteString,
+                "abv": item.abv,
+                "ibu": item.ibu
+            ]
+            let data = try! JSONSerialization.data(withJSONObject: [json])
+            client.complete(withStatusCode: 200, data: data)
         }
-        let json: [String: Any] = [
-            "id": item.id,
-            "name": item.name,
-            "tagline": item.tagline,
-            "description": item.description,
-            "image_url": item.imageURL.absoluteString,
-            "abv": item.abv,
-            "ibu": item.ibu
-        ]
-        let data = try! JSONSerialization.data(withJSONObject: [json])
-        client.complete(withStatusCode: 200, data: data)
-        
-//        let data = try! JSONSerialization.data(withJSONObject: [json])
-//        client.complete(withStatusCode: 200, data: data)
-        
-        wait(for: [exp], timeout: 5.0)
     }
     
     // MARK: - Helpers
@@ -220,6 +175,25 @@ class RemoteBeerListLoaderTests: XCTestCase {
         addTeardownBlock { [weak instance] in
             XCTAssertNil(instance, "Instance should have been deallocated. Potential memory leak.", file: file, line: line)
         }
+    }
+    
+    func expect(sut: RemoteBeerListLoader, toCompleteWith expectedResult: RemoteBeerListLoader.Result, when action: () -> Void, file: StaticString = #file, line: UInt = #line) {
+        let exp = expectation(description: "Wait for request completion")
+        
+        sut.load { receivedResult in
+            switch (receivedResult, expectedResult) {
+            case let (.success(receivedItem), .success(expectedItem)):
+                XCTAssertEqual(receivedItem, expectedItem, file: file, line: line)
+            case let (.failure(receivedError), .failure(expectedError)):
+                XCTAssertEqual(receivedError, expectedError, file: file, line: line)
+            default:
+                XCTFail("Expected to receive \(expectedResult), got \(receivedResult) instead", file: file, line: line)
+            }
+            exp.fulfill()
+        }
+        
+        action()
+        wait(for: [exp], timeout: 1.0)
     }
 
 }
