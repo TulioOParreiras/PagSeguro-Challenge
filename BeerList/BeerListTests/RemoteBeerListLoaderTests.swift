@@ -128,15 +128,7 @@ class RemoteBeerListLoaderTests: XCTestCase {
         let (sut, client) = makeSUT()
         
         let item = self.makeBeerItem()
-        let json: [String: Any] = [
-            "id": item.id,
-            "name": item.name,
-            "tagline": item.tagline,
-            "description": item.description,
-            "image_url": item.imageURL.absoluteString,
-            "abv": item.abv,
-            "ibu": item.ibu
-        ]
+        let json = self.makeBeerJSON(item)
         let data = try! JSONSerialization.data(withJSONObject: [json])
         
         let samples = [199, 300, 400, 500]
@@ -162,15 +154,7 @@ class RemoteBeerListLoaderTests: XCTestCase {
         let item = self.makeBeerItem()
         
         self.expect(sut: sut, toCompleteWith: .success([item])) {
-            let json: [String: Any] = [
-                "id": item.id,
-                "name": item.name,
-                "tagline": item.tagline,
-                "description": item.description,
-                "image_url": item.imageURL.absoluteString,
-                "abv": item.abv,
-                "ibu": item.ibu
-            ]
+            let json = self.makeBeerJSON(item)
             let data = try! JSONSerialization.data(withJSONObject: [json])
             client.complete(withStatusCode: 200, data: data)
         }
@@ -187,15 +171,7 @@ class RemoteBeerListLoaderTests: XCTestCase {
         sut = nil
         
         let item = self.makeBeerItem()
-        let json: [String: Any] = [
-            "id": item.id,
-            "name": item.name,
-            "tagline": item.tagline,
-            "description": item.description,
-            "image_url": item.imageURL.absoluteString,
-            "abv": item.abv,
-            "ibu": item.ibu
-        ]
+        let json = self.makeBeerJSON(item)
         let data = try! JSONSerialization.data(withJSONObject: [json])
         client.complete(withStatusCode: 200, data: data)
         
@@ -245,6 +221,18 @@ class RemoteBeerListLoaderTests: XCTestCase {
                     imageURL: URL(string: "https://a-image-url.com")!,
                     abv: 0,
                     ibu: 0)
+    }
+    
+    func makeBeerJSON(_ item: Beer) -> [String: Any] {
+        return [
+            "id": item.id,
+            "name": item.name,
+            "tagline": item.tagline,
+            "description": item.description,
+            "image_url": item.imageURL.absoluteString,
+            "abv": item.abv,
+            "ibu": item.ibu
+        ]
     }
 
 }
