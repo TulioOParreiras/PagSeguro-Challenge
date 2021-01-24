@@ -8,7 +8,6 @@
 import XCTest
 import BeerList
 
-
 class HTTPClientSpy: HTTPClient {
     var messages = [(url: URL, completion: HTTPClient.Response)]()
     var requestedURLs: [URL] {
