@@ -1,6 +1,8 @@
 # PagSeguro-Challenge
 PagSeguro iOS Dev Interview Job Challenge
 
+[![Build Status](https://travis-ci.com/TulioOParreiras/PagSeguro-Challenge.svg?token=iGMpTFuqiw9THqt1PGeK&branch=master)](https://travis-ci.com/TulioOParreiras/PagSeguro-Challenge)
+
 ## Beer List Feature Specs
 
 ### Story: Customer request to see the beer list
