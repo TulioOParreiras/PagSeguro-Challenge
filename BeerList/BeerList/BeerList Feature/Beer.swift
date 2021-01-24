@@ -14,7 +14,7 @@ public struct Beer: Equatable {
     public let description: String
     public let imageURL: URL
     public let abv: Double
-    public let ibu: Double
+    public let ibu: Double?
     
     public init(id: Int,
                 name: String,
@@ -22,7 +22,7 @@ public struct Beer: Equatable {
                 description: String,
                 imageURL: URL,
                 abv: Double,
-                ibu: Double) {
+                ibu: Double?) {
         self.id = id
         self.name = name
         self.tagline = tagline

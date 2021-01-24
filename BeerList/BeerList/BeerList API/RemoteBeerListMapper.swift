@@ -16,7 +16,7 @@ final class RemoteBeerListMapper {
         let description: String
         let image_url: URL
         let abv: Double
-        let ibu: Double
+        let ibu: Double?
         
         var item: Beer {
             Beer(id: self.id,
