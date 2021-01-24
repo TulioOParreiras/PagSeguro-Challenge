@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D232EF4425BDED5D00F272BB /* URLSessionHTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D232EF4325BDED5D00F272BB /* URLSessionHTTPClient.swift */; };
 		D251F0A425BB992C003FED5F /* URLSessionHTTPClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D251F0A325BB992C003FED5F /* URLSessionHTTPClientTests.swift */; };
 		D251F0A925BDCDCF003FED5F /* XCTest+MemoryLeakTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = D251F0A825BDCDCF003FED5F /* XCTest+MemoryLeakTracking.swift */; };
 		D256A39125BA47F10010C33F /* BeerList.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D256A38725BA47F10010C33F /* BeerList.framework */; };
@@ -29,6 +30,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D232EF4325BDED5D00F272BB /* URLSessionHTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionHTTPClient.swift; sourceTree = "<group>"; };
 		D251F0A325BB992C003FED5F /* URLSessionHTTPClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionHTTPClientTests.swift; sourceTree = "<group>"; };
 		D251F0A825BDCDCF003FED5F /* XCTest+MemoryLeakTracking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTest+MemoryLeakTracking.swift"; sourceTree = "<group>"; };
 		D256A38725BA47F10010C33F /* BeerList.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BeerList.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -124,6 +126,7 @@
 				D256A3C025BB0B480010C33F /* RemoteBeerListLoader.swift */,
 				D256A3CA25BB0E4A0010C33F /* RemoteBeerListMapper.swift */,
 				D256A3C625BB0C030010C33F /* HTTPClient.swift */,
+				D232EF4325BDED5D00F272BB /* URLSessionHTTPClient.swift */,
 			);
 			path = "BeerList API";
 			sourceTree = "<group>";
@@ -242,6 +245,7 @@
 				D256A3CB25BB0E4A0010C33F /* RemoteBeerListMapper.swift in Sources */,
 				D256A3C725BB0C030010C33F /* HTTPClient.swift in Sources */,
 				D256A3C125BB0B480010C33F /* RemoteBeerListLoader.swift in Sources */,
+				D232EF4425BDED5D00F272BB /* URLSessionHTTPClient.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
