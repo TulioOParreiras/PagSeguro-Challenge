@@ -160,7 +160,7 @@ class RemoteBeerListLoaderTests: XCTestCase {
                     ibu: 0)
     }
     
-    func makeBeerJSON(_ item: Beer) -> [String: Any] {
+    func makeBeerJSON(_ item: Beer) -> [String: Any?] {
         return [
             "id": item.id,
             "name": item.name,
