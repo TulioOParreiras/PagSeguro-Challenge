@@ -32,15 +32,9 @@ final class RemoteBeerListMapper {
     private static var OK_200: Int { 200 }
     
     static func map(data: Data, from response: HTTPURLResponse) throws -> [Beer] {
-        guard response.statusCode == OK_200 else {
+        guard response.statusCode == OK_200, let item = try? JSONDecoder().decode([BeerItem].self, from: data) else {
             throw RemoteBeerListLoader.Error.invalidData
         }
-        do {
-            let item = try JSONDecoder().decode([BeerItem].self, from: data)
-            let beers = item.compactMap { $0.item }
-            return beers
-        } catch {
-            throw RemoteBeerListLoader.Error.invalidData
-        }
+        return item.compactMap { $0.item }
     }
 }
