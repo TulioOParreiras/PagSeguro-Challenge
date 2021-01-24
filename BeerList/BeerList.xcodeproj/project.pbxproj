@@ -10,6 +10,7 @@
 		D232EF4425BDED5D00F272BB /* URLSessionHTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D232EF4325BDED5D00F272BB /* URLSessionHTTPClient.swift */; };
 		D232EF4E25BDFD7300F272BB /* BeerListAPIEndToEndTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D232EF4D25BDFD7300F272BB /* BeerListAPIEndToEndTests.swift */; };
 		D232EF5025BDFD7300F272BB /* BeerList.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D256A38725BA47F10010C33F /* BeerList.framework */; };
+		D232EF5925BE014B00F272BB /* XCTest+MemoryLeakTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = D251F0A825BDCDCF003FED5F /* XCTest+MemoryLeakTracking.swift */; };
 		D251F0A425BB992C003FED5F /* URLSessionHTTPClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D251F0A325BB992C003FED5F /* URLSessionHTTPClientTests.swift */; };
 		D251F0A925BDCDCF003FED5F /* XCTest+MemoryLeakTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = D251F0A825BDCDCF003FED5F /* XCTest+MemoryLeakTracking.swift */; };
 		D256A39125BA47F10010C33F /* BeerList.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D256A38725BA47F10010C33F /* BeerList.framework */; };
@@ -301,6 +302,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D232EF4E25BDFD7300F272BB /* BeerListAPIEndToEndTests.swift in Sources */,
+				D232EF5925BE014B00F272BB /* XCTest+MemoryLeakTracking.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

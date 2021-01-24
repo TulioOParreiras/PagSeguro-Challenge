@@ -22,11 +22,12 @@ class BeerListAPIEndToEndTests: XCTestCase {
     
     // MARK: - Helpers
     
-    private func getBeersResult() -> BeerListLoader.LoadResult {
+    private func getBeersResult(file: StaticString = #file, line: UInt = #line) -> BeerListLoader.LoadResult {
         let testServerURL = URL(string: "https://api.punkapi.com/v2/beers")!
         let client = URLSessionHTTPClient()
         let loader = RemoteBeerListLoader(url: testServerURL, client: client)
-        
+        trackForMemoryLeaks(client, file: file, line: line)
+        trackForMemoryLeaks(loader, file: file, line: line)
         let exp = expectation(description: "Wait for get completion")
         
         var expectedResult: BeerListLoader.LoadResult!
