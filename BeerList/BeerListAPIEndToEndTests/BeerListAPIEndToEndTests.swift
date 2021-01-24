@@ -11,23 +11,32 @@ import BeerList
 class BeerListAPIEndToEndTests: XCTestCase {
 
     func test_endToEndServerGETBeersResult_returnsNonEmptyResult() {
+        let result = getBeersResult()
+        switch result {
+        case let .success(beers):
+            XCTAssertFalse(beers.isEmpty)
+        case let .failure(error):
+            XCTFail("Expected success, got \(error) instead")
+        }
+    }
+    
+    // MARK: - Helpers
+    
+    private func getBeersResult() -> BeerListLoader.LoadResult {
         let testServerURL = URL(string: "https://api.punkapi.com/v2/beers")!
         let client = URLSessionHTTPClient()
         let loader = RemoteBeerListLoader(url: testServerURL, client: client)
         
         let exp = expectation(description: "Wait for get completion")
         
+        var expectedResult: BeerListLoader.LoadResult!
         loader.load { result in
-            switch result {
-            case let .success(beers):
-                XCTAssertFalse(beers.isEmpty)
-            case let .failure(error):
-                XCTFail("Expected success, got \(error) instead")
-            }
+            expectedResult = result
             exp.fulfill()
         }
         
         wait(for: [exp], timeout: 5.0)
+        return expectedResult
     }
 
 }
