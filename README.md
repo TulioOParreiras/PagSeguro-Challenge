@@ -81,7 +81,7 @@ Given the customer has connectivity
 | `description`    | `String`               |
 | `image_url`    | `URL`               |
 | `abv`            | `Double`               |
-| `ibu`            | `Double`               |
+| `ibu`            | `Double(optional)`               |
 
 ### Payload contract
 
