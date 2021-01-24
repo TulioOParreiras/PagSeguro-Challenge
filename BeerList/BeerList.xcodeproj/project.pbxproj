@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		D251F0A425BB992C003FED5F /* URLSessionHTTPClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D251F0A325BB992C003FED5F /* URLSessionHTTPClientTests.swift */; };
+		D251F0A925BDCDCF003FED5F /* XCTest+MemoryLeakTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = D251F0A825BDCDCF003FED5F /* XCTest+MemoryLeakTracking.swift */; };
 		D256A39125BA47F10010C33F /* BeerList.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D256A38725BA47F10010C33F /* BeerList.framework */; };
 		D256A3A625BA4B4A0010C33F /* Beer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D256A3A525BA4B4A0010C33F /* Beer.swift */; };
 		D256A3AA25BA4C2E0010C33F /* BeerListLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D256A3A925BA4C2E0010C33F /* BeerListLoader.swift */; };
@@ -29,6 +30,7 @@
 
 /* Begin PBXFileReference section */
 		D251F0A325BB992C003FED5F /* URLSessionHTTPClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionHTTPClientTests.swift; sourceTree = "<group>"; };
+		D251F0A825BDCDCF003FED5F /* XCTest+MemoryLeakTracking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTest+MemoryLeakTracking.swift"; sourceTree = "<group>"; };
 		D256A38725BA47F10010C33F /* BeerList.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BeerList.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D256A38B25BA47F10010C33F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D256A39025BA47F10010C33F /* BeerListTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BeerListTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -60,6 +62,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D251F0A725BDCDB9003FED5F /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				D251F0A825BDCDCF003FED5F /* XCTest+MemoryLeakTracking.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		D256A37D25BA47F10010C33F = {
 			isa = PBXGroup;
 			children = (
@@ -91,6 +101,7 @@
 		D256A39425BA47F10010C33F /* BeerListTests */ = {
 			isa = PBXGroup;
 			children = (
+				D251F0A725BDCDB9003FED5F /* Helpers */,
 				D256A39725BA47F10010C33F /* Info.plist */,
 				D256A3B825BA4DDE0010C33F /* RemoteBeerListLoaderTests.swift */,
 				D251F0A325BB992C003FED5F /* URLSessionHTTPClientTests.swift */,
@@ -239,6 +250,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D256A3B925BA4DDE0010C33F /* RemoteBeerListLoaderTests.swift in Sources */,
+				D251F0A925BDCDCF003FED5F /* XCTest+MemoryLeakTracking.swift in Sources */,
 				D251F0A425BB992C003FED5F /* URLSessionHTTPClientTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

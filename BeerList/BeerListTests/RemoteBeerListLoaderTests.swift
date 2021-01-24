@@ -131,12 +131,6 @@ class RemoteBeerListLoaderTests: XCTestCase {
         return (sut, client)
     }
     
-    func trackForMemoryLeaks(_ instance: AnyObject, file: StaticString = #file, line: UInt = #line) {
-        addTeardownBlock { [weak instance] in
-            XCTAssertNil(instance, "Instance should have been deallocated. Potential memory leak.", file: file, line: line)
-        }
-    }
-    
     func expect(sut: RemoteBeerListLoader, toCompleteWith expectedResult: RemoteBeerListLoader.Result, when action: () -> Void, file: StaticString = #file, line: UInt = #line) {
         let exp = expectation(description: "Wait for request completion")
         
