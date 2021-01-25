@@ -84,7 +84,6 @@ class BeerListViewControllerTests: XCTestCase {
         
         sut.loadViewIfNeeded()
         loader.completeBeerListLoading(with: [beer0, beer1])
-        
         XCTAssertEqual(loader.loadedImageURLs, [], "Expected no image URL requests until views become visible")
         
         sut.simulateBeerCellVisible(at: 0)
@@ -92,6 +91,22 @@ class BeerListViewControllerTests: XCTestCase {
         
         sut.simulateBeerCellVisible(at: 1)
         XCTAssertEqual(loader.loadedImageURLs, [beer0.imageURL, beer1.imageURL], "Expected second image URL request once second view also becomes visible")
+    }
+    
+    func test_beerCell_cancelsImageURLWhenNotVisibleAnymore() {
+        let beer0 = makeBeer(imageURL: URL(string: "https://a-url.com")!)
+        let beer1 = makeBeer(imageURL: URL(string: "https://any-url.com")!)
+        let (sut, loader) = makeSUT()
+        
+        sut.loadViewIfNeeded()
+        loader.completeBeerListLoading(with: [beer0, beer1])
+        XCTAssertEqual(loader.cancelledImageURLs, [], "Expected no cancelled image URL requests until image is not visible")
+        
+        sut.simulateBeerCellNotVisible(at: 0)
+        XCTAssertEqual(loader.cancelledImageURLs, [beer0.imageURL], "Expected one cancelled image URL request once first image is not visible anymore")
+        
+        sut.simulateBeerCellNotVisible(at: 1)
+        XCTAssertEqual(loader.cancelledImageURLs, [beer0.imageURL, beer1.imageURL], "Expected two cancelled image URL requests once second image is also not visible anymore")
     }
     
     // MARK: - Helpers
@@ -154,9 +169,14 @@ class BeerListViewControllerTests: XCTestCase {
         // MARK: - BeerImageDataLoader
         
         var loadedImageURLs: [URL] = []
+        var cancelledImageURLs: [URL] = []
         
         func loadImageData(from url: URL) {
             loadedImageURLs.append(url)
+        }
+        
+        func cancelImageDataLoad(from url: URL) {
+            cancelledImageURLs.append(url)
         }
     }
 
@@ -168,8 +188,17 @@ private extension BeerListViewController {
         refreshControl?.simulatePullToRefresh()
     }
     
-    func simulateBeerCellVisible(at index: Int) {
-        _ = beerCell(at: index)
+    @discardableResult
+    func simulateBeerCellVisible(at row: Int) -> BeerCell? {
+        return beerCell(at: row) as? BeerCell
+    }
+    
+    func simulateBeerCellNotVisible(at row: Int) {
+        let view = simulateBeerCellVisible(at: row)
+        
+        let delegate = tableView.delegate
+        let index = IndexPath(row: row, section: beerCellsSection)
+        delegate?.tableView?(tableView, didEndDisplaying: view!, forRowAt: index)
     }
     
     var isShowingLoadingIndicator: Bool {
