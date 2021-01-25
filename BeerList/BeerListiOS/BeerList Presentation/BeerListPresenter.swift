@@ -8,7 +8,7 @@
 import Foundation
 import BeerList
 
-protocol BeerListLoadingView: class {
+protocol BeerListLoadingView {
     func display(isLoading: Bool)
 }
 
@@ -26,7 +26,7 @@ final class BeerListPresenter {
     }
     
     var beerListView: BeerListView?
-    weak var loadingView: BeerListLoadingView?
+    var loadingView: BeerListLoadingView?
     
     func loadBeerList() {
         loadingView?.display(isLoading: true)

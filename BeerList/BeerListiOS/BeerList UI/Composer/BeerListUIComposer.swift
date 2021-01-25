@@ -15,7 +15,7 @@ public final class BeerListUIComposer {
         let presenter = BeerListPresenter(beerListLoader: beerListLoader)
         let refreshController = BeerListRefreshViewController(presenter: presenter)
         let beerListController = BeerListViewController(refreshController: refreshController)
-        presenter.loadingView = refreshController
+        presenter.loadingView = WeakRefVirtualProxy(object: refreshController)
         presenter.beerListView = BeerListViewAdapter(controller: beerListController, imageLoader: imageLoader)
         return beerListController
     }
@@ -29,6 +29,20 @@ public final class BeerListUIComposer {
         }
     }
 
+}
+
+private final class WeakRefVirtualProxy<T: AnyObject> {
+    private weak var object: T?
+    
+    init(object: T) {
+        self.object = object
+    }
+}
+
+extension WeakRefVirtualProxy: BeerListLoadingView where T: BeerListLoadingView {
+    func display(isLoading: Bool) {
+        object?.display(isLoading: isLoading)
+    }
 }
 
 private final class BeerListViewAdapter: BeerListView {
