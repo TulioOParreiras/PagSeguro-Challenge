@@ -209,7 +209,23 @@ class BeerListViewControllerTests: XCTestCase {
         XCTAssertEqual(loader.loadedImageURLs, [beer0.imageURL, beer1.imageURL, beer0.imageURL, beer1.imageURL], "Expected fourth imageURL request after second view retry action")
     }
 
-    // MARK: - Helpers
+    func test_beerCell_preloadsImageURLWhenNearVisible() {
+        let beer0 = makeBeer(imageURL: URL(string: "http://url-0.com")!)
+        let beer1 = makeBeer(imageURL: URL(string: "http://url-1.com")!)
+        let (sut, loader) = makeSUT()
+        
+        sut.loadViewIfNeeded()
+        loader.completeBeerListLoading(with: [beer0, beer1])
+        XCTAssertEqual(loader.loadedImageURLs, [], "Expected no image URL requests until image is near visible")
+        
+        sut.simulateBeerCellNearVisible(at: 0)
+        XCTAssertEqual(loader.loadedImageURLs, [beer0.imageURL], "Expected first image URL request once first image is near visible")
+        
+        sut.simulateBeerCellNearVisible(at: 1)
+        XCTAssertEqual(loader.loadedImageURLs, [beer0.imageURL, beer1.imageURL], "Expected second image URL request once second image is near visible")
+    }
+    
+// MARK: - Helpers
     
     private func makeSUT(file: StaticString = #file, line: UInt = #line) -> (sut: BeerListViewController, loader: LoaderSpy) {
         let loader = LoaderSpy()
@@ -315,6 +331,12 @@ private extension BeerListViewController {
         let delegate = tableView.delegate
         let index = IndexPath(row: row, section: beerCellsSection)
         delegate?.tableView?(tableView, didEndDisplaying: view!, forRowAt: index)
+    }
+    
+    func simulateBeerCellNearVisible(at row: Int) {
+        let ds = tableView.prefetchDataSource
+        let index = IndexPath(row: row, section: beerCellsSection)
+        ds?.tableView(tableView, prefetchRowsAt: [index])
     }
     
     var isShowingLoadingIndicator: Bool {

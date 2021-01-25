@@ -17,7 +17,7 @@ public protocol BeerImageDataLoader {
     func loadImageData(from url: URL, completion: @escaping(Result) -> Void) -> BeerImageDataLoaderTask
 }
 
-final public class BeerListViewController: UITableViewController {
+final public class BeerListViewController: UITableViewController, UITableViewDataSourcePrefetching {
     private var beerListLoader: BeerListLoader?
     private var imageLoader: BeerImageDataLoader?
     private var tableModel: [Beer] = []
@@ -33,6 +33,7 @@ final public class BeerListViewController: UITableViewController {
         super.viewDidLoad()
         refreshControl = UIRefreshControl()
         refreshControl?.addTarget(self, action: #selector(load), for: .valueChanged)
+        tableView.prefetchDataSource = self
         load()
     }
     
@@ -80,4 +81,12 @@ final public class BeerListViewController: UITableViewController {
         tasks[indexPath]?.cancel()
         tasks[indexPath] = nil
     }
+    
+    public func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
+        indexPaths.forEach { indexPath in
+            let cellModel = tableModel[indexPath.row]
+            _ = imageLoader?.loadImageData(from: cellModel.imageURL, completion: { _ in })
+        }
+    }
+    
 }
