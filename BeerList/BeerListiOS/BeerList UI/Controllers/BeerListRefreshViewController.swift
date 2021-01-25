@@ -9,14 +9,14 @@ import UIKit
 
 public final class BeerListRefreshViewController: NSObject, BeerListLoadingView {
     private(set) lazy var view: UIRefreshControl = loadView(UIRefreshControl())
-    private let presenter: BeerListPresenter
+    private let loadBeerList: () -> Void
     
-    init(presenter: BeerListPresenter) {
-        self.presenter = presenter
+    init(loadBeerList: @escaping () -> Void) {
+        self.loadBeerList = loadBeerList
     }
     
     @objc func refresh() {
-        self.presenter.loadBeerList()
+        self.loadBeerList()
     }
     
     private func loadView(_ view: UIRefreshControl) -> UIRefreshControl {
