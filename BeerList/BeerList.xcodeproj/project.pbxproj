@@ -153,13 +153,13 @@
 			path = Composer;
 			sourceTree = "<group>";
 		};
-		D209AD4B25BF3FA200956918 /* Models */ = {
+		D209AD6A25BF4D4300956918 /* BeerList Presentation */ = {
 			isa = PBXGroup;
 			children = (
 				D209AD4C25BF3FA600956918 /* BeerListViewModel.swift */,
 				D209AD5825BF443C00956918 /* BeerImageViewModel.swift */,
 			);
-			path = Models;
+			path = "BeerList Presentation";
 			sourceTree = "<group>";
 		};
 		D22E8C3025BF1DCE00B1F606 /* Helpers */ = {
@@ -206,7 +206,6 @@
 		D22E8C5625BF1F1A00B1F606 /* BeerList UI */ = {
 			isa = PBXGroup;
 			children = (
-				D209AD4B25BF3FA200956918 /* Models */,
 				D209AD3425BF364D00956918 /* Composer */,
 				D22E8C4B25BF1F0300B1F606 /* Views */,
 				D22E8C4A25BF1F0000B1F606 /* Controllers */,
@@ -234,6 +233,7 @@
 		D232EFE925BE3BA200F272BB /* BeerListiOS */ = {
 			isa = PBXGroup;
 			children = (
+				D209AD6A25BF4D4300956918 /* BeerList Presentation */,
 				D22E8C5725BF1F3600B1F606 /* BeerList Feature */,
 				D22E8C5625BF1F1A00B1F606 /* BeerList UI */,
 				D232EFEB25BE3BA200F272BB /* Info.plist */,
