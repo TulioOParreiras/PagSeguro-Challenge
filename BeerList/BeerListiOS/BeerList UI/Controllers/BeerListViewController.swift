@@ -8,15 +8,6 @@
 import UIKit
 import BeerList
 
-public protocol BeerImageDataLoaderTask {
-    func cancel()
-}
-
-public protocol BeerImageDataLoader {
-    typealias Result = Swift.Result<Data, Error>
-    func loadImageData(from url: URL, completion: @escaping(Result) -> Void) -> BeerImageDataLoaderTask
-}
-
 final public class BeerListViewController: UITableViewController, UITableViewDataSourcePrefetching {
     private var beerListLoader: BeerListLoader?
     private var imageLoader: BeerImageDataLoader?
