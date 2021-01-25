@@ -8,56 +8,71 @@
 import Foundation
 import BeerList
 
-final class BeerImageViewModel<Image> {
-    typealias Observer<T> = (T) -> Void
+protocol BeerView {
+    associatedtype Image
     
-    private var task: BeerImageDataLoaderTask?
-    private let model: Beer
-    private let imageLoader: BeerImageDataLoader
-    private let imageTransformer: (Data) -> Image?
-    
-    init(model: Beer, imageLoader: BeerImageDataLoader, imageTransformer: @escaping(Data) -> Image?) {
-        self.model = model
-        self.imageLoader = imageLoader
-        self.imageTransformer = imageTransformer
-    }
-    
-    var name: String {
-        return model.name
-    }
+    func display(_ model: BeerViewModel<Image>)
+}
+
+struct BeerViewModel<Image> {
+    let name: String
+    let ibuValue: Double?
+    let image: Image?
+    let isLoading: Bool
+    let shouldRetry: Bool
     
     var ibu: String?  {
-        guard let ibu = model.ibu else { return nil }
+        guard let ibu = ibuValue else { return nil }
         return String(describing: ibu)
     }
     
     var hasIbu: Bool {
-        return ibu != nil
+        return ibuValue != nil
+    }
+}
+
+final class BeerPresenter<View: BeerView, Image> where View.Image == Image {
+    private let view: View
+    private let imageTransformer: (Data) -> Image?
+    
+    init(view: View, imageTransformer: @escaping(Data) -> Image?) {
+        self.view = view
+        self.imageTransformer = imageTransformer
     }
     
-    var onImageLoad: Observer<Image>?
-    var onImageLoadingStateChange: Observer<Bool>?
-    var onShouldRetryImageLoadStateChange: Observer<Bool>?
+    func didStartLoadingImageData(for model: Beer) {
+        view.display(BeerViewModel(
+            name: model.name,
+            ibuValue: model.ibu,
+            image: nil,
+            isLoading: true,
+            shouldRetry: false
+        ))
+    }
     
-    func loadImageData() {
-        onImageLoadingStateChange?(true)
-        onShouldRetryImageLoadStateChange?(false)
-        task = imageLoader.loadImageData(from: model.imageURL) { [weak self] result in
-            self?.handle(result)
+    private struct InvalidImageDataError: Error { }
+    
+    func didFinishLoadingImageData(with data: Data, for model: Beer) {
+        guard let image = imageTransformer(data) else {
+            return didFinishLoadingImageData(with: InvalidImageDataError(), for: model)
         }
+        
+        view.display(BeerViewModel(
+            name: model.name,
+            ibuValue: model.ibu,
+            image: image,
+            isLoading: false,
+            shouldRetry: false
+        ))
     }
     
-    private func handle(_ result: BeerImageDataLoader.Result) {
-        if let image = (try? result.get()).flatMap(imageTransformer) {
-            onImageLoad?(image)
-        } else {
-            onShouldRetryImageLoadStateChange?(true)
-        }
-        onImageLoadingStateChange?(false)
-    }
-    
-    func cancelImageDataLoad() {
-        task?.cancel()
-        task = nil
+    func didFinishLoadingImageData(with error: Error, for model: Beer) {
+        view.display(BeerViewModel(
+            name: model.name,
+            ibuValue: model.ibu,
+            image: nil,
+            isLoading: false,
+            shouldRetry: true
+        ))
     }
 }

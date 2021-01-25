@@ -17,17 +17,8 @@ public final class BeerListUIComposer {
         let beerListController = BeerListViewController(refreshController: refreshController)
         
         presentationAdapter.presenter = BeerListPresenter(
-            beerListView: BeerListViewAdapter(controller: beerListController, imageLoader: imageLoader), loadingView: WeakRefVirtualProxy(object: refreshController))
+            beerListView: BeerListViewAdapter(controller: beerListController, imageLoader: imageLoader), loadingView: WeakRefVirtualProxy(refreshController))
         return beerListController
-    }
-    
-    private static func adaptBeerToCellControllers(forwardingTo controller: BeerListViewController, loader: BeerImageDataLoader) -> ([Beer]) -> Void {
-        return { [weak controller] beerList in
-            controller?.tableModel = beerList.map { model in
-                BeerListCellController(viewModel:
-                                        BeerImageViewModel(model: model, imageLoader: loader, imageTransformer: UIImage.init))
-            }
-        }
     }
 
 }
@@ -35,7 +26,7 @@ public final class BeerListUIComposer {
 private final class WeakRefVirtualProxy<T: AnyObject> {
     private weak var object: T?
     
-    init(object: T) {
+    init(_ object: T) {
         self.object = object
     }
 }
@@ -43,6 +34,12 @@ private final class WeakRefVirtualProxy<T: AnyObject> {
 extension WeakRefVirtualProxy: BeerListLoadingView where T: BeerListLoadingView {
     func display(_ viewModel: BeerListLoadingViewModel) {
         object?.display(viewModel)
+    }
+}
+
+extension WeakRefVirtualProxy: BeerView where T: BeerView, T.Image == UIImage {
+    func display(_ model: BeerViewModel<UIImage>) {
+        object?.display(model)
     }
 }
 
@@ -57,8 +54,14 @@ private final class BeerListViewAdapter: BeerListView {
     
     func display(_ viewModel: BeerListViewModel) {
         controller?.tableModel = viewModel.beerList.map { model in
-            BeerListCellController(viewModel:
-                                    BeerImageViewModel(model: model, imageLoader: imageLoader, imageTransformer: UIImage.init))
+            let adapter = BeerDataLoaderPresentationAdapter<WeakRefVirtualProxy<BeerListCellController>, UIImage>(model: model, imageLoader: imageLoader)
+            let view = BeerListCellController(delegate: adapter)
+            
+            adapter.presenter = BeerPresenter(
+                view: WeakRefVirtualProxy(view),
+                imageTransformer: UIImage.init
+            )
+            return view
         }
     }
 }
@@ -83,4 +86,37 @@ private final class BeerListLoaderPresentationAdapter: BeerListRefreshViewContro
             }
         }
     }
+}
+
+private final class BeerDataLoaderPresentationAdapter<View: BeerView, Image>: BeerListCellControllerDelegate where View.Image == Image {
+    private let model: Beer
+    private let imageLoader: BeerImageDataLoader
+    private var task: BeerImageDataLoaderTask?
+    
+    var presenter: BeerPresenter<View, Image>?
+    
+    init(model: Beer, imageLoader: BeerImageDataLoader) {
+        self.model = model
+        self.imageLoader = imageLoader
+    }
+    
+    func didRequestImage() {
+        presenter?.didStartLoadingImageData(for: model)
+        
+        let model = self.model
+        task = imageLoader.loadImageData(from: model.imageURL, completion: { [weak self] result in
+            switch result {
+            case let .success(data):
+                self?.presenter?.didFinishLoadingImageData(with: data, for: model)
+                
+            case let .failure(error):
+                self?.presenter?.didFinishLoadingImageData(with: error, for: model)
+            }
+        })
+    }
+    
+    func didCancelImageRequest() {
+        task?.cancel()
+    }
+    
 }

@@ -7,49 +7,40 @@
 
 import UIKit
 
-final class BeerListCellController {
-    private var task: BeerImageDataLoaderTask?
-    private let viewModel: BeerImageViewModel<UIImage>
+protocol BeerListCellControllerDelegate {
+    func didRequestImage()
+    func didCancelImageRequest()
+}
+
+final class BeerListCellController: BeerView {
+    private let delegate: BeerListCellControllerDelegate
+    private lazy var cell = BeerCell()
     
-    init(viewModel: BeerImageViewModel<UIImage>) {
-        self.viewModel = viewModel
+    init(delegate: BeerListCellControllerDelegate) {
+        self.delegate = delegate
     }
     
     func view() -> UITableViewCell {
-        let cell = binded(BeerCell())
-        viewModel.loadImageData()
+        delegate.didRequestImage()
         return cell
     }
     
     func preload() {
-        viewModel.loadImageData()
+        delegate.didRequestImage()
     }
     
     func cancelLoad() {
-        viewModel.cancelImageDataLoad()
+        delegate.didCancelImageRequest()
     }
     
-    private func binded(_ cell: BeerCell) -> BeerCell {
-        cell.ibuLabel.isHidden = viewModel.ibu == nil
+    func display(_ viewModel: BeerViewModel<UIImage>) {
+        cell.ibuLabel.isHidden = !viewModel.hasIbu
         cell.ibuLabel.text = viewModel.ibu
         cell.nameLabel.text = viewModel.name
-        cell.beerImageView.image = nil
-        cell.beerImageReturnButton.isHidden = true
-        cell.onRetry = viewModel.loadImageData
-        
-        viewModel.onImageLoad = { [weak cell] image in
-            cell?.beerImageView.image = image
-        }
-        
-        viewModel.onImageLoadingStateChange = { [weak cell] isLoading in
-            cell?.imageContainer.isShimmering = isLoading
-        }
-        
-        viewModel.onShouldRetryImageLoadStateChange = { [weak cell] shouldRetry in
-            cell?.beerImageReturnButton.isHidden = !shouldRetry
-        }
-        
-        return cell
+        cell.beerImageView.image = viewModel.image
+        cell.imageContainer.isShimmering = viewModel.isLoading
+        cell.beerImageReturnButton.isHidden = !viewModel.shouldRetry
+        cell.onRetry = delegate.didRequestImage
 
     }
 
