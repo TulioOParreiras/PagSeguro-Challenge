@@ -111,6 +111,7 @@
                         <connections>
                             <outlet property="dataSource" destination="l1Q-zP-kDQ" id="hoF-mF-HcL"/>
                             <outlet property="delegate" destination="l1Q-zP-kDQ" id="mqh-nF-kb8"/>
+                            <outlet property="prefetchDataSource" destination="l1Q-zP-kDQ" id="1jg-82-Vvy"/>
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Beers" id="V4T-VZ-ZBh"/>

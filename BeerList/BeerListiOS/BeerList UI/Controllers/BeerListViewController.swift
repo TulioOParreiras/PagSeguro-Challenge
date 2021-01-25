@@ -19,7 +19,6 @@ final public class BeerListViewController: UITableViewController, UITableViewDat
     
     public override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.prefetchDataSource = self
         refresh()
     }
     
