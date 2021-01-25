@@ -9,7 +9,7 @@ import XCTest
 import UIKit
 import BeerList
 
-final class BeerListViewController: UIViewController {
+final class BeerListViewController: UITableViewController {
     private var loader: BeerListLoader?
     
     convenience init(loader: BeerListLoader) {
@@ -19,7 +19,12 @@ final class BeerListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        refreshControl = UIRefreshControl()
+        refreshControl?.addTarget(self, action: #selector(load), for: .valueChanged)
+        load()
+    }
+    
+    @objc private func load() {
         loader?.load { _ in }
     }
 }
@@ -34,10 +39,20 @@ class BeerListViewControllerTests: XCTestCase {
     
     func test_viewDidLoad_doesLoadBeerList() {
         let (sut, loader) = makeSUT()
-        
         sut.loadViewIfNeeded()
         
         XCTAssertEqual(loader.loadCallCount, 1)
+    }
+    
+    func test_pullToRefresh_loadsBeerList() {
+        let (sut, loader) = makeSUT()
+        sut.loadViewIfNeeded()
+        
+        sut.simulatePullToRefresh()
+        XCTAssertEqual(loader.loadCallCount, 2)
+        
+        sut.simulatePullToRefresh()
+        XCTAssertEqual(loader.loadCallCount, 3)
     }
     
     // MARK: - Helpers
@@ -58,4 +73,16 @@ class BeerListViewControllerTests: XCTestCase {
         }
     }
 
+}
+
+extension BeerListViewController {
+    
+    func simulatePullToRefresh() {
+        refreshControl?.allTargets.forEach { target in
+            refreshControl?.actions(forTarget: target, forControlEvent: .valueChanged)?.forEach {
+                (target as NSObject).perform(Selector($0))
+            }
+        }
+    }
+    
 }
