@@ -22,7 +22,7 @@ public final class BeerListUIComposer {
     private static func adaptBeerToCellControllers(forwardingTo controller: BeerListViewController, loader: BeerImageDataLoader) -> ([Beer]) -> Void {
         return { [weak controller] beerList in
             controller?.tableModel = beerList.map { model in
-                BeerListCellController(model: model, imageLoader: loader)
+                BeerListCellController(viewModel: BeerImageViewModel(model: model, imageLoader: loader))
             }
         }
     }

@@ -8,7 +8,9 @@
 import UIKit
 import BeerList
 
-final class BeerListCellController {
+final class BeerImageViewModel {
+    typealias Observer<T> = (T) -> Void
+    
     private var task: BeerImageDataLoaderTask?
     private let model: Beer
     private let imageLoader: BeerImageDataLoader
@@ -18,35 +20,91 @@ final class BeerListCellController {
         self.imageLoader = imageLoader
     }
     
-    func view() -> UITableViewCell {
-        let cell = BeerCell()
-        cell.ibuLabel.isHidden = model.ibu == nil
-        cell.ibuLabel.text = String(describing: model.ibu ?? 0)
-        cell.nameLabel.text = model.name
-        cell.beerImageView.image = nil
-        cell.beerImageReturnButton.isHidden = true
-        cell.imageContainer.startShimmering()
-        let loadImage = { [weak cell, weak self] in
-            guard let self = self else { return }
-            self.task = self.imageLoader.loadImageData(from: self.model.imageURL) { [weak cell] result in
-                let data = try? result.get()
-                let image = data.map(UIImage.init) ?? nil
-                cell?.beerImageView.image = image
-                cell?.beerImageReturnButton.isHidden = image != nil
-                cell?.imageContainer.stopShimmering()
-            }
+    var name: String {
+        return model.name
+    }
+    
+    var ibu: String?  {
+        guard let ibu = model.ibu else { return nil }
+        return String(describing: ibu)
+    }
+    
+    var hasIbu: Bool {
+        return ibu != nil
+    }
+    
+    var onImageLoad: Observer<UIImage>?
+    var onImageLoadingStateChange: Observer<Bool>?
+    var onShouldRetryImageLoadStateChange: Observer<Bool>?
+    
+    func loadImageData() {
+        onImageLoadingStateChange?(true)
+        onShouldRetryImageLoadStateChange?(false)
+        task = imageLoader.loadImageData(from: model.imageURL) { [weak self] result in
+            self?.handle(result)
         }
-        
-        cell.onRetry = loadImage
-        loadImage()
+    }
+    
+    private func handle(_ result: BeerImageDataLoader.Result) {
+        if let image = (try? result.get()).flatMap(UIImage.init) {
+            onImageLoad?(image)
+        } else {
+            onShouldRetryImageLoadStateChange?(true)
+        }
+        onImageLoadingStateChange?(false)
+    }
+    
+    func cancelImageDataLoad() {
+        task?.cancel()
+        task = nil
+    }
+}
+
+
+final class BeerListCellController {
+    private var task: BeerImageDataLoaderTask?
+    private let viewModel: BeerImageViewModel
+    
+    init(viewModel: BeerImageViewModel) {
+        self.viewModel = viewModel
+    }
+    
+    func view() -> UITableViewCell {
+        let cell = binded(BeerCell())
+        viewModel.loadImageData()
         return cell
     }
     
     func preload() {
-        task = imageLoader.loadImageData(from: self.model.imageURL) { _ in }
+        viewModel.loadImageData()
     }
     
     func cancelLoad() {
-        task?.cancel()
+        viewModel.cancelImageDataLoad()
     }
+    
+    private func binded(_ cell: BeerCell) -> BeerCell {
+        cell.ibuLabel.isHidden = viewModel.ibu == nil
+        cell.ibuLabel.text = viewModel.ibu
+        cell.nameLabel.text = viewModel.name
+        cell.beerImageView.image = nil
+        cell.beerImageReturnButton.isHidden = true
+        cell.onRetry = viewModel.loadImageData
+        
+        viewModel.onImageLoad = { [weak cell] image in
+            cell?.beerImageView.image = image
+        }
+        
+        viewModel.onImageLoadingStateChange = { [weak cell] isLoading in
+            cell?.imageContainer.isShimmering = isLoading
+        }
+        
+        viewModel.onShouldRetryImageLoadStateChange = { [weak cell] shouldRetry in
+            cell?.beerImageReturnButton.isHidden = !shouldRetry
+        }
+        
+        return cell
+
+    }
+
 }
