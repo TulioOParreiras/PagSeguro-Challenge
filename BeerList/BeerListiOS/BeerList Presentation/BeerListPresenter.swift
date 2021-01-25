@@ -25,19 +25,24 @@ protocol BeerListView {
 }
 
 final class BeerListPresenter {
-    var beerListView: BeerListView?
-    var loadingView: BeerListLoadingView?
+    private let beerListView: BeerListView
+    private let loadingView: BeerListLoadingView
+    
+    init(beerListView: BeerListView, loadingView: BeerListLoadingView) {
+        self.beerListView = beerListView
+        self.loadingView = loadingView
+    }
     
     func didStartLoadingBeerList() {
-        loadingView?.display(BeerListLoadingViewModel(isLoading: true))
+        loadingView.display(BeerListLoadingViewModel(isLoading: true))
     }
     
     func didFinishLoadingBeerList(with beerList: [Beer]) {
-        beerListView?.display(BeerListViewModel(beerList: beerList))
-        loadingView?.display(BeerListLoadingViewModel(isLoading: false))
+        beerListView.display(BeerListViewModel(beerList: beerList))
+        loadingView.display(BeerListLoadingViewModel(isLoading: false))
     }
     
     func didFinishLoadingBeerList(with error: Error) {
-        loadingView?.display(BeerListLoadingViewModel(isLoading: false))
+        loadingView.display(BeerListLoadingViewModel(isLoading: false))
     }
 }

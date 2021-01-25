@@ -12,12 +12,12 @@ public final class BeerListUIComposer {
     private init() { }
     
     public static func beerListComposedWith(beerListLoader: BeerListLoader, imageLoader: BeerImageDataLoader) -> BeerListViewController {
-        let presenter = BeerListPresenter()
-        let presentationAdapter = BeerListLoaderPresentationAdapter(beerListLoader: beerListLoader, presenter: presenter)
+        let presentationAdapter = BeerListLoaderPresentationAdapter(beerListLoader: beerListLoader)
         let refreshController = BeerListRefreshViewController(delegate: presentationAdapter)
         let beerListController = BeerListViewController(refreshController: refreshController)
-        presenter.loadingView = WeakRefVirtualProxy(object: refreshController)
-        presenter.beerListView = BeerListViewAdapter(controller: beerListController, imageLoader: imageLoader)
+        
+        presentationAdapter.presenter = BeerListPresenter(
+            beerListView: BeerListViewAdapter(controller: beerListController, imageLoader: imageLoader), loadingView: WeakRefVirtualProxy(object: refreshController))
         return beerListController
     }
     
@@ -65,22 +65,21 @@ private final class BeerListViewAdapter: BeerListView {
 
 private final class BeerListLoaderPresentationAdapter: BeerListRefreshViewControllerDelegate {
     private let beerListLoader: BeerListLoader
-    private let presenter: BeerListPresenter
+    var presenter: BeerListPresenter?
     
-    init(beerListLoader: BeerListLoader, presenter: BeerListPresenter) {
+    init(beerListLoader: BeerListLoader) {
         self.beerListLoader = beerListLoader
-        self.presenter = presenter
     }
     
     func didRequestBeerListRefresh() {
-        presenter.didStartLoadingBeerList()
+        presenter?.didStartLoadingBeerList()
         
         beerListLoader.load { [weak self] result in
             switch result {
             case let .success(beerList):
-                self?.presenter.didFinishLoadingBeerList(with: beerList)
+                self?.presenter?.didFinishLoadingBeerList(with: beerList)
             case let .failure(error):
-                self?.presenter.didFinishLoadingBeerList(with: error)
+                self?.presenter?.didFinishLoadingBeerList(with: error)
             }
         }
     }
