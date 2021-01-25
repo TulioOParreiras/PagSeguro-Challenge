@@ -12,8 +12,9 @@ public final class BeerListUIComposer {
     private init() { }
     
     public static func beerListComposedWith(beerListLoader: BeerListLoader, imageLoader: BeerImageDataLoader) -> BeerListViewController {
-        let presenter = BeerListPresenter(beerListLoader: beerListLoader)
-        let refreshController = BeerListRefreshViewController(loadBeerList: presenter.loadBeerList)
+        let presenter = BeerListPresenter()
+        let presentationAdapter = BeerListLoaderPresentationAdapter(beerListLoader: beerListLoader, presenter: presenter)
+        let refreshController = BeerListRefreshViewController(loadBeerList: presentationAdapter .loadBeerList)
         let beerListController = BeerListViewController(refreshController: refreshController)
         presenter.loadingView = WeakRefVirtualProxy(object: refreshController)
         presenter.beerListView = BeerListViewAdapter(controller: beerListController, imageLoader: imageLoader)
@@ -58,6 +59,29 @@ private final class BeerListViewAdapter: BeerListView {
         controller?.tableModel = viewModel.beerList.map { model in
             BeerListCellController(viewModel:
                                     BeerImageViewModel(model: model, imageLoader: imageLoader, imageTransformer: UIImage.init))
+        }
+    }
+}
+
+private final class BeerListLoaderPresentationAdapter {
+    private let beerListLoader: BeerListLoader
+    private let presenter: BeerListPresenter
+    
+    init(beerListLoader: BeerListLoader, presenter: BeerListPresenter) {
+        self.beerListLoader = beerListLoader
+        self.presenter = presenter
+    }
+    
+    func loadBeerList() {
+        presenter.didStartLoadingBeerList()
+        
+        beerListLoader.load { [weak self] result in
+            switch result {
+            case let .success(beerList):
+                self?.presenter.didFinishLoadingBeerList(with: beerList)
+            case let .failure(error):
+                self?.presenter.didFinishLoadingBeerList(with: error)
+            }
         }
     }
 }

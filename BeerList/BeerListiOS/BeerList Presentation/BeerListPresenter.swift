@@ -25,24 +25,19 @@ protocol BeerListView {
 }
 
 final class BeerListPresenter {
-    typealias Observer<T> = (T) -> Void
-    
-    private let beerListLoader: BeerListLoader
-    
-    init(beerListLoader: BeerListLoader) {
-        self.beerListLoader = beerListLoader
-    }
-    
     var beerListView: BeerListView?
     var loadingView: BeerListLoadingView?
     
-    func loadBeerList() {
+    func didStartLoadingBeerList() {
         loadingView?.display(BeerListLoadingViewModel(isLoading: true))
-        beerListLoader.load { [weak self] result in
-            if let beerList = try? result.get() {
-                self?.beerListView?.display(BeerListViewModel(beerList: beerList))
-            }
-            self?.loadingView?.display(BeerListLoadingViewModel(isLoading: false))
-        }
+    }
+    
+    func didFinishLoadingBeerList(with beerList: [Beer]) {
+        beerListView?.display(BeerListViewModel(beerList: beerList))
+        loadingView?.display(BeerListLoadingViewModel(isLoading: false))
+    }
+    
+    func didFinishLoadingBeerList(with error: Error) {
+        loadingView?.display(BeerListLoadingViewModel(isLoading: false))
     }
 }
