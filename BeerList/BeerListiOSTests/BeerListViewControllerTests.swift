@@ -21,11 +21,11 @@ final class BeerListViewController: UITableViewController {
         super.viewDidLoad()
         refreshControl = UIRefreshControl()
         refreshControl?.addTarget(self, action: #selector(load), for: .valueChanged)
-        refreshControl?.beginRefreshing()
         load()
     }
     
     @objc private func load() {
+        refreshControl?.beginRefreshing()
         loader?.load { [weak self] _ in
             self?.refreshControl?.endRefreshing()
         }
@@ -34,62 +34,34 @@ final class BeerListViewController: UITableViewController {
 
 class BeerListViewControllerTests: XCTestCase {
 
-    func test_init_doesNotLoadBeerList() {
-        let (_, loader) = makeSUT()
-        
-        XCTAssertEqual(loader.loadCallCount, 0)
-    }
-    
-    func test_viewDidLoad_doesLoadBeerList() {
+    func test_loadBeerListActions_requestBeerListFromLoader() {
         let (sut, loader) = makeSUT()
+        XCTAssertEqual(loader.loadCallCount, 0, "Expect no loading requests before view is loaded")
+         
         sut.loadViewIfNeeded()
-        
-        XCTAssertEqual(loader.loadCallCount, 1)
-    }
-    
-    func test_userInitiatedBeerListReload_reloadsBeerList() {
-        let (sut, loader) = makeSUT()
-        sut.loadViewIfNeeded()
+        XCTAssertEqual(loader.loadCallCount, 1, "Expect a loading request once view is loaded")
         
         sut.simulateUserInitiatedBeerListReload()
-        XCTAssertEqual(loader.loadCallCount, 2)
+        XCTAssertEqual(loader.loadCallCount, 2, "Expect another loading request once user initiates a load")
         
         sut.simulateUserInitiatedBeerListReload()
-        XCTAssertEqual(loader.loadCallCount, 3)
+        XCTAssertEqual(loader.loadCallCount, 3, "Expect a third loading request once user initiates another load")
     }
     
-    func test_viewDidLoad_showsLoadingIndicator() {
-        let (sut, _) = makeSUT()
-        
-        sut.loadViewIfNeeded()
-        
-        XCTAssertTrue(sut.isShowingLoadingIndicator)
-    }
-    
-    func test_viewDidLoad_hidesIndicatorOnLoaderCompletion() {
+    func test_loadingBeerListIndicator_isVisibleWhileLoadingBeerList() {
         let (sut, loader) = makeSUT()
         
         sut.loadViewIfNeeded()
-        loader.completeBeerListLoading()
+        XCTAssertTrue(sut.isShowingLoadingIndicator, "Expect loading indicator once view is loaded")
         
-        XCTAssertFalse(sut.isShowingLoadingIndicator)
-    }
-    
-    func test_userInitiatedBeerListReload_showsLoadingIndicator() {
-        let (sut, _) = makeSUT()
+        loader.completeBeerListLoading(at: 0)
+        XCTAssertFalse(sut.isShowingLoadingIndicator, "Expect no loading indicator once loading is complete")
         
         sut.simulateUserInitiatedBeerListReload()
+        XCTAssertTrue(sut.isShowingLoadingIndicator, "Expect loading indicator once user initiates a reload")
         
-        XCTAssertTrue(sut.isShowingLoadingIndicator)
-    }
-    
-    func test_userInitiatedBeerListReload_hidesLoadingIndicatorOnLoaderCompletion() {
-        let (sut, loader) = makeSUT()
-        
-        sut.simulateUserInitiatedBeerListReload()
-        loader.completeBeerListLoading()
-        
-        XCTAssertFalse(sut.isShowingLoadingIndicator)
+        loader.completeBeerListLoading(at: 1)
+        XCTAssertFalse(sut.isShowingLoadingIndicator, "Expect no loading indicator once user initiated loading is complete")
     }
     
     // MARK: - Helpers
@@ -112,8 +84,8 @@ class BeerListViewControllerTests: XCTestCase {
             completions.append(completion)
         }
         
-        func completeBeerListLoading() {
-            completions[0](.success([]))
+        func completeBeerListLoading(at index: Int = 0) {
+            completions[index](.success([]))
         }
     }
 
