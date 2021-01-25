@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D209AD2725BF293500956918 /* BeerListRefreshViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D209AD2625BF293500956918 /* BeerListRefreshViewController.swift */; };
 		D22E8C3225BF1DDF00B1F606 /* UIImage+TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22E8C3125BF1DDF00B1F606 /* UIImage+TestHelpers.swift */; };
 		D22E8C3E25BF1E5900B1F606 /* UIControl+TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22E8C3D25BF1E5900B1F606 /* UIControl+TestHelpers.swift */; };
 		D22E8C5925BF1F3D00B1F606 /* BeerImageDataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22E8C5825BF1F3D00B1F606 /* BeerImageDataLoader.swift */; };
@@ -60,6 +61,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D209AD2625BF293500956918 /* BeerListRefreshViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeerListRefreshViewController.swift; sourceTree = "<group>"; };
 		D22E8C3125BF1DDF00B1F606 /* UIImage+TestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+TestHelpers.swift"; sourceTree = "<group>"; };
 		D22E8C3D25BF1E5900B1F606 /* UIControl+TestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIControl+TestHelpers.swift"; sourceTree = "<group>"; };
 		D22E8C5825BF1F3D00B1F606 /* BeerImageDataLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeerImageDataLoader.swift; sourceTree = "<group>"; };
@@ -161,6 +163,7 @@
 			isa = PBXGroup;
 			children = (
 				D232F01E25BE60F100F272BB /* BeerListViewController.swift */,
+				D209AD2625BF293500956918 /* BeerListRefreshViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -509,6 +512,7 @@
 				D232F03225BEFB4E00F272BB /* UIView+Shimmering.swift in Sources */,
 				D232F01F25BE60F100F272BB /* BeerListViewController.swift in Sources */,
 				D22E8C5925BF1F3D00B1F606 /* BeerImageDataLoader.swift in Sources */,
+				D209AD2725BF293500956918 /* BeerListRefreshViewController.swift in Sources */,
 				D232F02B25BE656000F272BB /* BeerCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

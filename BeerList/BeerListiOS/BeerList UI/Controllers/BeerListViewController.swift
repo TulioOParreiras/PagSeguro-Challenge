@@ -9,34 +9,27 @@ import UIKit
 import BeerList
 
 final public class BeerListViewController: UITableViewController, UITableViewDataSourcePrefetching {
-    private var beerListLoader: BeerListLoader?
+    private var refreshController: BeerListRefreshViewController?
     private var imageLoader: BeerImageDataLoader?
-    private var tableModel: [Beer] = []
+    private var tableModel: [Beer] = [] {
+        didSet { tableView.reloadData() }
+    }
     private var tasks = [IndexPath: BeerImageDataLoaderTask]()
     
     public convenience init(beerListLoader: BeerListLoader, imageLoader: BeerImageDataLoader ) {
         self.init()
-        self.beerListLoader = beerListLoader
+        self.refreshController = BeerListRefreshViewController(beerListLoader: beerListLoader)
         self.imageLoader = imageLoader
     }
     
     public override func viewDidLoad() {
         super.viewDidLoad()
-        refreshControl = UIRefreshControl()
-        refreshControl?.addTarget(self, action: #selector(load), for: .valueChanged)
-        tableView.prefetchDataSource = self
-        load()
-    }
-    
-    @objc private func load() {
-        refreshControl?.beginRefreshing()
-        beerListLoader?.load { [weak self] result in
-            if let beerList = try? result.get() {
-                self?.tableModel = beerList
-                self?.tableView.reloadData()
-            }
-            self?.refreshControl?.endRefreshing()
+        tableView.refreshControl = refreshController?.view
+        refreshController?.onRefresh = { [weak self] beerList in
+            self?.tableModel = beerList
         }
+        tableView.prefetchDataSource = self
+        refreshController?.refresh()
     }
     
     public override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
