@@ -73,7 +73,7 @@ Given the customer has connectivity
 
 ## Model Specs
 
-### Feed Image
+### Beer Image
 
 | Property      | Type                |
 |---------------|---------------------|

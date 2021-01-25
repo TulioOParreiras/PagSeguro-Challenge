@@ -6,11 +6,13 @@
 //
 
 import XCTest
+import UIKit
+import BeerList
 
 final class BeerListViewController: UIViewController {
-    private var loader: BeerListViewControllerTests.LoaderSpy?
+    private var loader: BeerListLoader?
     
-    convenience init(loader: BeerListViewControllerTests.LoaderSpy) {
+    convenience init(loader: BeerListLoader) {
         self.init()
         self.loader = loader
     }
@@ -18,7 +20,7 @@ final class BeerListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        loader?.load()
+        loader?.load { _ in }
     }
 }
 
@@ -42,10 +44,10 @@ class BeerListViewControllerTests: XCTestCase {
     
     // MARK: - Helpers
     
-    class LoaderSpy {
+    class LoaderSpy: BeerListLoader {
         private(set) var loadCallCount: Int = 0
         
-        func load() {
+        func load(completion: @escaping LoadResponse) {
             loadCallCount += 1
         }
     }
