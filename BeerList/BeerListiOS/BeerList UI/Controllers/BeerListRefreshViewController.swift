@@ -24,7 +24,7 @@ public final class BeerListRefreshViewController: NSObject, BeerListLoadingView 
         return view
     }
     
-    func display(isLoading: Bool) {
-        isLoading ? view.beginRefreshing() : view.endRefreshing()
+    func display(_ viewModel: BeerListLoadingViewModel) {
+        viewModel.isLoading ? view.beginRefreshing() : view.endRefreshing()
     }
 }

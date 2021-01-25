@@ -8,12 +8,20 @@
 import Foundation
 import BeerList
 
+struct BeerListLoadingViewModel {
+    let isLoading: Bool
+}
+
 protocol BeerListLoadingView {
-    func display(isLoading: Bool)
+    func display(_ viewModel: BeerListLoadingViewModel)
+}
+
+struct BeerListViewModel {
+    let beerList: [Beer]
 }
 
 protocol BeerListView {
-    func display(beerList: [Beer])
+    func display(_ viewModel: BeerListViewModel)
 }
 
 final class BeerListPresenter {
@@ -29,12 +37,12 @@ final class BeerListPresenter {
     var loadingView: BeerListLoadingView?
     
     func loadBeerList() {
-        loadingView?.display(isLoading: true)
+        loadingView?.display(BeerListLoadingViewModel(isLoading: true))
         beerListLoader.load { [weak self] result in
             if let beerList = try? result.get() {
-                self?.beerListView?.display(beerList: beerList)
+                self?.beerListView?.display(BeerListViewModel(beerList: beerList))
             }
-            self?.loadingView?.display(isLoading: false)
+            self?.loadingView?.display(BeerListLoadingViewModel(isLoading: false))
         }
     }
 }

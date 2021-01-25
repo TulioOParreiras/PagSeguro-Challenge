@@ -40,8 +40,8 @@ private final class WeakRefVirtualProxy<T: AnyObject> {
 }
 
 extension WeakRefVirtualProxy: BeerListLoadingView where T: BeerListLoadingView {
-    func display(isLoading: Bool) {
-        object?.display(isLoading: isLoading)
+    func display(_ viewModel: BeerListLoadingViewModel) {
+        object?.display(viewModel)
     }
 }
 
@@ -54,8 +54,8 @@ private final class BeerListViewAdapter: BeerListView {
         self.imageLoader = imageLoader
     }
     
-    func display(beerList: [Beer]) {
-        controller?.tableModel = beerList.map { model in
+    func display(_ viewModel: BeerListViewModel) {
+        controller?.tableModel = viewModel.beerList.map { model in
             BeerListCellController(viewModel:
                                     BeerImageViewModel(model: model, imageLoader: imageLoader, imageTransformer: UIImage.init))
         }
