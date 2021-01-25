@@ -8,13 +8,19 @@
 import UIKit
 import BeerList
 
+public protocol BeerImageDataLoader {
+    func loadImageData(from url: URL)
+}
+
 final public class BeerListViewController: UITableViewController {
-    private var loader: BeerListLoader?
+    private var beerListLoader: BeerListLoader?
+    private var imageLoader: BeerImageDataLoader?
     private var tableModel: [Beer] = []
     
-    public convenience init(loader: BeerListLoader) {
+    public convenience init(beerListLoader: BeerListLoader, imageLoader: BeerImageDataLoader ) {
         self.init()
-        self.loader = loader
+        self.beerListLoader = beerListLoader
+        self.imageLoader = imageLoader
     }
     
     public override func viewDidLoad() {
@@ -26,7 +32,7 @@ final public class BeerListViewController: UITableViewController {
     
     @objc private func load() {
         refreshControl?.beginRefreshing()
-        loader?.load { [weak self] result in
+        beerListLoader?.load { [weak self] result in
             if let beerList = try? result.get() {
                 self?.tableModel = beerList
                 self?.tableView.reloadData()
@@ -45,6 +51,7 @@ final public class BeerListViewController: UITableViewController {
         cell.ibuLabel.isHidden = cellModel.ibu == nil
         cell.ibuLabel.text = String(describing: cellModel.ibu ?? 0)
         cell.nameLabel.text = cellModel.name
+        imageLoader?.loadImageData(from: cellModel.imageURL)
         return cell
     }
 }

@@ -13,16 +13,16 @@ class BeerListViewControllerTests: XCTestCase {
 
     func test_loadBeerListActions_requestBeerListFromLoader() {
         let (sut, loader) = makeSUT()
-        XCTAssertEqual(loader.loadCallCount, 0, "Expect no loading requests before view is loaded")
+        XCTAssertEqual(loader.loadBeerListCallCount, 0, "Expect no loading requests before view is loaded")
          
         sut.loadViewIfNeeded()
-        XCTAssertEqual(loader.loadCallCount, 1, "Expect a loading request once view is loaded")
+        XCTAssertEqual(loader.loadBeerListCallCount, 1, "Expect a loading request once view is loaded")
         
         sut.simulateUserInitiatedBeerListReload()
-        XCTAssertEqual(loader.loadCallCount, 2, "Expect another loading request once user initiates a load")
+        XCTAssertEqual(loader.loadBeerListCallCount, 2, "Expect another loading request once user initiates a load")
         
         sut.simulateUserInitiatedBeerListReload()
-        XCTAssertEqual(loader.loadCallCount, 3, "Expect a third loading request once user initiates another load")
+        XCTAssertEqual(loader.loadBeerListCallCount, 3, "Expect a third loading request once user initiates another load")
     }
     
     func test_loadingBeerListIndicator_isVisibleWhileLoadingBeerList() {
@@ -77,11 +77,28 @@ class BeerListViewControllerTests: XCTestCase {
         assertThat(sut, isRendering: [beer0])
     }
     
+    func test_beerCell_loadsImageURLWhenVisible() {
+        let beer0 = makeBeer(imageURL: URL(string: "https://a-url.com")!)
+        let beer1 = makeBeer(imageURL: URL(string: "https://any-url.com")!)
+        let (sut, loader) = makeSUT()
+        
+        sut.loadViewIfNeeded()
+        loader.completeBeerListLoading(with: [beer0, beer1])
+        
+        XCTAssertEqual(loader.loadedImageURLs, [], "Expected no image URL requests until views become visible")
+        
+        sut.simulateBeerCellVisible(at: 0)
+        XCTAssertEqual(loader.loadedImageURLs, [beer0.imageURL], "Expected first image URL request once first view becomes visible")
+        
+        sut.simulateBeerCellVisible(at: 1)
+        XCTAssertEqual(loader.loadedImageURLs, [beer0.imageURL, beer1.imageURL], "Expected second image URL request once second view also becomes visible")
+    }
+    
     // MARK: - Helpers
     
     private func makeSUT(file: StaticString = #file, line: UInt = #line) -> (sut: BeerListViewController, loader: LoaderSpy) {
         let loader = LoaderSpy()
-        let sut = BeerListViewController(loader: loader)
+        let sut = BeerListViewController(beerListLoader: loader, imageLoader: loader)
         trackForMemoryLeaks(loader)
         trackForMemoryLeaks(sut)
         return (sut, loader)
@@ -108,27 +125,38 @@ class BeerListViewControllerTests: XCTestCase {
         XCTAssertEqual(cell.nameText, beer.name, "Expected name text to be \(beer.name) for beer cell at index (\(index))", file: file, line: line)
     }
     
-    private func makeBeer(name: String = "A name", imageUrl: URL = URL(string: "https://a-url.com")!, ibu: Double? = nil) -> Beer {
-        return Beer(id: Int.random(in: 0...100), name: name, tagline: "a tagline", description: "a description", imageURL: imageUrl, abv: Double.random(in: 1...10), ibu: ibu)
+    private func makeBeer(name: String = "A name", imageURL: URL = URL(string: "https://a-url.com")!, ibu: Double? = nil) -> Beer {
+        return Beer(id: Int.random(in: 0...100), name: name, tagline: "a tagline", description: "a description", imageURL: imageURL, abv: Double.random(in: 1...10), ibu: ibu)
     }
     
-    class LoaderSpy: BeerListLoader {
-        private var completions = [(LoadResponse)]()
-        var loadCallCount: Int {
-            completions.count
+    class LoaderSpy: BeerListLoader, BeerImageDataLoader {
+        
+        // MARK: - BeerListLoader
+        
+        private var beerListRequests = [(LoadResponse)]()
+        var loadBeerListCallCount: Int {
+            return beerListRequests.count
         }
         
         func load(completion: @escaping LoadResponse) {
-            completions.append(completion)
+            beerListRequests.append(completion)
         }
         
         func completeBeerListLoading(with beers: [Beer] = [], at index: Int = 0) {
-            completions[index](.success(beers))
+            beerListRequests[index](.success(beers))
         }
         
         func completeBeerListLoadingWithError(at index: Int = 0) {
             let error = NSError(domain: "a domain", code: 1)
-            completions[index](.failure(error))
+            beerListRequests[index](.failure(error))
+        }
+        
+        // MARK: - BeerImageDataLoader
+        
+        var loadedImageURLs: [URL] = []
+        
+        func loadImageData(from url: URL) {
+            loadedImageURLs.append(url)
         }
     }
 
@@ -138,6 +166,10 @@ private extension BeerListViewController {
     
     func simulateUserInitiatedBeerListReload() {
         refreshControl?.simulatePullToRefresh()
+    }
+    
+    func simulateBeerCellVisible(at index: Int) {
+        _ = beerCell(at: index)
     }
     
     var isShowingLoadingIndicator: Bool {
