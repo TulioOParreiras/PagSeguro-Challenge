@@ -6,28 +6,28 @@
 //
 
 import UIKit
-import BeerList
 
 public final class BeerListRefreshViewController: NSObject {
-    private(set) lazy var view: UIRefreshControl = {
-        let view = UIRefreshControl()
-        view.addTarget(self, action: #selector(refresh), for: .valueChanged)
-        return view
-    }()
-    private let beerListLoader: BeerListLoader
-    var onRefresh: (([Beer]) -> Void)?
+    private(set) lazy var view: UIRefreshControl = binded(UIRefreshControl())
+    private let viewModel: BeerListViewModel
     
-    init(beerListLoader: BeerListLoader) {
-        self.beerListLoader = beerListLoader
+    init(viewModel: BeerListViewModel) {
+        self.viewModel = viewModel
     }
     
     @objc func refresh() {
-        view.beginRefreshing()
-        beerListLoader.load { [weak self] result in
-            if let beerList = try? result.get() {
-                self?.onRefresh?(beerList)
+        viewModel.loadBeerList()
+    }
+    
+    private func binded(_ view: UIRefreshControl) -> UIRefreshControl {
+        viewModel.onChange = { [weak self] viewModel in
+            if viewModel.isLoading {
+                self?.view.beginRefreshing()
+            } else {
+                self?.view.endRefreshing()
             }
-            self?.view.endRefreshing()
         }
+        view.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        return view
     }
 }

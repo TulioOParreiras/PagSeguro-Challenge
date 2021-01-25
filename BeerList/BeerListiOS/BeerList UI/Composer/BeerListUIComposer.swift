@@ -12,9 +12,10 @@ public final class BeerListUIComposer {
     private init() { }
     
     public static func beerListComposedWith(beerListLoader: BeerListLoader, imageLoader: BeerImageDataLoader) -> BeerListViewController {
-        let refreshController = BeerListRefreshViewController(beerListLoader: beerListLoader)
+        let viewModel = BeerListViewModel(beerListLoader: beerListLoader)
+        let refreshController = BeerListRefreshViewController(viewModel: viewModel)
         let beerListController = BeerListViewController(refreshController: refreshController)
-        refreshController.onRefresh = adaptBeerToCellControllers(forwardingTo: beerListController, loader: imageLoader)
+        viewModel.onBeerListLoad = adaptBeerToCellControllers(forwardingTo: beerListController, loader: imageLoader)
         return beerListController
     }
     
