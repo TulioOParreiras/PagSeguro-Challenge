@@ -39,7 +39,7 @@ final class BeerCellController: BeerView {
         cell?.ibuLabel.isHidden = !viewModel.hasIbu
         cell?.ibuLabel.text = viewModel.ibu
         cell?.nameLabel.text = viewModel.name
-        cell?.beerImageView.image = viewModel.image
+        cell?.beerImageView?.setImageAnimated(viewModel.image)
         cell?.imageContainer.isShimmering = viewModel.isLoading
         cell?.beerImageReturnButton.isHidden = !viewModel.shouldRetry
         cell?.onRetry = delegate.didRequestImage
