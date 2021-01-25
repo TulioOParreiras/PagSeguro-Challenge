@@ -8,15 +8,19 @@
 import UIKit
 import BeerList
 
+public protocol BeerImageDataLoaderTask {
+    func cancel()
+}
+
 public protocol BeerImageDataLoader {
-    func loadImageData(from url: URL)
-    func cancelImageDataLoad(from url: URL)
+    func loadImageData(from url: URL) -> BeerImageDataLoaderTask
 }
 
 final public class BeerListViewController: UITableViewController {
     private var beerListLoader: BeerListLoader?
     private var imageLoader: BeerImageDataLoader?
     private var tableModel: [Beer] = []
+    private var tasks = [IndexPath: BeerImageDataLoaderTask]()
     
     public convenience init(beerListLoader: BeerListLoader, imageLoader: BeerImageDataLoader ) {
         self.init()
@@ -52,12 +56,12 @@ final public class BeerListViewController: UITableViewController {
         cell.ibuLabel.isHidden = cellModel.ibu == nil
         cell.ibuLabel.text = String(describing: cellModel.ibu ?? 0)
         cell.nameLabel.text = cellModel.name
-        imageLoader?.loadImageData(from: cellModel.imageURL)
+        tasks[indexPath] = imageLoader?.loadImageData(from: cellModel.imageURL)
         return cell
     }
     
     public override func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        let cellModel = tableModel[indexPath.row]
-        imageLoader?.cancelImageDataLoad(from: cellModel.imageURL)
+        tasks[indexPath]?.cancel()
+        tasks[indexPath] = nil
     }
 }

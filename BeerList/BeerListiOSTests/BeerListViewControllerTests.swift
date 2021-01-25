@@ -168,16 +168,21 @@ class BeerListViewControllerTests: XCTestCase {
         
         // MARK: - BeerImageDataLoader
         
+        private struct TaskSpy: BeerImageDataLoaderTask {
+            let cancelCallback: () -> Void
+            func cancel() {
+                cancelCallback()
+            }
+        }
+        
         var loadedImageURLs: [URL] = []
         var cancelledImageURLs: [URL] = []
         
-        func loadImageData(from url: URL) {
+        func loadImageData(from url: URL) -> BeerImageDataLoaderTask {
             loadedImageURLs.append(url)
+            return TaskSpy { [weak self] in self?.cancelledImageURLs.append(url) }
         }
         
-        func cancelImageDataLoad(from url: URL) {
-            cancelledImageURLs.append(url)
-        }
     }
 
 }
