@@ -32,13 +32,13 @@ class BeerListViewControllerTests: XCTestCase {
         XCTAssertTrue(sut.isShowingLoadingIndicator, "Expect loading indicator once view is loaded")
         
         loader.completeBeerListLoading(at: 0)
-        XCTAssertFalse(sut.isShowingLoadingIndicator, "Expect no loading indicator once loading is complete")
+        XCTAssertFalse(sut.isShowingLoadingIndicator, "Expect no loading indicator once loading completes with success")
         
         sut.simulateUserInitiatedBeerListReload()
         XCTAssertTrue(sut.isShowingLoadingIndicator, "Expect loading indicator once user initiates a reload")
         
-        loader.completeBeerListLoading(at: 1)
-        XCTAssertFalse(sut.isShowingLoadingIndicator, "Expect no loading indicator once user initiated loading is complete")
+        loader.completeBeerListLoadingWithError(at: 1)
+        XCTAssertFalse(sut.isShowingLoadingIndicator, "Expect no loading indicator once user initiated loading completes with error")
     }
     
     func test_loadBeerListCompletion_rendersSuccessfullyLoadedBeers() {
