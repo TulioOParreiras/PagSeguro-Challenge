@@ -241,6 +241,17 @@ class BeerListViewControllerTests: XCTestCase {
         XCTAssertEqual(loader.cancelledImageURLs, [beer0.imageURL, beer1.imageURL], "Expected second cancelled image URL request once second image is not near visible anymore")
     }
     
+    func test_beerCell_doesNotRenderLoadedBeerWhenNotVisibleAnymore() {
+        let (sut, loader) = makeSUT()
+        sut.loadViewIfNeeded()
+        loader.completeBeerListLoading(with: [makeBeer()])
+        
+        let view = sut.simulateBeerCellNotVisible(at: 0)
+        loader.completeImageLoading(with: anyImageData())
+        
+        XCTAssertNil(view?.renderedImage, "Expected no rendered image when an image load finishes after the view is not visible anymore)
+    }
+    
     // MARK: - Helpers
     
     private func makeSUT(file: StaticString = #file, line: UInt = #line) -> (sut: BeerListViewController, loader: LoaderSpy) {
@@ -249,6 +260,14 @@ class BeerListViewControllerTests: XCTestCase {
         trackForMemoryLeaks(loader)
         trackForMemoryLeaks(sut)
         return (sut, loader)
+    }
+    
+    func makeBeer(name: String = "A name", imageURL: URL = URL(string: "https://a-url.com")!, ibu: Double? = nil) -> Beer {
+        return Beer(id: Int.random(in: 0...100), name: name, tagline: "a tagline", description: "a description", imageURL: imageURL, abv: Double.random(in: 1...10), ibu: ibu)
+    }
+    
+    private func anyImageData() -> Data {
+        return UIImage.make(withColor: .red).pngData()!
     }
 
 }

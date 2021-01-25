@@ -19,12 +19,15 @@ extension BeerListViewController {
         return beerCell(at: row) as? BeerCell
     }
     
-    func simulateBeerCellNotVisible(at row: Int) {
+    @discardableResult
+    func simulateBeerCellNotVisible(at row: Int) -> BeerCell? {
         let view = simulateBeerCellVisible(at: row)
         
         let delegate = tableView.delegate
         let index = IndexPath(row: row, section: beerCellsSection)
         delegate?.tableView?(tableView, didEndDisplaying: view!, forRowAt: index)
+        
+        return view
     }
     
     func simulateBeerCellNearVisible(at row: Int) {

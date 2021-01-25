@@ -51,6 +51,9 @@
                                                             <state key="normal" title="↻">
                                                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             </state>
+                                                            <connections>
+                                                                <action selector="retryButtonTapped" destination="hQ1-QQ-K3N" eventType="touchUpInside" id="Pln-d5-WvS"/>
+                                                            </connections>
                                                         </button>
                                                     </subviews>
                                                     <color key="backgroundColor" red="0.8901960784313725" green="0.8901960784313725" blue="0.8901960784313725" alpha="0.84999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
@@ -101,10 +104,11 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="beerImageContainer" destination="5bJ-KR-6SU" id="0Qm-36-IJ5"/>
-                                    <outlet property="imvBeer" destination="yhR-vq-f3l" id="jep-rE-Nih"/>
-                                    <outlet property="lblBeer" destination="ulR-ug-ybO" id="Ygr-a4-SJt"/>
-                                    <outlet property="lblIBU" destination="vNU-t2-ZR8" id="aMh-BE-N5G"/>
+                                    <outlet property="beerImageReturnButton" destination="831-fM-vee" id="FgY-CJ-dAx"/>
+                                    <outlet property="beerImageView" destination="yhR-vq-f3l" id="coI-p2-bpG"/>
+                                    <outlet property="ibuLabel" destination="vNU-t2-ZR8" id="2gr-bD-lRi"/>
+                                    <outlet property="imageContainer" destination="5bJ-KR-6SU" id="9gE-5m-uvJ"/>
+                                    <outlet property="nameLabel" destination="ulR-ug-ybO" id="HRZ-Qh-r96"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
