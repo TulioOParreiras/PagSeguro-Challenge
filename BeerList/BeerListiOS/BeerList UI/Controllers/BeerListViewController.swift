@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import BeerList
 
 final public class BeerListViewController: UITableViewController, UITableViewDataSourcePrefetching {
     private var refreshController: BeerListRefreshViewController?
