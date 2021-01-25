@@ -1,5 +1,5 @@
 //
-//  BeerImageViewModel.swift
+//  BeerPresenter.swift
 //  BeerListiOS
 //
 //  Created by Tulio Parreiras on 25/01/21.
