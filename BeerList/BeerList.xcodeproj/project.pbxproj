@@ -12,6 +12,7 @@
 		D22E8C5925BF1F3D00B1F606 /* BeerImageDataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22E8C5825BF1F3D00B1F606 /* BeerImageDataLoader.swift */; };
 		D22E8C6525BF1FB300B1F606 /* BeerListViewController+TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22E8C6425BF1FB300B1F606 /* BeerListViewController+TestHelpers.swift */; };
 		D22E8C6C25BF1FEF00B1F606 /* BeerCell+TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22E8C6B25BF1FEF00B1F606 /* BeerCell+TestHelpers.swift */; };
+		D22E8C7325BF202900B1F606 /* BeerListViewControllerTests+TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22E8C7225BF202900B1F606 /* BeerListViewControllerTests+TestHelpers.swift */; };
 		D232EF4425BDED5D00F272BB /* URLSessionHTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D232EF4325BDED5D00F272BB /* URLSessionHTTPClient.swift */; };
 		D232EF4E25BDFD7300F272BB /* BeerListAPIEndToEndTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D232EF4D25BDFD7300F272BB /* BeerListAPIEndToEndTests.swift */; };
 		D232EF5025BDFD7300F272BB /* BeerList.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D256A38725BA47F10010C33F /* BeerList.framework */; };
@@ -63,6 +64,7 @@
 		D22E8C5825BF1F3D00B1F606 /* BeerImageDataLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeerImageDataLoader.swift; sourceTree = "<group>"; };
 		D22E8C6425BF1FB300B1F606 /* BeerListViewController+TestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BeerListViewController+TestHelpers.swift"; sourceTree = "<group>"; };
 		D22E8C6B25BF1FEF00B1F606 /* BeerCell+TestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BeerCell+TestHelpers.swift"; sourceTree = "<group>"; };
+		D22E8C7225BF202900B1F606 /* BeerListViewControllerTests+TestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BeerListViewControllerTests+TestHelpers.swift"; sourceTree = "<group>"; };
 		D232EF4325BDED5D00F272BB /* URLSessionHTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionHTTPClient.swift; sourceTree = "<group>"; };
 		D232EF4B25BDFD7300F272BB /* BeerListAPIEndToEndTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BeerListAPIEndToEndTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D232EF4D25BDFD7300F272BB /* BeerListAPIEndToEndTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeerListAPIEndToEndTests.swift; sourceTree = "<group>"; };
@@ -138,6 +140,7 @@
 				D22E8C3D25BF1E5900B1F606 /* UIControl+TestHelpers.swift */,
 				D22E8C6425BF1FB300B1F606 /* BeerListViewController+TestHelpers.swift */,
 				D22E8C6B25BF1FEF00B1F606 /* BeerCell+TestHelpers.swift */,
+				D22E8C7225BF202900B1F606 /* BeerListViewControllerTests+TestHelpers.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -517,6 +520,7 @@
 				D232F01825BE458800F272BB /* XCTest+MemoryLeakTracking.swift in Sources */,
 				D22E8C3225BF1DDF00B1F606 /* UIImage+TestHelpers.swift in Sources */,
 				D22E8C6C25BF1FEF00B1F606 /* BeerCell+TestHelpers.swift in Sources */,
+				D22E8C7325BF202900B1F606 /* BeerListViewControllerTests+TestHelpers.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

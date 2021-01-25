@@ -275,57 +275,5 @@ class BeerListViewControllerTests: XCTestCase {
     private func makeBeer(name: String = "A name", imageURL: URL = URL(string: "https://a-url.com")!, ibu: Double? = nil) -> Beer {
         return Beer(id: Int.random(in: 0...100), name: name, tagline: "a tagline", description: "a description", imageURL: imageURL, abv: Double.random(in: 1...10), ibu: ibu)
     }
-    
-    class LoaderSpy: BeerListLoader, BeerImageDataLoader {
-        
-        // MARK: - BeerListLoader
-        
-        private var beerListRequests = [(LoadResponse)]()
-        var loadBeerListCallCount: Int {
-            return beerListRequests.count
-        }
-        
-        func load(completion: @escaping LoadResponse) {
-            beerListRequests.append(completion)
-        }
-        
-        func completeBeerListLoading(with beers: [Beer] = [], at index: Int = 0) {
-            beerListRequests[index](.success(beers))
-        }
-        
-        func completeBeerListLoadingWithError(at index: Int = 0) {
-            let error = NSError(domain: "a domain", code: 1)
-            beerListRequests[index](.failure(error))
-        }
-        
-        // MARK: - BeerImageDataLoader
-        
-        private struct TaskSpy: BeerImageDataLoaderTask {
-            let cancelCallback: () -> Void
-            func cancel() {
-                cancelCallback()
-            }
-        }
-        
-        var loadImageRequests = [(url: URL, completion: (BeerImageDataLoader.Result) -> Void)]()
-        var loadedImageURLs: [URL] {
-            return loadImageRequests.map { $0.url }
-        }
-        var cancelledImageURLs: [URL] = []
-        
-        func loadImageData(from url: URL, completion: @escaping(BeerImageDataLoader.Result) -> Void) -> BeerImageDataLoaderTask {
-            loadImageRequests.append((url, completion))
-            return TaskSpy { [weak self] in self?.cancelledImageURLs.append(url) }
-        }
-        
-        func completeImageLoading(with imageData: Data = Data(), at index: Int = 0) {
-            loadImageRequests[index].completion(.success(imageData))
-        }
-        
-        func completeImageLoadingWithError(at index: Int = 0) {
-            let error = NSError(domain: "a domain", code: 1)
-            loadImageRequests[index].completion(.failure(error))
-        }
-    }
 
 }
