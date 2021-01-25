@@ -27,9 +27,14 @@ final public class BeerListViewController: UITableViewController {
     @objc private func load() {
         refreshControl?.beginRefreshing()
         loader?.load { [weak self] result in
-            self?.tableModel = (try? result.get()) ?? []
-            self?.tableView.reloadData()
-            self?.refreshControl?.endRefreshing()
+            switch result {
+            case let .success(beerList):
+                self?.tableModel = beerList
+                self?.tableView.reloadData()
+                self?.refreshControl?.endRefreshing()
+            case .failure:
+                break
+            }
         }
     }
     

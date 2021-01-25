@@ -61,6 +61,22 @@ class BeerListViewControllerTests: XCTestCase {
         assertThat(sut, isRendering: beerList)
     }
     
+    func test_loadBeerListCompletion_doesNotAlterCurrentRenderingStateOnError() {
+        let beer0 = makeBeer(name: "A name", ibu: 1)
+        let (sut, loader) = makeSUT()
+        
+        sut.loadViewIfNeeded()
+        assertThat(sut, isRendering: [])
+        XCTAssertEqual(sut.numberOfRenderedBeerCells(), 0)
+        
+        loader.completeBeerListLoading(with: [beer0], at: 0)
+        assertThat(sut, isRendering: [beer0])
+        
+        sut.simulateUserInitiatedBeerListReload()
+        loader.completeBeerListLoadingWithError(at: 1)
+        assertThat(sut, isRendering: [beer0])
+    }
+    
     // MARK: - Helpers
     
     private func makeSUT(file: StaticString = #file, line: UInt = #line) -> (sut: BeerListViewController, loader: LoaderSpy) {
@@ -108,6 +124,11 @@ class BeerListViewControllerTests: XCTestCase {
         
         func completeBeerListLoading(with beers: [Beer] = [], at index: Int = 0) {
             completions[index](.success(beers))
+        }
+        
+        func completeBeerListLoadingWithError(at index: Int = 0) {
+            let error = NSError(domain: "a domain", code: 1)
+            completions[index](.failure(error))
         }
     }
 
