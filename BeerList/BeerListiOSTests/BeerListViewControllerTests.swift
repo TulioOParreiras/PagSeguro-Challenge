@@ -27,15 +27,13 @@ final class BeerListViewController: UIViewController {
 class BeerListViewControllerTests: XCTestCase {
 
     func test_init_doesNotLoadBeerList() {
-        let loader = LoaderSpy()
-        _ = BeerListViewController(loader: loader)
+        let (_, loader) = makeSUT()
         
         XCTAssertEqual(loader.loadCallCount, 0)
     }
     
     func test_viewDidLoad_doesLoadBeerList() {
-        let loader = LoaderSpy()
-        let sut = BeerListViewController(loader: loader)
+        let (sut, loader) = makeSUT()
         
         sut.loadViewIfNeeded()
         
@@ -43,6 +41,14 @@ class BeerListViewControllerTests: XCTestCase {
     }
     
     // MARK: - Helpers
+    
+    private func makeSUT(file: StaticString = #file, line: UInt = #line) -> (sut: BeerListViewController, loader: LoaderSpy) {
+        let loader = LoaderSpy()
+        let sut = BeerListViewController(loader: loader)
+        trackForMemoryLeaks(loader)
+        trackForMemoryLeaks(sut)
+        return (sut, loader)
+    }
     
     class LoaderSpy: BeerListLoader {
         private(set) var loadCallCount: Int = 0
