@@ -9,9 +9,9 @@ import UIKit
 
 final class BeerListCellController {
     private var task: BeerImageDataLoaderTask?
-    private let viewModel: BeerImageViewModel
+    private let viewModel: BeerImageViewModel<UIImage>
     
-    init(viewModel: BeerImageViewModel) {
+    init(viewModel: BeerImageViewModel<UIImage>) {
         self.viewModel = viewModel
     }
     

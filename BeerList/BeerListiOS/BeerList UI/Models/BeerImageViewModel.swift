@@ -5,19 +5,21 @@
 //  Created by Tulio Parreiras on 25/01/21.
 //
 
-import UIKit
+import Foundation
 import BeerList
 
-final class BeerImageViewModel {
+final class BeerImageViewModel<Image> {
     typealias Observer<T> = (T) -> Void
     
     private var task: BeerImageDataLoaderTask?
     private let model: Beer
     private let imageLoader: BeerImageDataLoader
+    private let imageTransformer: (Data) -> Image?
     
-    init(model: Beer, imageLoader: BeerImageDataLoader) {
+    init(model: Beer, imageLoader: BeerImageDataLoader, imageTransformer: @escaping(Data) -> Image?) {
         self.model = model
         self.imageLoader = imageLoader
+        self.imageTransformer = imageTransformer
     }
     
     var name: String {
@@ -33,7 +35,7 @@ final class BeerImageViewModel {
         return ibu != nil
     }
     
-    var onImageLoad: Observer<UIImage>?
+    var onImageLoad: Observer<Image>?
     var onImageLoadingStateChange: Observer<Bool>?
     var onShouldRetryImageLoadStateChange: Observer<Bool>?
     
@@ -46,7 +48,7 @@ final class BeerImageViewModel {
     }
     
     private func handle(_ result: BeerImageDataLoader.Result) {
-        if let image = (try? result.get()).flatMap(UIImage.init) {
+        if let image = (try? result.get()).flatMap(imageTransformer) {
             onImageLoad?(image)
         } else {
             onShouldRetryImageLoadStateChange?(true)

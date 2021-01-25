@@ -5,7 +5,7 @@
 //  Created by Tulio Parreiras on 25/01/21.
 //
 
-import Foundation
+import UIKit
 import BeerList
 
 public final class BeerListUIComposer {
@@ -22,7 +22,8 @@ public final class BeerListUIComposer {
     private static func adaptBeerToCellControllers(forwardingTo controller: BeerListViewController, loader: BeerImageDataLoader) -> ([Beer]) -> Void {
         return { [weak controller] beerList in
             controller?.tableModel = beerList.map { model in
-                BeerListCellController(viewModel: BeerImageViewModel(model: model, imageLoader: loader))
+                BeerListCellController(viewModel:
+                                        BeerImageViewModel(model: model, imageLoader: loader, imageTransformer: UIImage.init))
             }
         }
     }
