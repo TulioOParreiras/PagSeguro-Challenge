@@ -408,15 +408,3 @@ private extension BeerCell {
         beerImageReturnButton.simulateEvent(.touchUpInside)
     }
 }
-
-private extension UIControl {
-    
-    func simulateEvent(_ event: UIControl.Event) {
-        allTargets.forEach { target in
-            actions(forTarget: target, forControlEvent: event)?.forEach {
-                (target as NSObject).perform(Selector($0))
-            }
-        }
-    }
-    
-}
