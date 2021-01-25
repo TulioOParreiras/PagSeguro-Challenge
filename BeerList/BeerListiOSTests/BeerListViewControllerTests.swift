@@ -47,14 +47,14 @@ class BeerListViewControllerTests: XCTestCase {
         XCTAssertEqual(loader.loadCallCount, 1)
     }
     
-    func test_pullToRefresh_loadsBeerList() {
+    func test_userInitiatedBeerListReload_reloadsBeerList() {
         let (sut, loader) = makeSUT()
         sut.loadViewIfNeeded()
         
-        sut.simulatePullToRefresh()
+        sut.simulateUserInitiatedBeerListReload()
         XCTAssertEqual(loader.loadCallCount, 2)
         
-        sut.simulatePullToRefresh()
+        sut.simulateUserInitiatedBeerListReload()
         XCTAssertEqual(loader.loadCallCount, 3)
     }
     
@@ -75,18 +75,18 @@ class BeerListViewControllerTests: XCTestCase {
         XCTAssertEqual(sut.refreshControl?.isRefreshing, false)
     }
     
-    func test_pullToRefresh_showsLoadingIndicator() {
+    func test_userInitiatedBeerListReload_showsLoadingIndicator() {
         let (sut, _) = makeSUT()
         
-        sut.simulatePullToRefresh()
+        sut.simulateUserInitiatedBeerListReload()
         
         XCTAssertEqual(sut.refreshControl?.isRefreshing, true)
     }
     
-    func test_pullToRefresh_hidesLoadingIndicatorOnLoaderCompletion() {
+    func test_userInitiatedBeerListReload_hidesLoadingIndicatorOnLoaderCompletion() {
         let (sut, loader) = makeSUT()
         
-        sut.simulatePullToRefresh()
+        sut.simulateUserInitiatedBeerListReload()
         loader.completeBeerListLoading()
         
         XCTAssertEqual(sut.refreshControl?.isRefreshing, false)
@@ -119,11 +119,19 @@ class BeerListViewControllerTests: XCTestCase {
 
 }
 
-extension BeerListViewController {
+private extension BeerListViewController {
+    
+    func simulateUserInitiatedBeerListReload() {
+        refreshControl?.simulatePullToRefresh()
+    }
+    
+}
+
+private extension UIRefreshControl {
     
     func simulatePullToRefresh() {
-        refreshControl?.allTargets.forEach { target in
-            refreshControl?.actions(forTarget: target, forControlEvent: .valueChanged)?.forEach {
+        allTargets.forEach { target in
+            actions(forTarget: target, forControlEvent: .valueChanged)?.forEach {
                 (target as NSObject).perform(Selector($0))
             }
         }
