@@ -12,4 +12,5 @@ final public class BeerCell: UITableViewCell {
     public let nameLabel = UILabel()
     public let imageContainer = UIView()
     public let beerImageView = UIImageView()
+    public let beerImageReturButton = UIButton()
 }

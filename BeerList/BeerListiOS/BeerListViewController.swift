@@ -58,10 +58,12 @@ final public class BeerListViewController: UITableViewController {
         cell.ibuLabel.text = String(describing: cellModel.ibu ?? 0)
         cell.nameLabel.text = cellModel.name
         cell.beerImageView.image = nil
+        cell.beerImageReturButton.isHidden = true
         cell.imageContainer.startShimmering()
         tasks[indexPath] = imageLoader?.loadImageData(from: cellModel.imageURL) { [weak cell] result in
             let data = try? result.get()
             cell?.beerImageView.image = data.map(UIImage.init) ?? nil
+            cell?.beerImageReturButton.isHidden = data != nil
             cell?.imageContainer.stopShimmering()
         }
         return cell
