@@ -5,23 +5,25 @@
 //  Created by Tulio Parreiras on 25/01/21.
 //
 
-import Foundation
+import UIKit
 import BeerList
 
 public final class BeerListUIComposer {
     private init() { }
     
     public static func beerListComposedWith(beerListLoader: BeerListLoader, imageLoader: BeerImageDataLoader) -> BeerListViewController {
-        let refreshController = BeerListRefreshViewController(beerListLoader: beerListLoader)
+        let viewModel = BeerListViewModel(beerListLoader: beerListLoader)
+        let refreshController = BeerListRefreshViewController(viewModel: viewModel)
         let beerListController = BeerListViewController(refreshController: refreshController)
-        refreshController.onRefresh = adaptBeerToCellControllers(forwardingTo: beerListController, loader: imageLoader)
+        viewModel.onBeerListLoad = adaptBeerToCellControllers(forwardingTo: beerListController, loader: imageLoader)
         return beerListController
     }
     
     private static func adaptBeerToCellControllers(forwardingTo controller: BeerListViewController, loader: BeerImageDataLoader) -> ([Beer]) -> Void {
         return { [weak controller] beerList in
             controller?.tableModel = beerList.map { model in
-                BeerListCellController(model: model, imageLoader: loader)
+                BeerListCellController(viewModel:
+                                        BeerImageViewModel(model: model, imageLoader: loader, imageTransformer: UIImage.init))
             }
         }
     }
