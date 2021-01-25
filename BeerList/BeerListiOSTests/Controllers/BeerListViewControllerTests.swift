@@ -249,7 +249,7 @@ class BeerListViewControllerTests: XCTestCase {
         let view = sut.simulateBeerCellNotVisible(at: 0)
         loader.completeImageLoading(with: anyImageData())
         
-        XCTAssertNil(view?.renderedImage, "Expected no rendered image when an image load finishes after the view is not visible anymore)
+        XCTAssertNil(view?.renderedImage, "Expected no rendered image when an image load finishes after the view is not visible anymore")
     }
     
     // MARK: - Helpers
