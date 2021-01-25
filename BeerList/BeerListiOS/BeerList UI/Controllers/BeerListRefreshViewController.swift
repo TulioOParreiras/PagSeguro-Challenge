@@ -12,23 +12,14 @@ protocol BeerListRefreshViewControllerDelegate {
 }
 
 public final class BeerListRefreshViewController: NSObject, BeerListLoadingView {
-    private(set) lazy var view: UIRefreshControl = loadView(UIRefreshControl())
-    private let delegate: BeerListRefreshViewControllerDelegate
+    @IBOutlet weak var view: UIRefreshControl?
+    var delegate: BeerListRefreshViewControllerDelegate?
     
-    init(delegate: BeerListRefreshViewControllerDelegate) {
-        self.delegate = delegate
-    }
-    
-    @objc func refresh() {
-        delegate.didRequestBeerListRefresh()
-    }
-    
-    private func loadView(_ view: UIRefreshControl) -> UIRefreshControl {
-        view.addTarget(self, action: #selector(refresh), for: .valueChanged)
-        return view
+    @IBAction func refresh() {
+        delegate?.didRequestBeerListRefresh()
     }
     
     func display(_ viewModel: BeerListLoadingViewModel) {
-        viewModel.isLoading ? view.beginRefreshing() : view.endRefreshing()
+        viewModel.isLoading ? view?.beginRefreshing() : view?.endRefreshing()
     }
 }

@@ -8,19 +8,13 @@
 import UIKit
 
 final public class BeerListViewController: UITableViewController, UITableViewDataSourcePrefetching {
-    private var refreshController: BeerListRefreshViewController?
+    @IBOutlet var refreshController: BeerListRefreshViewController?
     var tableModel: [BeerCellController] = [] {
         didSet { tableView.reloadData() }
     }
     
-    public convenience init(refreshController: BeerListRefreshViewController) {
-        self.init()
-        self.refreshController = refreshController
-    }
-    
     public override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.refreshControl = refreshController?.view
         tableView.prefetchDataSource = self
         refreshController?.refresh()
     }
