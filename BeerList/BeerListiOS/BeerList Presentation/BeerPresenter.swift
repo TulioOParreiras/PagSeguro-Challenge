@@ -14,23 +14,6 @@ protocol BeerView {
     func display(_ model: BeerViewModel<Image>)
 }
 
-struct BeerViewModel<Image> {
-    let name: String
-    let ibuValue: Double?
-    let image: Image?
-    let isLoading: Bool
-    let shouldRetry: Bool
-    
-    var ibu: String?  {
-        guard let ibu = ibuValue else { return nil }
-        return String(describing: ibu)
-    }
-    
-    var hasIbu: Bool {
-        return ibuValue != nil
-    }
-}
-
 final class BeerPresenter<View: BeerView, Image> where View.Image == Image {
     private let view: View
     private let imageTransformer: (Data) -> Image?

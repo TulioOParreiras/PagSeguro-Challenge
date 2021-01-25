@@ -8,16 +8,8 @@
 import Foundation
 import BeerList
 
-struct BeerListLoadingViewModel {
-    let isLoading: Bool
-}
-
 protocol BeerListLoadingView {
     func display(_ viewModel: BeerListLoadingViewModel)
-}
-
-struct BeerListViewModel {
-    let beerList: [Beer]
 }
 
 protocol BeerListView {
