@@ -8,7 +8,7 @@
 import UIKit
 import BeerList
 
-final class BeerListRefreshViewController: NSObject {
+public final class BeerListRefreshViewController: NSObject {
     private(set) lazy var view: UIRefreshControl = {
         let view = UIRefreshControl()
         view.addTarget(self, action: #selector(refresh), for: .valueChanged)

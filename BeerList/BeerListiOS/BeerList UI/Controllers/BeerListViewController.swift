@@ -10,24 +10,18 @@ import BeerList
 
 final public class BeerListViewController: UITableViewController, UITableViewDataSourcePrefetching {
     private var refreshController: BeerListRefreshViewController?
-    private var imageLoader: BeerImageDataLoader?
-    private var tableModel: [Beer] = [] {
+    var tableModel: [BeerListCellController] = [] {
         didSet { tableView.reloadData() }
     }
-    private var cellControllers = [IndexPath: BeerListCellController]()
     
-    public convenience init(beerListLoader: BeerListLoader, imageLoader: BeerImageDataLoader ) {
+    public convenience init(refreshController: BeerListRefreshViewController) {
         self.init()
-        self.refreshController = BeerListRefreshViewController(beerListLoader: beerListLoader)
-        self.imageLoader = imageLoader
+        self.refreshController = refreshController
     }
     
     public override func viewDidLoad() {
         super.viewDidLoad()
         tableView.refreshControl = refreshController?.view
-        refreshController?.onRefresh = { [weak self] beerList in
-            self?.tableModel = beerList
-        }
         tableView.prefetchDataSource = self
         refreshController?.refresh()
     }
@@ -41,7 +35,7 @@ final public class BeerListViewController: UITableViewController, UITableViewDat
     }
     
     public override func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        removeCellController(forRowAt: indexPath)
+        cancelCellControllerLoad(forRowAt: indexPath)
     }
     
     public func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
@@ -51,17 +45,14 @@ final public class BeerListViewController: UITableViewController, UITableViewDat
     }
     
     public func tableView(_ tableView: UITableView, cancelPrefetchingForRowsAt indexPaths: [IndexPath]) {
-        indexPaths.forEach(removeCellController)
+        indexPaths.forEach(cancelCellControllerLoad)
     }
     
     private func cellController(forRowAt indexPath: IndexPath) -> BeerListCellController {
-        let cellModel = tableModel[indexPath.row]
-        let cellController = BeerListCellController(model: cellModel, imageLoader: imageLoader!)
-        cellControllers[indexPath] = cellController
-        return cellController
+        return tableModel[indexPath.row]
     }
     
-    private func removeCellController(forRowAt indexPath: IndexPath) {
-        cellControllers[indexPath] = nil
+    private func cancelCellControllerLoad(forRowAt indexPath: IndexPath) {
+        tableModel[indexPath.row].cancelLoad()
     }
 }

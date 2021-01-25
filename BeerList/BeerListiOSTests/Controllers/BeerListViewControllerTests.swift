@@ -245,7 +245,7 @@ class BeerListViewControllerTests: XCTestCase {
     
     private func makeSUT(file: StaticString = #file, line: UInt = #line) -> (sut: BeerListViewController, loader: LoaderSpy) {
         let loader = LoaderSpy()
-        let sut = BeerListViewController(beerListLoader: loader, imageLoader: loader)
+        let sut = BeerListUIComposer.beerListComposedWith(beerListLoader: loader, imageLoader: loader)
         trackForMemoryLeaks(loader)
         trackForMemoryLeaks(sut)
         return (sut, loader)
