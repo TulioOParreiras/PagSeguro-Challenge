@@ -13,7 +13,8 @@ public protocol BeerImageDataLoaderTask {
 }
 
 public protocol BeerImageDataLoader {
-    func loadImageData(from url: URL) -> BeerImageDataLoaderTask
+    typealias Result = Swift.Result<Data, Error>
+    func loadImageData(from url: URL, completion: @escaping(Result) -> Void) -> BeerImageDataLoaderTask
 }
 
 final public class BeerListViewController: UITableViewController {
@@ -56,7 +57,10 @@ final public class BeerListViewController: UITableViewController {
         cell.ibuLabel.isHidden = cellModel.ibu == nil
         cell.ibuLabel.text = String(describing: cellModel.ibu ?? 0)
         cell.nameLabel.text = cellModel.name
-        tasks[indexPath] = imageLoader?.loadImageData(from: cellModel.imageURL)
+        cell.imageContainer.startShimmering()
+        tasks[indexPath] = imageLoader?.loadImageData(from: cellModel.imageURL) { [weak cell] _ in
+            cell?.imageContainer.stopShimmering()
+        }
         return cell
     }
     

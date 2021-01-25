@@ -10,4 +10,5 @@ import UIKit
 final public class BeerCell: UITableViewCell {
     public let ibuLabel = UILabel()
     public let nameLabel = UILabel()
+    public let imageContainer = UIView()
 }
