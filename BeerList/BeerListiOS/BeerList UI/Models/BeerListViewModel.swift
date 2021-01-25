@@ -9,26 +9,24 @@ import Foundation
 import BeerList
 
 final class BeerListViewModel {
+    typealias Observer<T> = (T) -> Void
+    
     private let beerListLoader: BeerListLoader
     
     init(beerListLoader: BeerListLoader) {
         self.beerListLoader = beerListLoader
     }
     
-    var onChange: ((BeerListViewModel) -> Void)?
-    var onBeerListLoad: (([Beer]) -> Void)?
-    
-    var isLoading: Bool = false {
-        didSet { onChange?(self) }
-    }
+    var onLoadingStateChange: Observer<Bool>?
+    var onBeerListLoad: Observer<[Beer]>?
     
     func loadBeerList() {
-        isLoading = true
+        onLoadingStateChange?(true)
         beerListLoader.load { [weak self] result in
             if let beerList = try? result.get() {
                 self?.onBeerListLoad?(beerList)
             }
-            self?.isLoading = false
+            self?.onLoadingStateChange?(false)
         }
     }
 }
