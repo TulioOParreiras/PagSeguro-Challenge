@@ -14,7 +14,7 @@ public final class BeerListUIComposer {
     public static func beerListComposedWith(beerListLoader: BeerListLoader, imageLoader: BeerImageDataLoader) -> BeerListViewController {
         let presenter = BeerListPresenter()
         let presentationAdapter = BeerListLoaderPresentationAdapter(beerListLoader: beerListLoader, presenter: presenter)
-        let refreshController = BeerListRefreshViewController(loadBeerList: presentationAdapter .loadBeerList)
+        let refreshController = BeerListRefreshViewController(delegate: presentationAdapter)
         let beerListController = BeerListViewController(refreshController: refreshController)
         presenter.loadingView = WeakRefVirtualProxy(object: refreshController)
         presenter.beerListView = BeerListViewAdapter(controller: beerListController, imageLoader: imageLoader)
@@ -63,7 +63,7 @@ private final class BeerListViewAdapter: BeerListView {
     }
 }
 
-private final class BeerListLoaderPresentationAdapter {
+private final class BeerListLoaderPresentationAdapter: BeerListRefreshViewControllerDelegate {
     private let beerListLoader: BeerListLoader
     private let presenter: BeerListPresenter
     
@@ -72,7 +72,7 @@ private final class BeerListLoaderPresentationAdapter {
         self.presenter = presenter
     }
     
-    func loadBeerList() {
+    func didRequestBeerListRefresh() {
         presenter.didStartLoadingBeerList()
         
         beerListLoader.load { [weak self] result in

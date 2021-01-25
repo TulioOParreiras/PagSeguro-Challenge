@@ -7,16 +7,20 @@
 
 import UIKit
 
+protocol BeerListRefreshViewControllerDelegate {
+    func didRequestBeerListRefresh()
+}
+
 public final class BeerListRefreshViewController: NSObject, BeerListLoadingView {
     private(set) lazy var view: UIRefreshControl = loadView(UIRefreshControl())
-    private let loadBeerList: () -> Void
+    private let delegate: BeerListRefreshViewControllerDelegate
     
-    init(loadBeerList: @escaping () -> Void) {
-        self.loadBeerList = loadBeerList
+    init(delegate: BeerListRefreshViewControllerDelegate) {
+        self.delegate = delegate
     }
     
     @objc func refresh() {
-        self.loadBeerList()
+        delegate.didRequestBeerListRefresh()
     }
     
     private func loadView(_ view: UIRefreshControl) -> UIRefreshControl {
