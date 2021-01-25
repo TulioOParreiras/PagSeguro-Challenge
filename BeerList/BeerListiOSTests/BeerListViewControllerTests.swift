@@ -63,7 +63,7 @@ class BeerListViewControllerTests: XCTestCase {
         
         sut.loadViewIfNeeded()
         
-        XCTAssertEqual(sut.refreshControl?.isRefreshing, true)
+        XCTAssertTrue(sut.isShowingLoadingIndicator)
     }
     
     func test_viewDidLoad_hidesIndicatorOnLoaderCompletion() {
@@ -72,7 +72,7 @@ class BeerListViewControllerTests: XCTestCase {
         sut.loadViewIfNeeded()
         loader.completeBeerListLoading()
         
-        XCTAssertEqual(sut.refreshControl?.isRefreshing, false)
+        XCTAssertFalse(sut.isShowingLoadingIndicator)
     }
     
     func test_userInitiatedBeerListReload_showsLoadingIndicator() {
@@ -80,7 +80,7 @@ class BeerListViewControllerTests: XCTestCase {
         
         sut.simulateUserInitiatedBeerListReload()
         
-        XCTAssertEqual(sut.refreshControl?.isRefreshing, true)
+        XCTAssertTrue(sut.isShowingLoadingIndicator)
     }
     
     func test_userInitiatedBeerListReload_hidesLoadingIndicatorOnLoaderCompletion() {
@@ -89,7 +89,7 @@ class BeerListViewControllerTests: XCTestCase {
         sut.simulateUserInitiatedBeerListReload()
         loader.completeBeerListLoading()
         
-        XCTAssertEqual(sut.refreshControl?.isRefreshing, false)
+        XCTAssertFalse(sut.isShowingLoadingIndicator)
     }
     
     // MARK: - Helpers
@@ -125,6 +125,9 @@ private extension BeerListViewController {
         refreshControl?.simulatePullToRefresh()
     }
     
+    var isShowingLoadingIndicator: Bool {
+        return refreshControl?.isRefreshing == true
+    }
 }
 
 private extension UIRefreshControl {
