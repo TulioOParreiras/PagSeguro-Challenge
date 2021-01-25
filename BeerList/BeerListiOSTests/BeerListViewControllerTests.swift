@@ -26,7 +26,9 @@ final class BeerListViewController: UITableViewController {
     }
     
     @objc private func load() {
-        loader?.load { _ in }
+        loader?.load { [weak self] _ in
+            self?.refreshControl?.endRefreshing()
+        }
     }
 }
 
@@ -64,6 +66,15 @@ class BeerListViewControllerTests: XCTestCase {
         XCTAssertEqual(sut.refreshControl?.isRefreshing, true)
     }
     
+    func test_viewDidLoad_hidesIndicatorOnLoaderCompletion() {
+        let (sut, loader) = makeSUT()
+        
+        sut.loadViewIfNeeded()
+        loader.completeBeerListLoading()
+        
+        XCTAssertEqual(sut.refreshControl?.isRefreshing, false)
+    }
+    
     // MARK: - Helpers
     
     private func makeSUT(file: StaticString = #file, line: UInt = #line) -> (sut: BeerListViewController, loader: LoaderSpy) {
@@ -75,10 +86,17 @@ class BeerListViewControllerTests: XCTestCase {
     }
     
     class LoaderSpy: BeerListLoader {
-        private(set) var loadCallCount: Int = 0
+        private var completions = [(LoadResponse)]()
+        var loadCallCount: Int {
+            completions.count
+        }
         
         func load(completion: @escaping LoadResponse) {
-            loadCallCount += 1
+            completions.append(completion)
+        }
+        
+        func completeBeerListLoading() {
+            completions[0](.success([]))
         }
     }
 
