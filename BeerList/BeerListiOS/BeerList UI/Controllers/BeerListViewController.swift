@@ -9,7 +9,7 @@ import UIKit
 
 final public class BeerListViewController: UITableViewController, UITableViewDataSourcePrefetching {
     private var refreshController: BeerListRefreshViewController?
-    var tableModel: [BeerListCellController] = [] {
+    var tableModel: [BeerCellController] = [] {
         didSet { tableView.reloadData() }
     }
     
@@ -47,7 +47,7 @@ final public class BeerListViewController: UITableViewController, UITableViewDat
         indexPaths.forEach(cancelCellControllerLoad)
     }
     
-    private func cellController(forRowAt indexPath: IndexPath) -> BeerListCellController {
+    private func cellController(forRowAt indexPath: IndexPath) -> BeerCellController {
         return tableModel[indexPath.row]
     }
     

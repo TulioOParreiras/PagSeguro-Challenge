@@ -1,5 +1,5 @@
 //
-//  BeerListCellController.swift
+//  BeerCellController.swift
 //  BeerListiOS
 //
 //  Created by Tulio Parreiras on 25/01/21.
@@ -7,16 +7,16 @@
 
 import UIKit
 
-protocol BeerListCellControllerDelegate {
+protocol BeerCellControllerDelegate {
     func didRequestImage()
     func didCancelImageRequest()
 }
 
-final class BeerListCellController: BeerView {
-    private let delegate: BeerListCellControllerDelegate
+final class BeerCellController: BeerView {
+    private let delegate: BeerCellControllerDelegate
     private lazy var cell = BeerCell()
     
-    init(delegate: BeerListCellControllerDelegate) {
+    init(delegate: BeerCellControllerDelegate) {
         self.delegate = delegate
     }
     

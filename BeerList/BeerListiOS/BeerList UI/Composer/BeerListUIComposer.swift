@@ -54,8 +54,8 @@ private final class BeerListViewAdapter: BeerListView {
     
     func display(_ viewModel: BeerListViewModel) {
         controller?.tableModel = viewModel.beerList.map { model in
-            let adapter = BeerDataLoaderPresentationAdapter<WeakRefVirtualProxy<BeerListCellController>, UIImage>(model: model, imageLoader: imageLoader)
-            let view = BeerListCellController(delegate: adapter)
+            let adapter = BeerDataLoaderPresentationAdapter<WeakRefVirtualProxy<BeerCellController>, UIImage>(model: model, imageLoader: imageLoader)
+            let view = BeerCellController(delegate: adapter)
             
             adapter.presenter = BeerPresenter(
                 view: WeakRefVirtualProxy(view),
@@ -88,7 +88,7 @@ private final class BeerListLoaderPresentationAdapter: BeerListRefreshViewContro
     }
 }
 
-private final class BeerDataLoaderPresentationAdapter<View: BeerView, Image>: BeerListCellControllerDelegate where View.Image == Image {
+private final class BeerDataLoaderPresentationAdapter<View: BeerView, Image>: BeerCellControllerDelegate where View.Image == Image {
     private let model: Beer
     private let imageLoader: BeerImageDataLoader
     private var task: BeerImageDataLoaderTask?
