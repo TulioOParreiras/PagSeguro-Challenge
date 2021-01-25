@@ -14,12 +14,16 @@ public final class BeerListUIComposer {
     public static func beerListComposedWith(beerListLoader: BeerListLoader, imageLoader: BeerImageDataLoader) -> BeerListViewController {
         let refreshController = BeerListRefreshViewController(beerListLoader: beerListLoader)
         let beerListController = BeerListViewController(refreshController: refreshController)
-        refreshController.onRefresh = { [weak beerListController] beerList in
-            guard let beerListController = beerListController else { return }
-            beerListController.tableModel = beerList.map { model in
-                BeerListCellController(model: model, imageLoader: imageLoader)
-            }
-        }
+        refreshController.onRefresh = adaptBeerToCellControllers(forwardingTo: beerListController, loader: imageLoader)
         return beerListController
     }
+    
+    private static func adaptBeerToCellControllers(forwardingTo controller: BeerListViewController, loader: BeerImageDataLoader) -> ([Beer]) -> Void {
+        return { [weak controller] beerList in
+            controller?.tableModel = beerList.map { model in
+                BeerListCellController(model: model, imageLoader: loader)
+            }
+        }
+    }
+
 }
