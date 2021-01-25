@@ -62,8 +62,9 @@ final public class BeerListViewController: UITableViewController {
         cell.imageContainer.startShimmering()
         tasks[indexPath] = imageLoader?.loadImageData(from: cellModel.imageURL) { [weak cell] result in
             let data = try? result.get()
-            cell?.beerImageView.image = data.map(UIImage.init) ?? nil
-            cell?.beerImageReturButton.isHidden = data != nil
+            let image = data.map(UIImage.init) ?? nil
+            cell?.beerImageView.image = image
+            cell?.beerImageReturButton.isHidden = image != nil
             cell?.imageContainer.stopShimmering()
         }
         return cell
