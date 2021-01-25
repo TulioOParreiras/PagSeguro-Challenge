@@ -12,5 +12,16 @@ final public class BeerCell: UITableViewCell {
     public let nameLabel = UILabel()
     public let imageContainer = UIView()
     public let beerImageView = UIImageView()
-    public let beerImageReturButton = UIButton()
+    
+    private(set) public lazy var beerImageReturnButton: UIButton = {
+        let button = UIButton()
+        button.addTarget(self, action: #selector(retryButtonTapped), for: .touchUpInside)
+        return button
+    }()
+    
+    var onRetry: (() -> Void)?
+    
+    @objc private func retryButtonTapped() {
+        onRetry?()
+    }
 }

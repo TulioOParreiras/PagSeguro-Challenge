@@ -185,6 +185,29 @@ class BeerListViewControllerTests: XCTestCase {
         loader.completeImageLoading(with: invalidImageData, at: 0)
         XCTAssertEqual(view?.isShowingRetryAction, true, "Expected retry action once image loading completes with invalid image data")
     }
+    
+    func test_beerCellRetryAction_retriesImageLoad() {
+        let beer0 = makeBeer(imageURL: URL(string: "http://url-0.com")!)
+        let beer1 = makeBeer(imageURL: URL(string: "http://url-1.com")!)
+        let (sut, loader) = makeSUT()
+        
+        sut.loadViewIfNeeded()
+        loader.completeBeerListLoading(with: [beer0, beer1])
+        
+        let view0 = sut.simulateBeerCellVisible(at: 0)
+        let view1 = sut.simulateBeerCellVisible(at: 1)
+        XCTAssertEqual(loader.loadedImageURLs, [beer0.imageURL, beer1.imageURL], "Expected two image URL request for the two visible views")
+        
+        loader.completeImageLoadingWithError(at: 0)
+        loader.completeImageLoadingWithError(at: 1)
+        XCTAssertEqual(loader.loadedImageURLs, [beer0.imageURL, beer1.imageURL], "Expected only two image URL requests before retry action")
+        
+        view0?.simulateRetryAction()
+        XCTAssertEqual(loader.loadedImageURLs, [beer0.imageURL, beer1.imageURL, beer0.imageURL], "Expected third imageURL request after first view retry action")
+        
+        view1?.simulateRetryAction()
+        XCTAssertEqual(loader.loadedImageURLs, [beer0.imageURL, beer1.imageURL, beer0.imageURL, beer1.imageURL], "Expected fourth imageURL request after second view retry action")
+    }
 
     // MARK: - Helpers
     
@@ -278,7 +301,7 @@ class BeerListViewControllerTests: XCTestCase {
 private extension BeerListViewController {
     
     func simulateUserInitiatedBeerListReload() {
-        refreshControl?.simulatePullToRefresh()
+        refreshControl?.simulateEvent(.valueChanged)
     }
     
     @discardableResult
@@ -331,15 +354,19 @@ private extension BeerCell {
     }
     
     var isShowingRetryAction: Bool {
-        return !beerImageReturButton.isHidden
+        return !beerImageReturnButton.isHidden
+    }
+    
+    func simulateRetryAction() {
+        beerImageReturnButton.simulateEvent(.touchUpInside)
     }
 }
 
-private extension UIRefreshControl {
+private extension UIControl {
     
-    func simulatePullToRefresh() {
+    func simulateEvent(_ event: UIControl.Event) {
         allTargets.forEach { target in
-            actions(forTarget: target, forControlEvent: .valueChanged)?.forEach {
+            actions(forTarget: target, forControlEvent: event)?.forEach {
                 (target as NSObject).perform(Selector($0))
             }
         }
