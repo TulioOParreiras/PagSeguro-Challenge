@@ -151,7 +151,7 @@ class BeerListViewControllerTests: XCTestCase {
         XCTAssertEqual(view1?.renderedImage, imageData1, "Expected image for second view once second image loading completes successfully")
     }
     
-    func test_feedImageViewRetryButton_isVisibleOnImageURLLoadError() {
+    func test_beerCellRetryButton_isVisibleOnImageURLLoadError() {
         let (sut, loader) = makeSUT()
         
         sut.loadViewIfNeeded()
