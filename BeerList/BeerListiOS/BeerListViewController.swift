@@ -89,7 +89,7 @@ final public class BeerListViewController: UITableViewController, UITableViewDat
     }
     
     public func tableView(_ tableView: UITableView, cancelPrefetchingForRowsAt indexPaths: [IndexPath]) {
-        indexPaths.forEach(cancelTask(forRowAt:))
+        indexPaths.forEach(cancelTask)
     }
     
     private func cancelTask(forRowAt indexPath: IndexPath) {
