@@ -7,16 +7,28 @@
 
 import UIKit
 
-final public class BeerListViewController: UITableViewController, UITableViewDataSourcePrefetching {
-    @IBOutlet var refreshController: BeerListRefreshViewController?
+protocol BeerListViewControllerDelegate {
+    func didRequestBeerListRefresh()
+}
+
+final public class BeerListViewController: UITableViewController, UITableViewDataSourcePrefetching, BeerListLoadingView {
     var tableModel: [BeerCellController] = [] {
         didSet { tableView.reloadData() }
     }
+    var delegate: BeerListViewControllerDelegate?
     
     public override func viewDidLoad() {
         super.viewDidLoad()
         tableView.prefetchDataSource = self
-        refreshController?.refresh()
+        refresh()
+    }
+    
+    @IBAction func refresh() {
+        delegate?.didRequestBeerListRefresh()
+    }
+    
+    func display(_ viewModel: BeerListLoadingViewModel) {
+        viewModel.isLoading ? refreshControl?.beginRefreshing() : refreshControl?.endRefreshing()
     }
     
     public override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

@@ -17,12 +17,10 @@ public final class BeerListUIComposer {
         let bundle = Bundle(for: BeerListViewController.self)
         let storyboard = UIStoryboard(name: "BeerList", bundle: bundle)
         let beerListController = storyboard.instantiateInitialViewController() as! BeerListViewController
-        
-        let refreshController = beerListController.refreshController!
-        refreshController.delegate = presentationAdapter
+        beerListController.delegate = presentationAdapter
         
         presentationAdapter.presenter = BeerListPresenter(
-            beerListView: BeerListViewAdapter(controller: beerListController, imageLoader: imageLoader), loadingView: WeakRefVirtualProxy(refreshController))
+            beerListView: BeerListViewAdapter(controller: beerListController, imageLoader: imageLoader), loadingView: WeakRefVirtualProxy(beerListController))
         return beerListController
     }
 
@@ -71,7 +69,7 @@ private final class BeerListViewAdapter: BeerListView {
     }
 }
 
-private final class BeerListLoaderPresentationAdapter: BeerListRefreshViewControllerDelegate {
+private final class BeerListLoaderPresentationAdapter: BeerListViewControllerDelegate {
     private let beerListLoader: BeerListLoader
     var presenter: BeerListPresenter?
     
