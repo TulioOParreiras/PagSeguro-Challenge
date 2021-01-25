@@ -7,27 +7,24 @@
 
 import UIKit
 
-public final class BeerListRefreshViewController: NSObject {
-    private(set) lazy var view: UIRefreshControl = binded(UIRefreshControl())
-    private let viewModel: BeerListViewModel
+public final class BeerListRefreshViewController: NSObject, BeerListLoadingView {
+    private(set) lazy var view: UIRefreshControl = loadView(UIRefreshControl())
+    private let presenter: BeerListPresenter
     
-    init(viewModel: BeerListViewModel) {
-        self.viewModel = viewModel
+    init(presenter: BeerListPresenter) {
+        self.presenter = presenter
     }
     
     @objc func refresh() {
-        viewModel.loadBeerList()
+        self.presenter.loadBeerList()
     }
     
-    private func binded(_ view: UIRefreshControl) -> UIRefreshControl {
-        viewModel.onLoadingStateChange = { [weak view] isLoading in
-            if isLoading {
-                view?.beginRefreshing()
-            } else {
-                view?.endRefreshing()
-            }
-        }
+    private func loadView(_ view: UIRefreshControl) -> UIRefreshControl {
         view.addTarget(self, action: #selector(refresh), for: .valueChanged)
         return view
+    }
+    
+    func display(isLoading: Bool) {
+        isLoading ? view.beginRefreshing() : view.endRefreshing()
     }
 }
