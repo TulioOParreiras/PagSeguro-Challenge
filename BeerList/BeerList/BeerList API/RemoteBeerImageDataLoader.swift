@@ -7,7 +7,7 @@
 
 import Foundation
 
-public class RemoteBeerImageDataLoader {
+public class RemoteBeerImageDataLoader: BeerImageDataLoader {
     private let client: HTTPClient
     
     public init(client: HTTPClient) {
