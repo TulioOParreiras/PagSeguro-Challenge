@@ -12,7 +12,7 @@ public final class BeerListUIComposer {
     private init() { }
     
     public static func beerListComposedWith(beerListLoader: BeerListLoader, imageLoader: BeerImageDataLoader) -> BeerListViewController {
-        let presentationAdapter = BeerListLoaderPresentationAdapter(beerListLoader: beerListLoader)
+        let presentationAdapter = BeerListLoaderPresentationAdapter(beerListLoader: MainQueueDispatchDecorator(decoratee: beerListLoader))
         
         let beerListController = BeerListViewController.makeWith(
             delegate: presentationAdapter,
@@ -33,6 +33,30 @@ private extension BeerListViewController {
         beerListController.delegate = delegate
         beerListController.title = title
         return beerListController
+    }
+}
+
+final class MainQueueDispatchDecorator<T> {
+    private let decoratee: T
+    
+    init(decoratee: T) {
+        self.decoratee = decoratee
+    }
+    
+    func dispatch(completion: @escaping () -> Void) {
+        guard Thread.isMainThread else {
+            return DispatchQueue.main.async(execute: completion)
+        }
+        
+        completion()
+    }
+}
+
+extension MainQueueDispatchDecorator: BeerListLoader where T == BeerListLoader {
+    func load(completion: @escaping (BeerListLoader.LoadResult) -> Void) {
+        decoratee.load { [weak self] result in
+            self?.dispatch { completion(result) }
+        }
     }
 }
 
