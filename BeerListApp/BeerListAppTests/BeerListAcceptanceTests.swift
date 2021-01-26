@@ -20,6 +20,12 @@ class BeerListAcceptanceTests: XCTestCase {
         XCTAssertEqual(beerList.renderedBeerImageData(at: 1), makeImageData())
     }
     
+    func test_onLaunch_displaysEmptyBeerListWhenCustomerHasNoConnectivity() {
+        let beerList = launch(httpClient: .offline)
+        
+        XCTAssertEqual(beerList.numberOfRenderedBeerCells(), 0)
+    }
+    
     // MARK: - Helpers
 
     private func launch(
@@ -49,6 +55,9 @@ class BeerListAcceptanceTests: XCTestCase {
             return Task()
         }
         
+        static var offline: HTTPClientStub {
+            HTTPClientStub(stub: { _ in .failure(NSError(domain: "offline", code: 0)) })
+        }
         static func online(_ stub: @escaping (URL) -> (Data, HTTPURLResponse)) -> HTTPClientStub {
             HTTPClientStub { url in .success(stub(url)) }
         }
