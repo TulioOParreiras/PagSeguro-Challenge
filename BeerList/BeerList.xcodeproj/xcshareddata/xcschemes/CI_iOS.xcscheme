@@ -44,6 +44,13 @@
             BlueprintName = "BeerListiOS"
             ReferencedContainer = "container:BeerList.xcodeproj">
          </BuildableReference>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "D2BA5B7425C0445400912BD9"
+            BuildableName = "BeerListApp.app"
+            BlueprintName = "BeerListApp"
+            ReferencedContainer = "container:../BeerListApp/BeerListApp.xcodeproj">
+         </BuildableReference>
       </CodeCoverageTargets>
       <Testables>
          <TestableReference
@@ -77,6 +84,17 @@
                BuildableName = "BeerListiOSTests.xctest"
                BlueprintName = "BeerListiOSTests"
                ReferencedContainer = "container:BeerList.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            testExecutionOrdering = "random">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "D2BA5C5B25C04F9A00912BD9"
+               BuildableName = "BeerListAppTests.xctest"
+               BlueprintName = "BeerListAppTests"
+               ReferencedContainer = "container:../BeerListApp/BeerListApp.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
