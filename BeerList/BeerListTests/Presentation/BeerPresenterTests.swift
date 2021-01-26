@@ -8,10 +8,10 @@
 import XCTest
 import BeerList
 
-struct BeerViewModel {
+struct BeerViewModel<Image> {
     let name: String
     let ibuValue: Double?
-    let image: Any?
+    let image: Image?
     let isLoading: Bool
     let shouldRetry: Bool
     
@@ -26,15 +26,17 @@ struct BeerViewModel {
 }
 
 protocol BeerView {
-    func display(_ model: BeerViewModel)
+    associatedtype Image
+    
+    func display(_ model: BeerViewModel<Image>)
 }
 
 
-class BeerPresenter {
-    private let view: BeerView
-    private let imageTransformer: (Data) -> Any?
+class BeerPresenter<View: BeerView, Image> where View.Image == Image {
+    private let view: View
+    private let imageTransformer: (Data) -> Image?
 
-    init(view: BeerView, imageTransformer: @escaping(Data) -> Any?) {
+    init(view: View, imageTransformer: @escaping(Data) -> Image?) {
         self.view = view
         self.imageTransformer = imageTransformer
     }
@@ -49,12 +51,13 @@ class BeerPresenter {
     }
     
     func didFinishLoadingImageData(with data: Data, for model: Beer) {
+        let image = imageTransformer(data)
         view.display(BeerViewModel(
                         name: model.name,
                         ibuValue: model.ibu,
-                        image: imageTransformer(data),
-                        isLoading: true,
-                        shouldRetry: true))
+                        image: image,
+                        isLoading: false,
+                        shouldRetry: image == nil))
     }
 }
 
@@ -92,17 +95,34 @@ class BeerPresenterTests: XCTestCase {
         XCTAssertEqual(view.messages.count, 1)
         XCTAssertEqual(message?.name, beer.name)
         XCTAssertEqual(message?.ibuValue, beer.ibu)
-        XCTAssertEqual(message?.isLoading, true)
+        XCTAssertEqual(message?.isLoading, false)
         XCTAssertEqual(message?.shouldRetry, true)
         XCTAssertNil(message?.image)
+    }
+    
+    func test_didFinishLoadingImageData_displaysImageOnSuccessfulTransformation() {
+        let beer = makeBeer()
+        let data = Data()
+        let transformedData = AnyImage()
+        let (sut, view) = makeSUT(imageTransformer: { _ in transformedData })
+        
+        sut.didFinishLoadingImageData(with: data, for: beer)
+        
+        let message = view.messages.first
+        XCTAssertEqual(view.messages.count, 1)
+        XCTAssertEqual(message?.name, beer.name)
+        XCTAssertEqual(message?.ibuValue, beer.ibu)
+        XCTAssertEqual(message?.isLoading, false)
+        XCTAssertEqual(message?.shouldRetry, false)
+        XCTAssertEqual(message?.image, transformedData)
     }
     
     // MARK: - Helpers
     
     private func makeSUT(
-        imageTransformer: @escaping (Data) -> Any? = { _ in nil },
+        imageTransformer: @escaping (Data) -> AnyImage? = { _ in nil },
         file: StaticString = #file,
-        line: UInt = #line) -> (sut: BeerPresenter, view: ViewSpy) {
+        line: UInt = #line) -> (sut: BeerPresenter<ViewSpy, AnyImage>, view: ViewSpy) {
         let view = ViewSpy()
         let sut = BeerPresenter(view: view, imageTransformer: imageTransformer)
         trackForMemoryLeaks(view, file: file, line: line)
@@ -114,14 +134,16 @@ class BeerPresenterTests: XCTestCase {
         return Beer(id: Int.random(in: 0...100), name: name, tagline: "a tagline", description: "a description", imageURL: imageURL, abv: Double.random(in: 1...10), ibu: ibu)
     }
     
-    private var fail: (Data) -> Any? {
+    private var fail: (Data) -> AnyImage? {
         return { _ in nil }
     }
     
+    private struct AnyImage: Equatable {}
+    
     private class ViewSpy: BeerView {
-        var messages = [BeerViewModel]()
+        var messages = [BeerViewModel<AnyImage>]()
         
-        func display(_ model: BeerViewModel) {
+        func display(_ model: BeerViewModel<AnyImage>) {
             messages.append(model)
         }
     }
