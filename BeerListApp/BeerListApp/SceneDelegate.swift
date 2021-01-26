@@ -17,6 +17,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let _ = (scene as? UIWindowScene) else { return }
         
+        configureWindow()
+    }
+    
+    func configureWindow() {
         let url = URL(string: "https://api.punkapi.com/v2/beers")!
         let client = URLSessionHTTPClient(session: URLSession(configuration: .ephemeral))
         let beerListLoader = RemoteBeerListLoader(url: url, client: client)
@@ -26,7 +30,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             beerListLoader: beerListLoader,
             imageLoader: imageLoader)
         
-        self.window?.rootViewController = beerListController
+        self.window?.rootViewController = UINavigationController(rootViewController: beerListController)
     }
 
 

@@ -17,7 +17,7 @@
 		D2BA5BB425C0454C00912BD9 /* BeerList.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D2BA5BB125C0454C00912BD9 /* BeerList.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D2BA5BB525C0454C00912BD9 /* BeerListiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2BA5BB225C0454C00912BD9 /* BeerListiOS.framework */; };
 		D2BA5BB625C0454C00912BD9 /* BeerListiOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D2BA5BB225C0454C00912BD9 /* BeerListiOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		D2BA5C6F25C04FD100912BD9 /* BeerListAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BA5C6E25C04FD100912BD9 /* BeerListAppTests.swift */; };
+		D2BA5C8225C0539300912BD9 /* SceneDelegateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BA5C8125C0539300912BD9 /* SceneDelegateTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -94,7 +94,7 @@
 		D2BA5BE425C0496700912BD9 /* BeerList.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = BeerList.xcodeproj; path = ../BeerList/BeerList.xcodeproj; sourceTree = "<group>"; };
 		D2BA5C5C25C04F9A00912BD9 /* BeerListAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BeerListAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2BA5C6025C04F9A00912BD9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D2BA5C6E25C04FD100912BD9 /* BeerListAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeerListAppTests.swift; sourceTree = "<group>"; };
+		D2BA5C8125C0539300912BD9 /* SceneDelegateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegateTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -175,8 +175,8 @@
 		D2BA5C5D25C04F9A00912BD9 /* BeerListAppTests */ = {
 			isa = PBXGroup;
 			children = (
-				D2BA5C6E25C04FD100912BD9 /* BeerListAppTests.swift */,
 				D2BA5C6025C04F9A00912BD9 /* Info.plist */,
+				D2BA5C8125C0539300912BD9 /* SceneDelegateTests.swift */,
 			);
 			path = BeerListAppTests;
 			sourceTree = "<group>";
@@ -337,7 +337,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D2BA5C6F25C04FD100912BD9 /* BeerListAppTests.swift in Sources */,
+				D2BA5C8225C0539300912BD9 /* SceneDelegateTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
