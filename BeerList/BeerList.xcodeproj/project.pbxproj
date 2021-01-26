@@ -49,6 +49,7 @@
 		D2BA5B5725C03F4400912BD9 /* URLProtocolStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BA5B5625C03F4400912BD9 /* URLProtocolStub.swift */; };
 		D2BA5BB925C0456400912BD9 /* BeerList.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D256A38725BA47F10010C33F /* BeerList.framework */; platformFilter = ios; };
 		D2BA5BBA25C0456400912BD9 /* BeerList.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D256A38725BA47F10010C33F /* BeerList.framework */; platformFilter = ios; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		D2C2E8DB25C08D710027C40F /* BeerListSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C2E8DA25C08D710027C40F /* BeerListSnapshotTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -143,6 +144,7 @@
 		D2BA5B4125C03BC700912BD9 /* RemoteBeerImageDataLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteBeerImageDataLoader.swift; sourceTree = "<group>"; };
 		D2BA5B4925C03ECF00912BD9 /* HTTPURLResponse+StatusCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HTTPURLResponse+StatusCode.swift"; sourceTree = "<group>"; };
 		D2BA5B5625C03F4400912BD9 /* URLProtocolStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLProtocolStub.swift; sourceTree = "<group>"; };
+		D2C2E8DA25C08D710027C40F /* BeerListSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeerListSnapshotTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -241,6 +243,7 @@
 			isa = PBXGroup;
 			children = (
 				D232EFF725BE3BA300F272BB /* Info.plist */,
+				D2C2E8DA25C08D710027C40F /* BeerListSnapshotTests.swift */,
 			);
 			path = BeerListiOSTests;
 			sourceTree = "<group>";
@@ -617,6 +620,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D232F01825BE458800F272BB /* XCTest+MemoryLeakTracking.swift in Sources */,
+				D2C2E8DB25C08D710027C40F /* BeerListSnapshotTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
