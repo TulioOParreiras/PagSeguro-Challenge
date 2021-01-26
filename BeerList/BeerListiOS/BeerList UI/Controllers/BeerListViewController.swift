@@ -14,6 +14,8 @@ public protocol BeerListViewControllerDelegate {
 
 final public class BeerListViewController: UITableViewController, UITableViewDataSourcePrefetching, BeerListLoadingView, BeerListErrorView {
     @IBOutlet private(set) public var errorView: ErrorView!
+    
+    private var loadingControllers = [IndexPath: BeerCellController]()
     private var tableModel: [BeerCellController] = [] {
         didSet { tableView.reloadData() }
     }
@@ -35,6 +37,7 @@ final public class BeerListViewController: UITableViewController, UITableViewDat
     }
     
     public func display(_ cellControllers: [BeerCellController]) {
+        loadingControllers = [:]
         tableModel = cellControllers
     }
     
@@ -69,10 +72,13 @@ final public class BeerListViewController: UITableViewController, UITableViewDat
     }
     
     private func cellController(forRowAt indexPath: IndexPath) -> BeerCellController {
-        return tableModel[indexPath.row]
+        let controller = tableModel[indexPath.row]
+        loadingControllers[indexPath] = controller
+        return controller
     }
     
     private func cancelCellControllerLoad(forRowAt indexPath: IndexPath) {
-        tableModel[indexPath.row].cancelLoad()
+        loadingControllers[indexPath]?.cancelLoad()
+        loadingControllers[indexPath] = nil
     }
 }

@@ -81,6 +81,20 @@ class BeerListUIIntegrationsTests: XCTestCase {
         assertThat(sut, isRendering: beerList)
     }
     
+    func test_loadBeerListCompletion_rendersSuccessfullyLoadedEmptyBeersAfterNonEmptyBeers() {
+        let beer0 = makeBeer()
+        let beer1 = makeBeer()
+        let (sut, loader) = makeSUT()
+        
+        sut.loadViewIfNeeded()
+        loader.completeBeerListLoading(with: [beer0, beer1], at: 0)
+        assertThat(sut, isRendering: [beer0, beer1])
+        
+        sut.simulateUserInitiatedBeerListReload()
+        loader.completeBeerListLoading(with: [], at: 1)
+        assertThat(sut, isRendering: [])
+    }
+    
     func test_loadBeerListCompletion_doesNotAlterCurrentRenderingStateOnError() {
         let beer0 = makeBeer(name: "A name", ibu: 1)
         let (sut, loader) = makeSUT()

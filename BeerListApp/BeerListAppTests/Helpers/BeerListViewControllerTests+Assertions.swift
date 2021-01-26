@@ -13,7 +13,12 @@ import BeerListiOS
 extension BeerListUIIntegrationsTests {
     
     func assertThat(_ sut: BeerListViewController, isRendering beerList: [Beer], file: StaticString = #file, line: UInt = #line) {
-        XCTAssertEqual(sut.numberOfRenderedBeerCells(), beerList.count, "Expected \(beerList.count) beers, got \(sut.numberOfRenderedBeerCells()) instead", file: file, line: line)
+        sut.tableView.layoutIfNeeded()
+        RunLoop.main.run(until: Date())
+        
+        guard sut.numberOfRenderedBeerCells() == beerList.count else {
+            return XCTFail("Expected \(beerList.count) beer items, got \(sut.numberOfRenderedBeerCells()) instead", file: file, line: line)
+        }
         
         beerList.enumerated().forEach { index, beer in
             assertThat(sut, hasViewConfiguredFor: beer, at: index, file: file, line: line)
