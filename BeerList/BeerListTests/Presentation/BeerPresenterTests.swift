@@ -32,9 +32,11 @@ protocol BeerView {
 
 class BeerPresenter {
     private let view: BeerView
+    private let imageTransformer: (Data) -> Any?
 
-    init(view: BeerView) {
+    init(view: BeerView, imageTransformer: @escaping(Data) -> Any?) {
         self.view = view
+        self.imageTransformer = imageTransformer
     }
     
     func didStartLoadingImageData(for model: Beer) {
@@ -44,6 +46,15 @@ class BeerPresenter {
                         image: nil,
                         isLoading: true,
                         shouldRetry: false))
+    }
+    
+    func didFinishLoadingImageData(with data: Data, for model: Beer) {
+        view.display(BeerViewModel(
+                        name: model.name,
+                        ibuValue: model.ibu,
+                        image: imageTransformer(data),
+                        isLoading: true,
+                        shouldRetry: true))
     }
 }
 
@@ -70,11 +81,30 @@ class BeerPresenterTests: XCTestCase {
         XCTAssertNil(message?.image)
     }
     
+    func test_didFinishLoadingImageData_displaysRetryOnFailedImageTransformation() {
+        let (sut, view) = makeSUT(imageTransformer: { _ in nil })
+        let beer = makeBeer()
+        let data = Data()
+        
+        sut.didFinishLoadingImageData(with: data, for: beer)
+        
+        let message = view.messages.first
+        XCTAssertEqual(view.messages.count, 1)
+        XCTAssertEqual(message?.name, beer.name)
+        XCTAssertEqual(message?.ibuValue, beer.ibu)
+        XCTAssertEqual(message?.isLoading, true)
+        XCTAssertEqual(message?.shouldRetry, true)
+        XCTAssertNil(message?.image)
+    }
+    
     // MARK: - Helpers
     
-    private func makeSUT(file: StaticString = #file, line: UInt = #line) -> (sut: BeerPresenter, view: ViewSpy) {
+    private func makeSUT(
+        imageTransformer: @escaping (Data) -> Any? = { _ in nil },
+        file: StaticString = #file,
+        line: UInt = #line) -> (sut: BeerPresenter, view: ViewSpy) {
         let view = ViewSpy()
-        let sut = BeerPresenter(view: view)
+        let sut = BeerPresenter(view: view, imageTransformer: imageTransformer)
         trackForMemoryLeaks(view, file: file, line: line)
         trackForMemoryLeaks(sut, file: file, line: line)
         return (sut, view)
