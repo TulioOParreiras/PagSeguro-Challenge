@@ -8,68 +8,6 @@
 import XCTest
 import BeerList
 
-struct BeerViewModel<Image> {
-    let name: String
-    let ibuValue: Double?
-    let image: Image?
-    let isLoading: Bool
-    let shouldRetry: Bool
-    
-    var ibu: String?  {
-        guard let ibu = ibuValue else { return nil }
-        return String(describing: ibu)
-    }
-    
-    var hasIbu: Bool {
-        return ibuValue != nil
-    }
-}
-
-protocol BeerView {
-    associatedtype Image
-    
-    func display(_ model: BeerViewModel<Image>)
-}
-
-
-class BeerPresenter<View: BeerView, Image> where View.Image == Image {
-    private let view: View
-    private let imageTransformer: (Data) -> Image?
-
-    init(view: View, imageTransformer: @escaping(Data) -> Image?) {
-        self.view = view
-        self.imageTransformer = imageTransformer
-    }
-    
-    func didStartLoadingImageData(for model: Beer) {
-        view.display(BeerViewModel(
-                        name: model.name,
-                        ibuValue: model.ibu,
-                        image: nil,
-                        isLoading: true,
-                        shouldRetry: false))
-    }
-    
-    func didFinishLoadingImageData(with data: Data, for model: Beer) {
-        let image = imageTransformer(data)
-        view.display(BeerViewModel(
-                        name: model.name,
-                        ibuValue: model.ibu,
-                        image: image,
-                        isLoading: false,
-                        shouldRetry: image == nil))
-    }
-    
-    func didFinishLoadingImageData(with error: Error, for model: Beer) {
-        view.display(BeerViewModel(
-                        name: model.name,
-                        ibuValue: model.ibu,
-                        image: nil,
-                        isLoading: false,
-                        shouldRetry: true))
-    }
-}
-
 class BeerPresenterTests: XCTestCase {
     
     func test_init_doesNotSendMessagesToView() {
