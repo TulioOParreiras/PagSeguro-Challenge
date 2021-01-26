@@ -19,7 +19,7 @@ final class BeerListViewAdapter: BeerListView {
     }
     
     func display(_ viewModel: BeerListViewModel) {
-        controller?.tableModel = viewModel.beerList.map { model in
+        controller?.display(viewModel.beerList.map { model in
             let adapter = BeerDataLoaderPresentationAdapter<WeakRefVirtualProxy<BeerCellController>, UIImage>(model: model, imageLoader: imageLoader)
             let view = BeerCellController(delegate: adapter)
             
@@ -28,6 +28,6 @@ final class BeerListViewAdapter: BeerListView {
                 imageTransformer: UIImage.init
             )
             return view
-        }
+        })
     }
 }

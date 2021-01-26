@@ -136,8 +136,8 @@
                     <rect key="frame" x="0.0" y="0.0" width="414" height="414"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M1E-Nb-yIW">
-                            <rect key="frame" x="186" y="196.5" width="42" height="21"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M1E-Nb-yIW">
+                            <rect key="frame" x="186.5" y="197" width="41.5" height="20.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -148,6 +148,7 @@
                     <constraints>
                         <constraint firstItem="M1E-Nb-yIW" firstAttribute="centerY" secondItem="MYj-fB-fxo" secondAttribute="centerY" id="DJw-Z9-2yD"/>
                         <constraint firstItem="M1E-Nb-yIW" firstAttribute="centerX" secondItem="MYj-fB-fxo" secondAttribute="centerX" id="dVG-pU-d8m"/>
+                        <constraint firstItem="M1E-Nb-yIW" firstAttribute="width" relation="lessThanOrEqual" secondItem="MYj-fB-fxo" secondAttribute="width" multiplier="0.75" id="v5N-1Z-hIF"/>
                     </constraints>
                     <connections>
                         <outlet property="label" destination="M1E-Nb-yIW" id="ZW5-em-Iak"/>
