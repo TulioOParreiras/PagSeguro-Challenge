@@ -19,7 +19,7 @@ public final class BeerListUIComposer {
             title: BeerListPresenter.title)
         
         presentationAdapter.presenter = BeerListPresenter(
-            beerListView: BeerListViewAdapter(controller: beerListController, imageLoader: imageLoader), loadingView: WeakRefVirtualProxy(beerListController))
+            beerListView: BeerListViewAdapter(controller: beerListController, imageLoader: MainQueueDispatchDecorator(decoratee: imageLoader)), loadingView: WeakRefVirtualProxy(beerListController))
         return beerListController
     }
 
@@ -55,6 +55,14 @@ final class MainQueueDispatchDecorator<T> {
 extension MainQueueDispatchDecorator: BeerListLoader where T == BeerListLoader {
     func load(completion: @escaping (BeerListLoader.LoadResult) -> Void) {
         decoratee.load { [weak self] result in
+            self?.dispatch { completion(result) }
+        }
+    }
+}
+
+extension MainQueueDispatchDecorator: BeerImageDataLoader where T == BeerImageDataLoader {
+    func loadImageData(from url: URL, completion: @escaping (BeerImageDataLoader.Result) -> Void) -> BeerImageDataLoaderTask {
+        decoratee.loadImageData(from: url) { [weak self] result in
             self?.dispatch { completion(result) }
         }
     }
