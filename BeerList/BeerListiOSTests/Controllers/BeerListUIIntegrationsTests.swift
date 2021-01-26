@@ -96,7 +96,7 @@ class BeerListUIIntegrationsTests: XCTestCase {
         assertThat(sut, isRendering: [beer0])
     }
     
-    func test_loadBeerListCompletion_rendersErrorMessageOnError() {
+    func test_loadFeedCompletion_rendersErrorMessageOnErrorUntilNextReload() {
         let (sut, loader) = makeSUT()
         
         sut.loadViewIfNeeded()
@@ -105,6 +105,8 @@ class BeerListUIIntegrationsTests: XCTestCase {
         loader.completeBeerListLoadingWithError(at: 0)
         XCTAssertEqual(sut.errorMessage, localized("BEER_LIST_CONNECTION_ERROR"))
 
+        sut.simulateUserInitiatedBeerListReload()
+        XCTAssertEqual(sut.errorMessage, nil)
     }
     
     func test_beerCell_loadsImageURLWhenVisible() {

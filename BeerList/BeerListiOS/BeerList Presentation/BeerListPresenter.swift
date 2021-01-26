@@ -17,7 +17,7 @@ protocol BeerListView {
 }
 
 struct BeerListErrorViewModel {
-    let message: String
+    let message: String?
 }
 
 protocol BeerListErrorView {
@@ -50,6 +50,7 @@ final class BeerListPresenter {
     }
     
     func didStartLoadingBeerList() {
+        errorView.display(BeerListErrorViewModel(message: nil))
         loadingView.display(BeerListLoadingViewModel(isLoading: true))
     }
     
