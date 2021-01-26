@@ -43,6 +43,7 @@
 		D28E5CD025BF8F77006BEEFE /* UIImageView+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28E5CCF25BF8F77006BEEFE /* UIImageView+Helpers.swift */; };
 		D28E5D4225BFBC2B006BEEFE /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28E5D4125BFBC2B006BEEFE /* ErrorView.swift */; };
 		D29538B325C0C2BB00E27934 /* UIViewController+TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29538B225C0C2BB00E27934 /* UIViewController+TestHelpers.swift */; };
+		D29538C125C0C30F00E27934 /* UIImage+TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29538C025C0C30F00E27934 /* UIImage+TestHelpers.swift */; };
 		D2BA5B3425C03B4800912BD9 /* SharedTestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BA5B3325C03B4800912BD9 /* SharedTestHelpers.swift */; };
 		D2BA5B3B25C03B8500912BD9 /* HTTPClientSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BA5B3A25C03B8500912BD9 /* HTTPClientSpy.swift */; };
 		D2BA5B4225C03BC700912BD9 /* RemoteBeerImageDataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BA5B4125C03BC700912BD9 /* RemoteBeerImageDataLoader.swift */; };
@@ -140,6 +141,7 @@
 		D28E5CED25BF9600006BEEFE /* BeerListLocalizationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeerListLocalizationTests.swift; sourceTree = "<group>"; };
 		D28E5D4125BFBC2B006BEEFE /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
 		D29538B225C0C2BB00E27934 /* UIViewController+TestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+TestHelpers.swift"; sourceTree = "<group>"; };
+		D29538C025C0C30F00E27934 /* UIImage+TestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+TestHelpers.swift"; sourceTree = "<group>"; };
 		D2A97C9E25C01E87000AE465 /* BeerListPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeerListPresenterTests.swift; sourceTree = "<group>"; };
 		D2BA5B3325C03B4800912BD9 /* SharedTestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedTestHelpers.swift; sourceTree = "<group>"; };
 		D2BA5B3A25C03B8500912BD9 /* HTTPClientSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClientSpy.swift; sourceTree = "<group>"; };
@@ -370,6 +372,7 @@
 			isa = PBXGroup;
 			children = (
 				D29538B225C0C2BB00E27934 /* UIViewController+TestHelpers.swift */,
+				D29538C025C0C30F00E27934 /* UIImage+TestHelpers.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -633,6 +636,7 @@
 				D29538B325C0C2BB00E27934 /* UIViewController+TestHelpers.swift in Sources */,
 				D232F01825BE458800F272BB /* XCTest+MemoryLeakTracking.swift in Sources */,
 				D2C2E8DB25C08D710027C40F /* BeerListSnapshotTests.swift in Sources */,
+				D29538C125C0C30F00E27934 /* UIImage+TestHelpers.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
