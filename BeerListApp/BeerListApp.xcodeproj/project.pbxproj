@@ -13,8 +13,6 @@
 		D2BA5B8025C0445400912BD9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D2BA5B7E25C0445400912BD9 /* Main.storyboard */; };
 		D2BA5B8225C0445700912BD9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D2BA5B8125C0445700912BD9 /* Assets.xcassets */; };
 		D2BA5B8525C0445700912BD9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D2BA5B8325C0445700912BD9 /* LaunchScreen.storyboard */; };
-		D2BA5B9025C0445700912BD9 /* BeerListAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BA5B8F25C0445700912BD9 /* BeerListAppTests.swift */; };
-		D2BA5B9B25C0445700912BD9 /* BeerListAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BA5B9A25C0445700912BD9 /* BeerListAppUITests.swift */; };
 		D2BA5BB325C0454C00912BD9 /* BeerList.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2BA5BB125C0454C00912BD9 /* BeerList.framework */; };
 		D2BA5BB425C0454C00912BD9 /* BeerList.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D2BA5BB125C0454C00912BD9 /* BeerList.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D2BA5BB525C0454C00912BD9 /* BeerListiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2BA5BB225C0454C00912BD9 /* BeerListiOS.framework */; };
@@ -98,10 +96,8 @@
 		D2BA5B8425C0445700912BD9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D2BA5B8625C0445700912BD9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D2BA5B8B25C0445700912BD9 /* BeerListAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BeerListAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		D2BA5B8F25C0445700912BD9 /* BeerListAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeerListAppTests.swift; sourceTree = "<group>"; };
 		D2BA5B9125C0445700912BD9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D2BA5B9625C0445700912BD9 /* BeerListAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BeerListAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		D2BA5B9A25C0445700912BD9 /* BeerListAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeerListAppUITests.swift; sourceTree = "<group>"; };
 		D2BA5B9C25C0445700912BD9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D2BA5BB125C0454C00912BD9 /* BeerList.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = BeerList.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2BA5BB225C0454C00912BD9 /* BeerListiOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = BeerListiOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -173,7 +169,6 @@
 		D2BA5B8E25C0445700912BD9 /* BeerListAppTests */ = {
 			isa = PBXGroup;
 			children = (
-				D2BA5B8F25C0445700912BD9 /* BeerListAppTests.swift */,
 				D2BA5B9125C0445700912BD9 /* Info.plist */,
 			);
 			path = BeerListAppTests;
@@ -182,7 +177,6 @@
 		D2BA5B9925C0445700912BD9 /* BeerListAppUITests */ = {
 			isa = PBXGroup;
 			children = (
-				D2BA5B9A25C0445700912BD9 /* BeerListAppUITests.swift */,
 				D2BA5B9C25C0445700912BD9 /* Info.plist */,
 			);
 			path = BeerListAppUITests;
@@ -395,7 +389,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D2BA5B9025C0445700912BD9 /* BeerListAppTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -403,7 +396,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D2BA5B9B25C0445700912BD9 /* BeerListAppUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
