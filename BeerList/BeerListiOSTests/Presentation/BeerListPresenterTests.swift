@@ -6,6 +6,15 @@
 //
 
 import XCTest
+import BeerList
+
+struct BeerListViewModel {
+    let beerList: [Beer]
+}
+
+protocol BeerListView {
+    func display(_ viewModel: BeerListViewModel)
+}
 
 struct BeerListLoadingViewModel {
     let isLoading: Bool
@@ -28,10 +37,12 @@ protocol BeerListErrorView {
 }
 
 final class BeerListPresenter {
+    private let beerListView: BeerListView
     private let loadingView: BeerListLoadingView
     private let errorView: BeerListErrorView
     
-    init(loadingView: BeerListLoadingView,errorView: BeerListErrorView) {
+    init(beerListView: BeerListView, loadingView: BeerListLoadingView,errorView: BeerListErrorView) {
+        self.beerListView = beerListView
         self.loadingView = loadingView
         self.errorView = errorView
     }
@@ -39,6 +50,11 @@ final class BeerListPresenter {
     func didStartLoadingBeerList() {
         errorView.display(.noError)
         loadingView.display(BeerListLoadingViewModel(isLoading: true))
+    }
+    
+    func didFinishLoadingBeerList(with beerList: [Beer]) {
+        beerListView.display(BeerListViewModel(beerList: beerList))
+        loadingView.display(BeerListLoadingViewModel(isLoading: false))
     }
 }
 
@@ -61,20 +77,37 @@ class BeerListPresenterTests: XCTestCase {
         ])
     }
     
+    func test_didFinishLoadingBeerList_displaysBeerListAndStopsLoading() {
+        let (sut, view) = makeSUT()
+        let beerList = [makeBeer()]
+        
+        sut.didFinishLoadingBeerList(with: beerList)
+        
+        XCTAssertEqual(view.messages, [
+            .display(beerList: beerList),
+            .display(isLoading: false)
+        ])
+    }
+    
     // MARK: - Helpers
     
     private func makeSUT(file: StaticString = #file, line: UInt = #line) -> (sut: BeerListPresenter, view: ViewSpy) {
         let view = ViewSpy()
-        let sut = BeerListPresenter(loadingView: view, errorView: view)
+        let sut = BeerListPresenter(beerListView: view, loadingView: view, errorView: view)
         trackForMemoryLeaks(view, file: file, line: line)
         trackForMemoryLeaks(sut, file: file, line: line)
         return (sut, view)
     }
+    
+    func makeBeer(name: String = "A name", imageURL: URL = URL(string: "https://a-url.com")!, ibu: Double? = nil) -> Beer {
+        return Beer(id: Int.random(in: 0...100), name: name, tagline: "a tagline", description: "a description", imageURL: imageURL, abv: Double.random(in: 1...10), ibu: ibu)
+    }
 
-    private class ViewSpy: BeerListLoadingView, BeerListErrorView {
+    private class ViewSpy: BeerListView, BeerListLoadingView, BeerListErrorView {
         enum Message: Hashable {
             case display(errorMessage: String?)
             case display(isLoading: Bool)
+            case display(beerList: [Beer])
         }
         
         private(set) var messages = Set<Message>()
@@ -85,6 +118,10 @@ class BeerListPresenterTests: XCTestCase {
         
         func display(_ viewModel: BeerListLoadingViewModel) {
             messages.insert(.display(isLoading: viewModel.isLoading))
+        }
+        
+        func display(_ viewModel: BeerListViewModel) {
+            messages.insert(.display(beerList: viewModel.beerList))
         }
     }
 

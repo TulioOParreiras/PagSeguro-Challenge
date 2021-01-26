@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct Beer: Equatable {
+public struct Beer: Hashable {
     public let id: Int
     public let name: String
     public let tagline: String
