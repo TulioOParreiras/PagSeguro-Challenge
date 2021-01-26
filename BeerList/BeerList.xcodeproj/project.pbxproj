@@ -58,6 +58,7 @@
 		D2BA5B3425C03B4800912BD9 /* SharedTestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BA5B3325C03B4800912BD9 /* SharedTestHelpers.swift */; };
 		D2BA5B3B25C03B8500912BD9 /* HTTPClientSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BA5B3A25C03B8500912BD9 /* HTTPClientSpy.swift */; };
 		D2BA5B4225C03BC700912BD9 /* RemoteBeerImageDataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BA5B4125C03BC700912BD9 /* RemoteBeerImageDataLoader.swift */; };
+		D2BA5B4A25C03ECF00912BD9 /* HTTPURLResponse+StatusCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BA5B4925C03ECF00912BD9 /* HTTPURLResponse+StatusCode.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -142,6 +143,7 @@
 		D2BA5B3325C03B4800912BD9 /* SharedTestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedTestHelpers.swift; sourceTree = "<group>"; };
 		D2BA5B3A25C03B8500912BD9 /* HTTPClientSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClientSpy.swift; sourceTree = "<group>"; };
 		D2BA5B4125C03BC700912BD9 /* RemoteBeerImageDataLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteBeerImageDataLoader.swift; sourceTree = "<group>"; };
+		D2BA5B4925C03ECF00912BD9 /* HTTPURLResponse+StatusCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HTTPURLResponse+StatusCode.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -349,6 +351,7 @@
 		D256A3BF25BB0B3D0010C33F /* BeerList API */ = {
 			isa = PBXGroup;
 			children = (
+				D2BA5B4825C03EC100912BD9 /* Helpers */,
 				D256A3C025BB0B480010C33F /* RemoteBeerListLoader.swift */,
 				D256A3CA25BB0E4A0010C33F /* RemoteBeerListMapper.swift */,
 				D256A3C625BB0C030010C33F /* HTTPClient.swift */,
@@ -390,6 +393,14 @@
 				D251F0A325BB992C003FED5F /* URLSessionHTTPClientTests.swift */,
 			);
 			path = API;
+			sourceTree = "<group>";
+		};
+		D2BA5B4825C03EC100912BD9 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				D2BA5B4925C03ECF00912BD9 /* HTTPURLResponse+StatusCode.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -651,6 +662,7 @@
 				D27409B725C0255000EFBE6F /* BeerListViewModel.swift in Sources */,
 				D256A3AA25BA4C2E0010C33F /* BeerListLoader.swift in Sources */,
 				D27409B025C0248F00EFBE6F /* BeerListPresenter.swift in Sources */,
+				D2BA5B4A25C03ECF00912BD9 /* HTTPURLResponse+StatusCode.swift in Sources */,
 				D27409BE25C0256A00EFBE6F /* BeerListLoadingViewModel.swift in Sources */,
 				D256A3A625BA4B4A0010C33F /* Beer.swift in Sources */,
 				D27409C525C0259100EFBE6F /* BeerListErrorViewModel.swift in Sources */,
