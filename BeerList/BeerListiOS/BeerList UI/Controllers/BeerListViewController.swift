@@ -7,10 +7,6 @@
 
 import UIKit
 
-final public class ErrorView: UIView {
-    public var message: String?
-}
-
 protocol BeerListViewControllerDelegate {
     func didRequestBeerListRefresh()
 }
