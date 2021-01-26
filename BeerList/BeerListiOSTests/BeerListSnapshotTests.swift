@@ -6,17 +6,25 @@
 //
 
 import XCTest
-import BeerList
+@testable import BeerList
 import BeerListiOS
 
 class BeerListSnapshotTests: XCTestCase {
 
-    func test() {
+    func test_emptyBeerList() {
         let sut = makeSUT()
         
         sut.tableModel = emptyBeerList()
         
         record(snapshot: sut.snapshot(), named: "EMPTY_BEER_LIST")
+    }
+    
+    func test_beerListWithContent() {
+        let sut = makeSUT()
+        
+        sut.display(beerListWithContent())
+        
+        record(snapshot: sut.snapshot(), named: "BEER_LIST_WITH_CONTENT")
     }
     
     // MARK: - Helpers
@@ -31,6 +39,13 @@ class BeerListSnapshotTests: XCTestCase {
     
     private func emptyBeerList() -> [BeerCellController] {
         return []
+    }
+    
+    private func beerListWithContent() -> [BeerStub] {
+        return [
+            BeerStub(name: "Buzz", ibu: 60.0, image: UIImage.make(withColor: .red)),
+            BeerStub(name: "Trashy Blonde", ibu: 41.5, image: UIImage.make(withColor: .blue))
+        ]
     }
     
     private func record(snapshot: UIImage, named name: String, file: StaticString = #file, line: UInt = #line) {
@@ -64,5 +79,52 @@ extension UIViewController {
         return renderer.image { action in
             view.layer.render(in: action.cgContext)
         }
+    }
+}
+
+private extension BeerListViewController {
+    func display(_ stubs: [BeerStub]) {
+        let cells: [BeerCellController] = stubs.map { stub in
+            let cellController = BeerCellController(delegate: stub)
+            stub.controller = cellController
+            return cellController
+        }
+        
+        tableModel = cells
+    }
+}
+
+private class BeerStub: BeerCellControllerDelegate {
+    let viewModel: BeerViewModel<UIImage>
+    weak var controller: BeerCellController?
+    
+    init(name: String, ibu: Double?, image: UIImage?) {
+        self.viewModel = BeerViewModel(
+            name: name,
+            ibuValue: ibu,
+            image: image,
+            isLoading: false,
+            shouldRetry: image == nil)
+    }
+    
+    func didRequestImage() {
+        controller?.display(viewModel)
+    }
+    
+    func didCancelImageRequest() {
+        
+    }
+}
+
+extension UIImage {
+    static func make(withColor color: UIColor) -> UIImage {
+        let rect = CGRect(x: 0, y: 0, width: 1, height: 1)
+        UIGraphicsBeginImageContext(rect.size)
+        let context = UIGraphicsGetCurrentContext()!
+        context.setFillColor(color.cgColor)
+        context.fill(rect)
+        let img = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return img!
     }
 }
