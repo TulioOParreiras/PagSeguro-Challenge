@@ -8,6 +8,7 @@
 import XCTest
 import BeerListiOS
 import BeerList
+import BeerListApp
 
 class BeerListUIIntegrationsTests: XCTestCase {
     
@@ -289,8 +290,8 @@ class BeerListUIIntegrationsTests: XCTestCase {
         sut.loadViewIfNeeded()
 
         let exp = expectation(description: "Wait for background queue")
-        DispatchQueue.global().async {
-            loader.completeBeerListLoading()
+        DispatchQueue.global().async { [weak loader] in
+            loader?.completeBeerListLoading()
             exp.fulfill()
         }
         wait(for: [exp], timeout: 1.0)

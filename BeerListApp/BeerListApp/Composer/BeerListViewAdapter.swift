@@ -7,6 +7,7 @@
 
 import UIKit
 import BeerList
+import BeerListiOS
 
 final class BeerListViewAdapter: BeerListView {
     private weak var controller: BeerListViewController?

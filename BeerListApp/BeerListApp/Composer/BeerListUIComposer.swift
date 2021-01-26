@@ -7,6 +7,7 @@
 
 import UIKit
 import BeerList
+import BeerListiOS
 
 public final class BeerListUIComposer {
     private init() { }
