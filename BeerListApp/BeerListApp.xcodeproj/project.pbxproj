@@ -36,6 +36,41 @@
 			remoteGlobalIDString = D2BA5B7425C0445400912BD9;
 			remoteInfo = BeerListApp;
 		};
+		D2BA5BEC25C0496700912BD9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D2BA5BE425C0496700912BD9 /* BeerList.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D256A38725BA47F10010C33F;
+			remoteInfo = BeerList;
+		};
+		D2BA5BEE25C0496700912BD9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D2BA5BE425C0496700912BD9 /* BeerList.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D256A39025BA47F10010C33F;
+			remoteInfo = BeerListTests;
+		};
+		D2BA5BF025C0496700912BD9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D2BA5BE425C0496700912BD9 /* BeerList.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D232EF4B25BDFD7300F272BB;
+			remoteInfo = BeerListAPIEndToEndTests;
+		};
+		D2BA5BF225C0496700912BD9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D2BA5BE425C0496700912BD9 /* BeerList.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D232EFE825BE3BA200F272BB;
+			remoteInfo = BeerListiOS;
+		};
+		D2BA5BF425C0496700912BD9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D2BA5BE425C0496700912BD9 /* BeerList.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D232EFF025BE3BA300F272BB;
+			remoteInfo = BeerListiOSTests;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -70,6 +105,7 @@
 		D2BA5B9C25C0445700912BD9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D2BA5BB125C0454C00912BD9 /* BeerList.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = BeerList.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2BA5BB225C0454C00912BD9 /* BeerListiOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = BeerListiOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D2BA5BE425C0496700912BD9 /* BeerList.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = BeerList.xcodeproj; path = ../BeerList/BeerList.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,10 +191,23 @@
 		D2BA5BB025C0454B00912BD9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D2BA5BE425C0496700912BD9 /* BeerList.xcodeproj */,
 				D2BA5BB125C0454C00912BD9 /* BeerList.framework */,
 				D2BA5BB225C0454C00912BD9 /* BeerListiOS.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D2BA5BE525C0496700912BD9 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D2BA5BED25C0496700912BD9 /* BeerList.framework */,
+				D2BA5BEF25C0496700912BD9 /* BeerListTests.xctest */,
+				D2BA5BF125C0496700912BD9 /* BeerListAPIEndToEndTests.xctest */,
+				D2BA5BF325C0496700912BD9 /* BeerListiOS.framework */,
+				D2BA5BF525C0496700912BD9 /* BeerListiOSTests.xctest */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -251,6 +300,12 @@
 			mainGroup = D2BA5B6C25C0445400912BD9;
 			productRefGroup = D2BA5B7625C0445400912BD9 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = D2BA5BE525C0496700912BD9 /* Products */;
+					ProjectRef = D2BA5BE425C0496700912BD9 /* BeerList.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				D2BA5B7425C0445400912BD9 /* BeerListApp */,
@@ -259,6 +314,44 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		D2BA5BED25C0496700912BD9 /* BeerList.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = BeerList.framework;
+			remoteRef = D2BA5BEC25C0496700912BD9 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		D2BA5BEF25C0496700912BD9 /* BeerListTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = BeerListTests.xctest;
+			remoteRef = D2BA5BEE25C0496700912BD9 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		D2BA5BF125C0496700912BD9 /* BeerListAPIEndToEndTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = BeerListAPIEndToEndTests.xctest;
+			remoteRef = D2BA5BF025C0496700912BD9 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		D2BA5BF325C0496700912BD9 /* BeerListiOS.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = BeerListiOS.framework;
+			remoteRef = D2BA5BF225C0496700912BD9 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		D2BA5BF525C0496700912BD9 /* BeerListiOSTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = BeerListiOSTests.xctest;
+			remoteRef = D2BA5BF425C0496700912BD9 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		D2BA5B7325C0445400912BD9 /* Resources */ = {

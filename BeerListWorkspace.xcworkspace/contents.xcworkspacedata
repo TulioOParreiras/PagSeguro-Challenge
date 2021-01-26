@@ -2,9 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:../../BeerList/BeerList.xcodeproj">
+      location = "group:BeerList/BeerList.xcodeproj">
    </FileRef>
    <FileRef
-      location = "self:">
+      location = "group:BeerListApp/BeerListApp.xcodeproj">
    </FileRef>
 </Workspace>
