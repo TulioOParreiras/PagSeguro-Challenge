@@ -63,6 +63,10 @@ extension BeerListViewController {
         return 0
     }
     
+    func renderedBeerImageData(at index: Int) -> Data? {
+        return simulateBeerCellVisible(at: index)?.renderedImage
+    }
+
     var errorMessage: String? {
         return errorView.message
     }

@@ -32,6 +32,7 @@
 		D2BA5CDC25C056F900912BD9 /* BeerListViewControllerTests+Assertions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BA5CD525C056F900912BD9 /* BeerListViewControllerTests+Assertions.swift */; };
 		D2BA5CDD25C056F900912BD9 /* BeerListUIIntegrationsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BA5CD625C056F900912BD9 /* BeerListUIIntegrationsTests.swift */; };
 		D2BA5CE525C057B300912BD9 /* XCTest+MemoryLeakTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BA5CE425C057B300912BD9 /* XCTest+MemoryLeakTracking.swift */; };
+		D2BA5CE825C0587F00912BD9 /* BeerListAcceptanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BA5CE725C0587F00912BD9 /* BeerListAcceptanceTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -123,6 +124,7 @@
 		D2BA5CD525C056F900912BD9 /* BeerListViewControllerTests+Assertions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "BeerListViewControllerTests+Assertions.swift"; sourceTree = "<group>"; };
 		D2BA5CD625C056F900912BD9 /* BeerListUIIntegrationsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeerListUIIntegrationsTests.swift; sourceTree = "<group>"; };
 		D2BA5CE425C057B300912BD9 /* XCTest+MemoryLeakTracking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "XCTest+MemoryLeakTracking.swift"; sourceTree = "<group>"; };
+		D2BA5CE725C0587F00912BD9 /* BeerListAcceptanceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeerListAcceptanceTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -208,6 +210,7 @@
 				D2BA5CCF25C056F900912BD9 /* Helpers */,
 				D2BA5C6025C04F9A00912BD9 /* Info.plist */,
 				D2BA5C8125C0539300912BD9 /* SceneDelegateTests.swift */,
+				D2BA5CE725C0587F00912BD9 /* BeerListAcceptanceTests.swift */,
 			);
 			path = BeerListAppTests;
 			sourceTree = "<group>";
@@ -403,6 +406,7 @@
 			files = (
 				D2BA5CD825C056F900912BD9 /* BeerListViewControllerTests+TestHelpers.swift in Sources */,
 				D2BA5CD925C056F900912BD9 /* BeerCell+TestHelpers.swift in Sources */,
+				D2BA5CE825C0587F00912BD9 /* BeerListAcceptanceTests.swift in Sources */,
 				D2BA5CDD25C056F900912BD9 /* BeerListUIIntegrationsTests.swift in Sources */,
 				D2BA5CD725C056F900912BD9 /* BeerListViewController+TestHelpers.swift in Sources */,
 				D2BA5CE525C057B300912BD9 /* XCTest+MemoryLeakTracking.swift in Sources */,
