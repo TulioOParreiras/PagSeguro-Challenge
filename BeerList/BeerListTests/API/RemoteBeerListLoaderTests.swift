@@ -9,6 +9,10 @@ import XCTest
 import BeerList
 
 class HTTPClientSpy: HTTPClient {
+    private struct Task: HTTPClientTask {
+        func cancel() {}
+    }
+
     var messages = [(url: URL, completion: HTTPClient.Response)]()
     var requestedURLs: [URL] {
         self.messages.map { $0.url }
@@ -16,8 +20,9 @@ class HTTPClientSpy: HTTPClient {
     
     typealias Response = HTTPClient.Response
     
-    func get(from url: URL, completion: @escaping Response) {
+    func get(from url: URL, completion: @escaping Response) -> HTTPClientTask {
         self.messages.append((url, completion))
+        return Task()
     }
     
     func complete(with error: Error, at index: Int = 0) {
