@@ -8,38 +8,6 @@
 import XCTest
 import BeerList
 
-class HTTPClientSpy: HTTPClient {
-    private struct Task: HTTPClientTask {
-        func cancel() {}
-    }
-
-    var messages = [(url: URL, completion: HTTPClient.Response)]()
-    var requestedURLs: [URL] {
-        self.messages.map { $0.url }
-    }
-    
-    typealias Response = HTTPClient.Response
-    
-    func get(from url: URL, completion: @escaping Response) -> HTTPClientTask {
-        self.messages.append((url, completion))
-        return Task()
-    }
-    
-    func complete(with error: Error, at index: Int = 0) {
-        self.messages[index].completion(.failure(error))
-    }
-    
-    func complete(withStatusCode code: Int, data: Data = Data(), at index: Int = 0) {
-        let response = HTTPURLResponse(
-            url: requestedURLs[index],
-            statusCode: code,
-            httpVersion: nil,
-            headerFields: nil
-        )!
-        messages[index].completion(.success((data, response)))
-    }
-}
-
 class RemoteBeerListLoaderTests: XCTestCase {
 
     func test_init_doesNotRequestDataFromURL() {
