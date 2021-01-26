@@ -14,7 +14,7 @@ class BeerListSnapshotTests: XCTestCase {
     func test_emptyBeerList() {
         let sut = makeSUT()
         
-        sut.tableModel = emptyBeerList()
+        sut.display(emptyBeerList())
         
         assert(snapshot: sut.snapshot(for: .iPhone8(style: .light)), named: "EMPTY_BEER_LIST_light")
         assert(snapshot: sut.snapshot(for: .iPhone8(style: .dark)), named: "EMPTY_BEER_LIST_dark")
@@ -85,7 +85,7 @@ private extension BeerListViewController {
             return cellController
         }
         
-        tableModel = cells
+        display(cells)
     }
 }
 

@@ -14,7 +14,7 @@ public protocol BeerListViewControllerDelegate {
 
 final public class BeerListViewController: UITableViewController, UITableViewDataSourcePrefetching, BeerListLoadingView, BeerListErrorView {
     @IBOutlet private(set) public var errorView: ErrorView!
-    public var tableModel: [BeerCellController] = [] {
+    private var tableModel: [BeerCellController] = [] {
         didSet { tableView.reloadData() }
     }
     public var delegate: BeerListViewControllerDelegate?
@@ -32,6 +32,10 @@ final public class BeerListViewController: UITableViewController, UITableViewDat
     
     @IBAction func refresh() {
         delegate?.didRequestBeerListRefresh()
+    }
+    
+    public func display(_ cellControllers: [BeerCellController]) {
+        tableModel = cellControllers
     }
     
     public func display(_ viewModel: BeerListLoadingViewModel) {
