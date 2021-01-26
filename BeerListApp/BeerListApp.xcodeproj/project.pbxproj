@@ -18,6 +18,20 @@
 		D2BA5BB525C0454C00912BD9 /* BeerListiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2BA5BB225C0454C00912BD9 /* BeerListiOS.framework */; };
 		D2BA5BB625C0454C00912BD9 /* BeerListiOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D2BA5BB225C0454C00912BD9 /* BeerListiOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D2BA5C8225C0539300912BD9 /* SceneDelegateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BA5C8125C0539300912BD9 /* SceneDelegateTests.swift */; };
+		D2BA5CC425C056DF00912BD9 /* BeerDataLoaderPresentationAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BA5CBE25C056DF00912BD9 /* BeerDataLoaderPresentationAdapter.swift */; };
+		D2BA5CC525C056DF00912BD9 /* BeerListUIComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BA5CBF25C056DF00912BD9 /* BeerListUIComposer.swift */; };
+		D2BA5CC625C056DF00912BD9 /* MainQueueDispatchDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BA5CC025C056DF00912BD9 /* MainQueueDispatchDecorator.swift */; };
+		D2BA5CC725C056DF00912BD9 /* WeakRefVirtualProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BA5CC125C056DF00912BD9 /* WeakRefVirtualProxy.swift */; };
+		D2BA5CC825C056DF00912BD9 /* BeerListLoaderPresentationAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BA5CC225C056DF00912BD9 /* BeerListLoaderPresentationAdapter.swift */; };
+		D2BA5CC925C056DF00912BD9 /* BeerListViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BA5CC325C056DF00912BD9 /* BeerListViewAdapter.swift */; };
+		D2BA5CD725C056F900912BD9 /* BeerListViewController+TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BA5CD025C056F900912BD9 /* BeerListViewController+TestHelpers.swift */; };
+		D2BA5CD825C056F900912BD9 /* BeerListViewControllerTests+TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BA5CD125C056F900912BD9 /* BeerListViewControllerTests+TestHelpers.swift */; };
+		D2BA5CD925C056F900912BD9 /* BeerCell+TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BA5CD225C056F900912BD9 /* BeerCell+TestHelpers.swift */; };
+		D2BA5CDA25C056F900912BD9 /* UIImage+TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BA5CD325C056F900912BD9 /* UIImage+TestHelpers.swift */; };
+		D2BA5CDB25C056F900912BD9 /* UIControl+TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BA5CD425C056F900912BD9 /* UIControl+TestHelpers.swift */; };
+		D2BA5CDC25C056F900912BD9 /* BeerListViewControllerTests+Assertions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BA5CD525C056F900912BD9 /* BeerListViewControllerTests+Assertions.swift */; };
+		D2BA5CDD25C056F900912BD9 /* BeerListUIIntegrationsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BA5CD625C056F900912BD9 /* BeerListUIIntegrationsTests.swift */; };
+		D2BA5CE525C057B300912BD9 /* XCTest+MemoryLeakTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BA5CE425C057B300912BD9 /* XCTest+MemoryLeakTracking.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -95,6 +109,20 @@
 		D2BA5C5C25C04F9A00912BD9 /* BeerListAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BeerListAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2BA5C6025C04F9A00912BD9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D2BA5C8125C0539300912BD9 /* SceneDelegateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegateTests.swift; sourceTree = "<group>"; };
+		D2BA5CBE25C056DF00912BD9 /* BeerDataLoaderPresentationAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeerDataLoaderPresentationAdapter.swift; sourceTree = "<group>"; };
+		D2BA5CBF25C056DF00912BD9 /* BeerListUIComposer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeerListUIComposer.swift; sourceTree = "<group>"; };
+		D2BA5CC025C056DF00912BD9 /* MainQueueDispatchDecorator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainQueueDispatchDecorator.swift; sourceTree = "<group>"; };
+		D2BA5CC125C056DF00912BD9 /* WeakRefVirtualProxy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeakRefVirtualProxy.swift; sourceTree = "<group>"; };
+		D2BA5CC225C056DF00912BD9 /* BeerListLoaderPresentationAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeerListLoaderPresentationAdapter.swift; sourceTree = "<group>"; };
+		D2BA5CC325C056DF00912BD9 /* BeerListViewAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeerListViewAdapter.swift; sourceTree = "<group>"; };
+		D2BA5CD025C056F900912BD9 /* BeerListViewController+TestHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "BeerListViewController+TestHelpers.swift"; sourceTree = "<group>"; };
+		D2BA5CD125C056F900912BD9 /* BeerListViewControllerTests+TestHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "BeerListViewControllerTests+TestHelpers.swift"; sourceTree = "<group>"; };
+		D2BA5CD225C056F900912BD9 /* BeerCell+TestHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "BeerCell+TestHelpers.swift"; sourceTree = "<group>"; };
+		D2BA5CD325C056F900912BD9 /* UIImage+TestHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+TestHelpers.swift"; sourceTree = "<group>"; };
+		D2BA5CD425C056F900912BD9 /* UIControl+TestHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIControl+TestHelpers.swift"; sourceTree = "<group>"; };
+		D2BA5CD525C056F900912BD9 /* BeerListViewControllerTests+Assertions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "BeerListViewControllerTests+Assertions.swift"; sourceTree = "<group>"; };
+		D2BA5CD625C056F900912BD9 /* BeerListUIIntegrationsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeerListUIIntegrationsTests.swift; sourceTree = "<group>"; };
+		D2BA5CE425C057B300912BD9 /* XCTest+MemoryLeakTracking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "XCTest+MemoryLeakTracking.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,6 +167,7 @@
 		D2BA5B7725C0445400912BD9 /* BeerListApp */ = {
 			isa = PBXGroup;
 			children = (
+				D2BA5CBD25C056DF00912BD9 /* Composer */,
 				D2BA5B7825C0445400912BD9 /* AppDelegate.swift */,
 				D2BA5B7A25C0445400912BD9 /* SceneDelegate.swift */,
 				D2BA5B7C25C0445400912BD9 /* ViewController.swift */,
@@ -175,10 +204,39 @@
 		D2BA5C5D25C04F9A00912BD9 /* BeerListAppTests */ = {
 			isa = PBXGroup;
 			children = (
+				D2BA5CD625C056F900912BD9 /* BeerListUIIntegrationsTests.swift */,
+				D2BA5CCF25C056F900912BD9 /* Helpers */,
 				D2BA5C6025C04F9A00912BD9 /* Info.plist */,
 				D2BA5C8125C0539300912BD9 /* SceneDelegateTests.swift */,
 			);
 			path = BeerListAppTests;
+			sourceTree = "<group>";
+		};
+		D2BA5CBD25C056DF00912BD9 /* Composer */ = {
+			isa = PBXGroup;
+			children = (
+				D2BA5CBE25C056DF00912BD9 /* BeerDataLoaderPresentationAdapter.swift */,
+				D2BA5CBF25C056DF00912BD9 /* BeerListUIComposer.swift */,
+				D2BA5CC025C056DF00912BD9 /* MainQueueDispatchDecorator.swift */,
+				D2BA5CC125C056DF00912BD9 /* WeakRefVirtualProxy.swift */,
+				D2BA5CC225C056DF00912BD9 /* BeerListLoaderPresentationAdapter.swift */,
+				D2BA5CC325C056DF00912BD9 /* BeerListViewAdapter.swift */,
+			);
+			path = Composer;
+			sourceTree = "<group>";
+		};
+		D2BA5CCF25C056F900912BD9 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				D2BA5CD025C056F900912BD9 /* BeerListViewController+TestHelpers.swift */,
+				D2BA5CE425C057B300912BD9 /* XCTest+MemoryLeakTracking.swift */,
+				D2BA5CD125C056F900912BD9 /* BeerListViewControllerTests+TestHelpers.swift */,
+				D2BA5CD225C056F900912BD9 /* BeerCell+TestHelpers.swift */,
+				D2BA5CD325C056F900912BD9 /* UIImage+TestHelpers.swift */,
+				D2BA5CD425C056F900912BD9 /* UIControl+TestHelpers.swift */,
+				D2BA5CD525C056F900912BD9 /* BeerListViewControllerTests+Assertions.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -327,8 +385,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D2BA5CC825C056DF00912BD9 /* BeerListLoaderPresentationAdapter.swift in Sources */,
 				D2BA5B7D25C0445400912BD9 /* ViewController.swift in Sources */,
 				D2BA5B7925C0445400912BD9 /* AppDelegate.swift in Sources */,
+				D2BA5CC525C056DF00912BD9 /* BeerListUIComposer.swift in Sources */,
+				D2BA5CC425C056DF00912BD9 /* BeerDataLoaderPresentationAdapter.swift in Sources */,
+				D2BA5CC625C056DF00912BD9 /* MainQueueDispatchDecorator.swift in Sources */,
+				D2BA5CC725C056DF00912BD9 /* WeakRefVirtualProxy.swift in Sources */,
+				D2BA5CC925C056DF00912BD9 /* BeerListViewAdapter.swift in Sources */,
 				D2BA5B7B25C0445400912BD9 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -337,6 +401,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D2BA5CD825C056F900912BD9 /* BeerListViewControllerTests+TestHelpers.swift in Sources */,
+				D2BA5CD925C056F900912BD9 /* BeerCell+TestHelpers.swift in Sources */,
+				D2BA5CDD25C056F900912BD9 /* BeerListUIIntegrationsTests.swift in Sources */,
+				D2BA5CD725C056F900912BD9 /* BeerListViewController+TestHelpers.swift in Sources */,
+				D2BA5CE525C057B300912BD9 /* XCTest+MemoryLeakTracking.swift in Sources */,
+				D2BA5CDB25C056F900912BD9 /* UIControl+TestHelpers.swift in Sources */,
+				D2BA5CDA25C056F900912BD9 /* UIImage+TestHelpers.swift in Sources */,
+				D2BA5CDC25C056F900912BD9 /* BeerListViewControllerTests+Assertions.swift in Sources */,
 				D2BA5C8225C0539300912BD9 /* SceneDelegateTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

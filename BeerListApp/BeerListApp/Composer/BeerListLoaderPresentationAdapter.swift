@@ -7,6 +7,7 @@
 
 import Foundation
 import BeerList
+import BeerListiOS
 
 final class BeerListLoaderPresentationAdapter: BeerListViewControllerDelegate {
     private let beerListLoader: BeerListLoader

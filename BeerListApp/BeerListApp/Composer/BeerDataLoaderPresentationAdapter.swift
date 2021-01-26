@@ -7,6 +7,7 @@
 
 import Foundation
 import BeerList
+import BeerListiOS
 
 final class BeerDataLoaderPresentationAdapter<View: BeerView, Image>: BeerCellControllerDelegate where View.Image == Image {
     private let model: Beer

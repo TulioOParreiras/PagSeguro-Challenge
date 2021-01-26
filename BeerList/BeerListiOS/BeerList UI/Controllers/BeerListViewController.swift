@@ -8,16 +8,16 @@
 import UIKit
 import BeerList
 
-protocol BeerListViewControllerDelegate {
+public protocol BeerListViewControllerDelegate {
     func didRequestBeerListRefresh()
 }
 
 final public class BeerListViewController: UITableViewController, UITableViewDataSourcePrefetching, BeerListLoadingView, BeerListErrorView {
     @IBOutlet private(set) public var errorView: ErrorView!
-    var tableModel: [BeerCellController] = [] {
+    public var tableModel: [BeerCellController] = [] {
         didSet { tableView.reloadData() }
     }
-    var delegate: BeerListViewControllerDelegate?
+    public var delegate: BeerListViewControllerDelegate?
     
     public override func viewDidLoad() {
         super.viewDidLoad()

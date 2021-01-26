@@ -8,16 +8,16 @@
 import UIKit
 import BeerList
 
-protocol BeerCellControllerDelegate {
+public protocol BeerCellControllerDelegate {
     func didRequestImage()
     func didCancelImageRequest()
 }
 
-final class BeerCellController: BeerView {
+public final class BeerCellController: BeerView {
     private let delegate: BeerCellControllerDelegate
     private var cell: BeerCell?
     
-    init(delegate: BeerCellControllerDelegate) {
+    public init(delegate: BeerCellControllerDelegate) {
         self.delegate = delegate
     }
     
@@ -36,7 +36,7 @@ final class BeerCellController: BeerView {
         delegate.didCancelImageRequest()
     }
     
-    func display(_ viewModel: BeerViewModel<UIImage>) {
+    public func display(_ viewModel: BeerViewModel<UIImage>) {
         cell?.ibuLabel.isHidden = !viewModel.hasIbu
         cell?.ibuLabel.text = viewModel.ibu
         cell?.nameLabel.text = viewModel.name
