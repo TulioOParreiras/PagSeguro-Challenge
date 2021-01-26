@@ -54,6 +54,9 @@ extension BeerListViewController {
     }
     
     func beerCell(at row: Int) -> UITableViewCell? {
+        guard numberOfRenderedBeerCells() > row else {
+            return nil
+        }
         let ds = tableView.dataSource
         let index = IndexPath(row: row, section: beerCellsSection)
         return ds?.tableView(tableView, cellForRowAt: index)
