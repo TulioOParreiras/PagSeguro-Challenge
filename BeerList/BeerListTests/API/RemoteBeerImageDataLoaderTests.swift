@@ -8,10 +8,6 @@
 import XCTest
 import BeerList
 
-func anyURL() -> URL {
-    return URL(string: "https://any-url.com")!
-}
-
 class RemoteBeerImageDataLoader {
     private let client: HTTPClient
     
@@ -178,10 +174,6 @@ class RemoteBeerImageDataLoaderTests: XCTestCase {
         trackForMemoryLeaks(sut, file: file, line: line)
         trackForMemoryLeaks(client, file: file, line: line)
         return (sut, client)
-    }
-
-    private func anyData() -> Data {
-        return Data("any data".utf8)
     }
 
     private func failure(_ error: RemoteBeerImageDataLoader.Error) -> BeerImageDataLoader.Result {

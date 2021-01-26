@@ -55,6 +55,7 @@
 		D28E5D2325BF9DA2006BEEFE /* BeerListLoaderPresentationAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28E5D2225BF9DA2006BEEFE /* BeerListLoaderPresentationAdapter.swift */; };
 		D28E5D2A25BF9DC6006BEEFE /* BeerDataLoaderPresentationAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28E5D2925BF9DC6006BEEFE /* BeerDataLoaderPresentationAdapter.swift */; };
 		D28E5D4225BFBC2B006BEEFE /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28E5D4125BFBC2B006BEEFE /* ErrorView.swift */; };
+		D2BA5B3425C03B4800912BD9 /* SharedTestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BA5B3325C03B4800912BD9 /* SharedTestHelpers.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -136,6 +137,7 @@
 		D28E5D2925BF9DC6006BEEFE /* BeerDataLoaderPresentationAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeerDataLoaderPresentationAdapter.swift; sourceTree = "<group>"; };
 		D28E5D4125BFBC2B006BEEFE /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
 		D2A97C9E25C01E87000AE465 /* BeerListPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeerListPresenterTests.swift; sourceTree = "<group>"; };
+		D2BA5B3325C03B4800912BD9 /* SharedTestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedTestHelpers.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -278,6 +280,7 @@
 			isa = PBXGroup;
 			children = (
 				D251F0A825BDCDCF003FED5F /* XCTest+MemoryLeakTracking.swift */,
+				D2BA5B3325C03B4800912BD9 /* SharedTestHelpers.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -659,6 +662,7 @@
 				D27409F525C02A3900EFBE6F /* BeerListPresenterTests.swift in Sources */,
 				D256A3B925BA4DDE0010C33F /* RemoteBeerListLoaderTests.swift in Sources */,
 				D2740A1725C02AFB00EFBE6F /* BeerPresenterTests.swift in Sources */,
+				D2BA5B3425C03B4800912BD9 /* SharedTestHelpers.swift in Sources */,
 				D251F0A925BDCDCF003FED5F /* XCTest+MemoryLeakTracking.swift in Sources */,
 				D2740A0025C02A5B00EFBE6F /* BeerListLocalizationTests.swift in Sources */,
 				D251F0A425BB992C003FED5F /* URLSessionHTTPClientTests.swift in Sources */,

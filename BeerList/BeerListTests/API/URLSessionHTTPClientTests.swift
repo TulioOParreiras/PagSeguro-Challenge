@@ -8,10 +8,6 @@
 import XCTest
 import BeerList
 
-func anyNSError() -> NSError {
-    return NSError(domain: "a domain", code: 1)
-}
-
 class URLSessionHTTPClientTests: XCTestCase {
     
     override func tearDown() {
