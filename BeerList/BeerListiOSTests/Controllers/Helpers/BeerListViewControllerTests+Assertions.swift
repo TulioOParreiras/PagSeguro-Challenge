@@ -10,7 +10,7 @@ import BeerList
 import BeerListiOS
 
 
-extension BeerListViewControllerTests {
+extension BeerListUIIntegrationsTests {
     
     func assertThat(_ sut: BeerListViewController, isRendering beerList: [Beer], file: StaticString = #file, line: UInt = #line) {
         XCTAssertEqual(sut.numberOfRenderedBeerCells(), beerList.count, "Expected \(beerList.count) beers, got \(sut.numberOfRenderedBeerCells()) instead", file: file, line: line)

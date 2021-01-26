@@ -9,7 +9,7 @@ import UIKit
 import BeerList
 import BeerListiOS
 
-extension BeerListViewControllerTests {
+extension BeerListUIIntegrationsTests {
     
     class LoaderSpy: BeerListLoader, BeerImageDataLoader {
         

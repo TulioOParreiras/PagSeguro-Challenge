@@ -14,16 +14,26 @@ public final class BeerListUIComposer {
     public static func beerListComposedWith(beerListLoader: BeerListLoader, imageLoader: BeerImageDataLoader) -> BeerListViewController {
         let presentationAdapter = BeerListLoaderPresentationAdapter(beerListLoader: beerListLoader)
         
-        let bundle = Bundle(for: BeerListViewController.self)
-        let storyboard = UIStoryboard(name: "BeerList", bundle: bundle)
-        let beerListController = storyboard.instantiateInitialViewController() as! BeerListViewController
-        beerListController.delegate = presentationAdapter
+        let beerListController = BeerListViewController.makeWith(
+            delegate: presentationAdapter,
+            title: BeerListPresenter.title)
         
         presentationAdapter.presenter = BeerListPresenter(
             beerListView: BeerListViewAdapter(controller: beerListController, imageLoader: imageLoader), loadingView: WeakRefVirtualProxy(beerListController))
         return beerListController
     }
 
+}
+
+private extension BeerListViewController {
+    static func makeWith(delegate: BeerListViewControllerDelegate, title: String) -> BeerListViewController {
+        let bundle = Bundle(for: BeerListViewController.self)
+        let storyboard = UIStoryboard(name: "BeerList", bundle: bundle)
+        let beerListController = storyboard.instantiateInitialViewController() as! BeerListViewController
+        beerListController.delegate = delegate
+        beerListController.title = title
+        return beerListController
+    }
 }
 
 private final class WeakRefVirtualProxy<T: AnyObject> {

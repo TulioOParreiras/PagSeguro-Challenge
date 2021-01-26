@@ -23,7 +23,7 @@
 		D232EF5025BDFD7300F272BB /* BeerList.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D256A38725BA47F10010C33F /* BeerList.framework */; };
 		D232EF5925BE014B00F272BB /* XCTest+MemoryLeakTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = D251F0A825BDCDCF003FED5F /* XCTest+MemoryLeakTracking.swift */; };
 		D232EFF125BE3BA300F272BB /* BeerListiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D232EFE825BE3BA200F272BB /* BeerListiOS.framework */; };
-		D232F01225BE42F900F272BB /* BeerListViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D232F01125BE42F900F272BB /* BeerListViewControllerTests.swift */; };
+		D232F01225BE42F900F272BB /* BeerListUIIntegrationsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D232F01125BE42F900F272BB /* BeerListUIIntegrationsTests.swift */; };
 		D232F01825BE458800F272BB /* XCTest+MemoryLeakTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = D251F0A825BDCDCF003FED5F /* XCTest+MemoryLeakTracking.swift */; };
 		D232F01F25BE60F100F272BB /* BeerListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D232F01E25BE60F100F272BB /* BeerListViewController.swift */; };
 		D232F02B25BE656000F272BB /* BeerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D232F02A25BE656000F272BB /* BeerCell.swift */; };
@@ -43,6 +43,8 @@
 		D28E5CB325BF850B006BEEFE /* BeerList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D28E5CB225BF850A006BEEFE /* BeerList.storyboard */; };
 		D28E5CC425BF8E72006BEEFE /* UITableView+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28E5CC325BF8E72006BEEFE /* UITableView+Helpers.swift */; };
 		D28E5CD025BF8F77006BEEFE /* UIImageView+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28E5CCF25BF8F77006BEEFE /* UIImageView+Helpers.swift */; };
+		D28E5CEE25BF9600006BEEFE /* BeerListLocalizationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28E5CED25BF9600006BEEFE /* BeerListLocalizationTests.swift */; };
+		D28E5CF925BF96AD006BEEFE /* BeerList.strings in Resources */ = {isa = PBXBuildFile; fileRef = D28E5CFB25BF96AD006BEEFE /* BeerList.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -89,7 +91,7 @@
 		D232EFEB25BE3BA200F272BB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D232EFF025BE3BA300F272BB /* BeerListiOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BeerListiOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D232EFF725BE3BA300F272BB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D232F01125BE42F900F272BB /* BeerListViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeerListViewControllerTests.swift; sourceTree = "<group>"; };
+		D232F01125BE42F900F272BB /* BeerListUIIntegrationsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeerListUIIntegrationsTests.swift; sourceTree = "<group>"; };
 		D232F01E25BE60F100F272BB /* BeerListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeerListViewController.swift; sourceTree = "<group>"; };
 		D232F02A25BE656000F272BB /* BeerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeerCell.swift; sourceTree = "<group>"; };
 		D232F03125BEFB4E00F272BB /* UIView+Shimmering.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Shimmering.swift"; sourceTree = "<group>"; };
@@ -111,6 +113,9 @@
 		D28E5CB225BF850A006BEEFE /* BeerList.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = BeerList.storyboard; sourceTree = "<group>"; };
 		D28E5CC325BF8E72006BEEFE /* UITableView+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Helpers.swift"; sourceTree = "<group>"; };
 		D28E5CCF25BF8F77006BEEFE /* UIImageView+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Helpers.swift"; sourceTree = "<group>"; };
+		D28E5CED25BF9600006BEEFE /* BeerListLocalizationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeerListLocalizationTests.swift; sourceTree = "<group>"; };
+		D28E5CFA25BF96AD006BEEFE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/BeerList.strings; sourceTree = "<group>"; };
+		D28E5D0125BF96EB006BEEFE /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/BeerList.strings"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -171,6 +176,7 @@
 				D209AD6B25BF4DB900956918 /* BeerListPresenter.swift */,
 				D28E5C8425BF6400006BEEFE /* BeerListViewModel.swift */,
 				D28E5C7D25BF63F3006BEEFE /* BeerListLoadingViewModel.swift */,
+				D28E5CFB25BF96AD006BEEFE /* BeerList.strings */,
 			);
 			path = "BeerList Presentation";
 			sourceTree = "<group>";
@@ -191,7 +197,7 @@
 		D22E8C4925BF1EF500B1F606 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				D232F01125BE42F900F272BB /* BeerListViewControllerTests.swift */,
+				D232F01125BE42F900F272BB /* BeerListUIIntegrationsTests.swift */,
 				D22E8C3025BF1DCE00B1F606 /* Helpers */,
 			);
 			path = Controllers;
@@ -259,6 +265,7 @@
 		D232EFF425BE3BA300F272BB /* BeerListiOSTests */ = {
 			isa = PBXGroup;
 			children = (
+				D28E5CEC25BF95EC006BEEFE /* Presentation */,
 				D22E8C4925BF1EF500B1F606 /* Controllers */,
 				D232EFF725BE3BA300F272BB /* Info.plist */,
 			);
@@ -336,6 +343,14 @@
 				D232EF4325BDED5D00F272BB /* URLSessionHTTPClient.swift */,
 			);
 			path = "BeerList API";
+			sourceTree = "<group>";
+		};
+		D28E5CEC25BF95EC006BEEFE /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				D28E5CED25BF9600006BEEFE /* BeerListLocalizationTests.swift */,
+			);
+			path = Presentation;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -485,6 +500,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"pt-BR",
 			);
 			mainGroup = D256A37D25BA47F10010C33F;
 			productRefGroup = D256A38825BA47F10010C33F /* Products */;
@@ -512,6 +528,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D28E5CF925BF96AD006BEEFE /* BeerList.strings in Resources */,
 				D28E5CB325BF850B006BEEFE /* BeerList.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -573,7 +590,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D232F01225BE42F900F272BB /* BeerListViewControllerTests.swift in Sources */,
+				D232F01225BE42F900F272BB /* BeerListUIIntegrationsTests.swift in Sources */,
+				D28E5CEE25BF9600006BEEFE /* BeerListLocalizationTests.swift in Sources */,
 				D22E8C7A25BF207800B1F606 /* BeerListViewControllerTests+Assertions.swift in Sources */,
 				D22E8C6525BF1FB300B1F606 /* BeerListViewController+TestHelpers.swift in Sources */,
 				D22E8C3E25BF1E5900B1F606 /* UIControl+TestHelpers.swift in Sources */,
@@ -626,6 +644,18 @@
 			targetProxy = D256A39225BA47F10010C33F /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		D28E5CFB25BF96AD006BEEFE /* BeerList.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D28E5CFA25BF96AD006BEEFE /* en */,
+				D28E5D0125BF96EB006BEEFE /* pt-BR */,
+			);
+			name = BeerList.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		D232EF5425BDFD7300F272BB /* Debug */ = {
@@ -772,6 +802,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -836,6 +867,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
