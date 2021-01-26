@@ -96,12 +96,15 @@ class BeerListUIIntegrationsTests: XCTestCase {
         assertThat(sut, isRendering: [beer0])
     }
     
-    func test_errorView_doesNotRenderErrorOnLoad() {
-        let (sut, _) = makeSUT()
+    func test_loadBeerListCompletion_rendersErrorMessageOnError() {
+        let (sut, loader) = makeSUT()
         
         sut.loadViewIfNeeded()
-        
         XCTAssertEqual(sut.errorMessage, nil)
+        
+        loader.completeBeerListLoadingWithError(at: 0)
+        XCTAssertEqual(sut.errorMessage, localized("BEER_LIST_CONNECTION_ERROR"))
+
     }
     
     func test_beerCell_loadsImageURLWhenVisible() {

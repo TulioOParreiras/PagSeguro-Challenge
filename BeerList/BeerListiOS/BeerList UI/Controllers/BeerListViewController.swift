@@ -15,7 +15,7 @@ protocol BeerListViewControllerDelegate {
     func didRequestBeerListRefresh()
 }
 
-final public class BeerListViewController: UITableViewController, UITableViewDataSourcePrefetching, BeerListLoadingView {
+final public class BeerListViewController: UITableViewController, UITableViewDataSourcePrefetching, BeerListLoadingView, BeerListErrorView {
     public let errorView = ErrorView()
     var tableModel: [BeerCellController] = [] {
         didSet { tableView.reloadData() }
@@ -33,6 +33,10 @@ final public class BeerListViewController: UITableViewController, UITableViewDat
     
     func display(_ viewModel: BeerListLoadingViewModel) {
         viewModel.isLoading ? refreshControl?.beginRefreshing() : refreshControl?.endRefreshing()
+    }
+    
+    func display(_ viewModel: BeerListErrorViewModel) {
+        errorView.message = viewModel.message
     }
     
     public override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

@@ -19,7 +19,11 @@ public final class BeerListUIComposer {
             title: BeerListPresenter.title)
         
         presentationAdapter.presenter = BeerListPresenter(
-            beerListView: BeerListViewAdapter(controller: beerListController, imageLoader: MainQueueDispatchDecorator(decoratee: imageLoader)), loadingView: WeakRefVirtualProxy(beerListController))
+            beerListView: BeerListViewAdapter(
+                controller: beerListController,
+                imageLoader: MainQueueDispatchDecorator(decoratee: imageLoader)),
+            loadingView: WeakRefVirtualProxy(beerListController),
+            errorView: WeakRefVirtualProxy(beerListController))
         return beerListController
     }
 

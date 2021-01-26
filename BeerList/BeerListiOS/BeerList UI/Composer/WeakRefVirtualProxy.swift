@@ -27,3 +27,9 @@ extension WeakRefVirtualProxy: BeerView where T: BeerView, T.Image == UIImage {
         object?.display(model)
     }
 }
+
+extension WeakRefVirtualProxy: BeerListErrorView where T: BeerListErrorView {
+    func display(_ viewModel: BeerListErrorViewModel) {
+        object?.display(viewModel)
+    }
+}
