@@ -35,6 +35,14 @@ class BeerListSnapshotTests: XCTestCase {
         record(snapshot: sut.snapshot(), named: "BEER_LIST_WITH_ERROR_MESSAAGE")
     }
     
+    func test_beerWithFailedImageLoading() {
+        let sut = makeSUT()
+        
+        sut.display(beerWithFailedImageLoading())
+        
+        record(snapshot: sut.snapshot(), named: "BEER_WITH_FAILED_IMAGE_LOADING")
+    }
+    
     // MARK: - Helpers
     
     private func makeSUT() -> BeerListViewController {
@@ -53,6 +61,13 @@ class BeerListSnapshotTests: XCTestCase {
         return [
             BeerStub(name: "Buzz", ibu: 60.0, image: UIImage.make(withColor: .red)),
             BeerStub(name: "Trashy Blonde", ibu: 41.5, image: UIImage.make(withColor: .blue))
+        ]
+    }
+    
+    private func beerWithFailedImageLoading() -> [BeerStub] {
+        return [
+            BeerStub(name: "Buzz", ibu: 60.0, image: nil),
+            BeerStub(name: "Trashy Blonde", ibu: 41.5, image: nil)
         ]
     }
     
