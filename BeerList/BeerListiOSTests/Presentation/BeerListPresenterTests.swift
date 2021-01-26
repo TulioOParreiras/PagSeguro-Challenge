@@ -8,56 +8,6 @@
 import XCTest
 import BeerList
 
-struct BeerListViewModel {
-    let beerList: [Beer]
-}
-
-protocol BeerListView {
-    func display(_ viewModel: BeerListViewModel)
-}
-
-struct BeerListLoadingViewModel {
-    let isLoading: Bool
-}
-
-protocol BeerListLoadingView {
-    func display(_ viewModel: BeerListLoadingViewModel)
-}
-
-struct BeerListErrorViewModel {
-    let message: String?
-    
-    static var noError: BeerListErrorViewModel {
-        return BeerListErrorViewModel(message: nil)
-    }
-}
-
-protocol BeerListErrorView {
-    func display(_ viewModel: BeerListErrorViewModel)
-}
-
-final class BeerListPresenter {
-    private let beerListView: BeerListView
-    private let loadingView: BeerListLoadingView
-    private let errorView: BeerListErrorView
-    
-    init(beerListView: BeerListView, loadingView: BeerListLoadingView,errorView: BeerListErrorView) {
-        self.beerListView = beerListView
-        self.loadingView = loadingView
-        self.errorView = errorView
-    }
-    
-    func didStartLoadingBeerList() {
-        errorView.display(.noError)
-        loadingView.display(BeerListLoadingViewModel(isLoading: true))
-    }
-    
-    func didFinishLoadingBeerList(with beerList: [Beer]) {
-        beerListView.display(BeerListViewModel(beerList: beerList))
-        loadingView.display(BeerListLoadingViewModel(isLoading: false))
-    }
-}
-
 class BeerListPresenterTests: XCTestCase {
 
     func test_init_doesNotSendMessagesToView() {
