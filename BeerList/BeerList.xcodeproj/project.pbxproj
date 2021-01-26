@@ -47,6 +47,7 @@
 		D28E5CF925BF96AD006BEEFE /* BeerList.strings in Resources */ = {isa = PBXBuildFile; fileRef = D28E5CFB25BF96AD006BEEFE /* BeerList.strings */; };
 		D28E5D0E25BF9CFE006BEEFE /* MainQueueDispatchDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28E5D0D25BF9CFE006BEEFE /* MainQueueDispatchDecorator.swift */; };
 		D28E5D1525BF9D29006BEEFE /* WeakRefVirtualProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28E5D1425BF9D29006BEEFE /* WeakRefVirtualProxy.swift */; };
+		D28E5D1C25BF9D60006BEEFE /* BeerListViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28E5D1B25BF9D60006BEEFE /* BeerListViewAdapter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -120,6 +121,7 @@
 		D28E5D0125BF96EB006BEEFE /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/BeerList.strings"; sourceTree = "<group>"; };
 		D28E5D0D25BF9CFE006BEEFE /* MainQueueDispatchDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainQueueDispatchDecorator.swift; sourceTree = "<group>"; };
 		D28E5D1425BF9D29006BEEFE /* WeakRefVirtualProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeakRefVirtualProxy.swift; sourceTree = "<group>"; };
+		D28E5D1B25BF9D60006BEEFE /* BeerListViewAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeerListViewAdapter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -168,6 +170,7 @@
 			isa = PBXGroup;
 			children = (
 				D209AD3525BF365200956918 /* BeerListUIComposer.swift */,
+				D28E5D1B25BF9D60006BEEFE /* BeerListViewAdapter.swift */,
 				D28E5D1425BF9D29006BEEFE /* WeakRefVirtualProxy.swift */,
 				D28E5D0D25BF9CFE006BEEFE /* MainQueueDispatchDecorator.swift */,
 			);
@@ -586,6 +589,7 @@
 				D28E5D1525BF9D29006BEEFE /* WeakRefVirtualProxy.swift in Sources */,
 				D28E5CC425BF8E72006BEEFE /* UITableView+Helpers.swift in Sources */,
 				D28E5D0E25BF9CFE006BEEFE /* MainQueueDispatchDecorator.swift in Sources */,
+				D28E5D1C25BF9D60006BEEFE /* BeerListViewAdapter.swift in Sources */,
 				D209AD2E25BF325900956918 /* BeerCellController.swift in Sources */,
 				D28E5C7725BF63CE006BEEFE /* BeerViewModel.swift in Sources */,
 				D28E5CD025BF8F77006BEEFE /* UIImageView+Helpers.swift in Sources */,
