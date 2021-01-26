@@ -18,6 +18,7 @@ public final class BeerListUIComposer {
         let storyboard = UIStoryboard(name: "BeerList", bundle: bundle)
         let beerListController = storyboard.instantiateInitialViewController() as! BeerListViewController
         beerListController.delegate = presentationAdapter
+        beerListController.title = BeerListPresenter.title
         
         presentationAdapter.presenter = BeerListPresenter(
             beerListView: BeerListViewAdapter(controller: beerListController, imageLoader: imageLoader), loadingView: WeakRefVirtualProxy(beerListController))

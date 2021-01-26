@@ -10,6 +10,25 @@ import BeerListiOS
 import BeerList
 
 class BeerListUIIntegrationsTests: XCTestCase {
+    
+    func test_beerListView_hasTitle() {
+        let (sut, _) = makeSUT()
+        
+        sut.loadViewIfNeeded()
+        
+        XCTAssertEqual(sut.title, localized("BEER_LIST_VIEW_TITLE"))
+    }
+    
+    func localized(_ key: String, file: StaticString = #file, line: UInt = #line) -> String {
+        let table = "BeerList"
+        let bundle = Bundle(for: BeerListViewController.self)
+        let value = bundle.localizedString(forKey: key, value: nil, table: table)
+        if value == key {
+            XCTFail("Missing localized string for key: \(key) in table: \(table)", file: file, line: line)
+        }
+        return value
+    }
+
 
     func test_loadBeerListActions_requestBeerListFromLoader() {
         let (sut, loader) = makeSUT()

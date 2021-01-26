@@ -43,6 +43,7 @@
 		D28E5CB325BF850B006BEEFE /* BeerList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D28E5CB225BF850A006BEEFE /* BeerList.storyboard */; };
 		D28E5CC425BF8E72006BEEFE /* UITableView+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28E5CC325BF8E72006BEEFE /* UITableView+Helpers.swift */; };
 		D28E5CD025BF8F77006BEEFE /* UIImageView+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28E5CCF25BF8F77006BEEFE /* UIImageView+Helpers.swift */; };
+		D28E5CE625BF94F9006BEEFE /* BeerList.strings in Resources */ = {isa = PBXBuildFile; fileRef = D28E5CE525BF94F9006BEEFE /* BeerList.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -111,6 +112,7 @@
 		D28E5CB225BF850A006BEEFE /* BeerList.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = BeerList.storyboard; sourceTree = "<group>"; };
 		D28E5CC325BF8E72006BEEFE /* UITableView+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Helpers.swift"; sourceTree = "<group>"; };
 		D28E5CCF25BF8F77006BEEFE /* UIImageView+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Helpers.swift"; sourceTree = "<group>"; };
+		D28E5CE525BF94F9006BEEFE /* BeerList.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = BeerList.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -171,6 +173,7 @@
 				D209AD6B25BF4DB900956918 /* BeerListPresenter.swift */,
 				D28E5C8425BF6400006BEEFE /* BeerListViewModel.swift */,
 				D28E5C7D25BF63F3006BEEFE /* BeerListLoadingViewModel.swift */,
+				D28E5CE525BF94F9006BEEFE /* BeerList.strings */,
 			);
 			path = "BeerList Presentation";
 			sourceTree = "<group>";
@@ -512,6 +515,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D28E5CE625BF94F9006BEEFE /* BeerList.strings in Resources */,
 				D28E5CB325BF850B006BEEFE /* BeerList.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

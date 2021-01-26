@@ -25,6 +25,13 @@ final class BeerListPresenter {
         self.loadingView = loadingView
     }
     
+    static var title: String {
+        return NSLocalizedString("BEER_LIST_VIEW_TITLE",
+                                 tableName: "BeerList",
+                                 bundle: Bundle(for: BeerListPresenter.self),
+                                 comment: "Title for the beer list view")
+    }
+    
     func didStartLoadingBeerList() {
         loadingView.display(BeerListLoadingViewModel(isLoading: true))
     }
