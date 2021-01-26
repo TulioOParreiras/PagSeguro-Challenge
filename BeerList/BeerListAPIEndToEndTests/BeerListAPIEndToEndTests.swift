@@ -37,9 +37,7 @@ class BeerListAPIEndToEndTests: XCTestCase {
     
     private func getBeersResult(file: StaticString = #file, line: UInt = #line) -> BeerListLoader.LoadResult {
         let testServerURL = URL(string: "https://api.punkapi.com/v2/beers")!
-        let client = URLSessionHTTPClient(session: URLSession(configuration: .ephemeral))
-        let loader = RemoteBeerListLoader(url: testServerURL, client: client)
-        trackForMemoryLeaks(client, file: file, line: line)
+        let loader = RemoteBeerListLoader(url: testServerURL, client: ephemeralClient(file: file, line: line))
         trackForMemoryLeaks(loader, file: file, line: line)
         let exp = expectation(description: "Wait for get completion")
         
@@ -55,8 +53,7 @@ class BeerListAPIEndToEndTests: XCTestCase {
     
     private func getBeerImageDataResult(file: StaticString = #file, line: UInt = #line) -> BeerImageDataLoader.Result? {
         let testServerURL = URL(string: "https://images.punkapi.com/v2/keg.png")!
-        let client = URLSessionHTTPClient(session: URLSession(configuration: .ephemeral))
-        let loader = RemoteBeerImageDataLoader(client: client)
+        let loader = RemoteBeerListLoader(url: testServerURL, client: ephemeralClient(file: file, line: line))
         trackForMemoryLeaks(client, file: file, line: line)
         trackForMemoryLeaks(loader, file: file, line: line)
         
@@ -72,4 +69,10 @@ class BeerListAPIEndToEndTests: XCTestCase {
         return receivedResult
     }
 
+    private func ephemeralClient(file: StaticString = #file, line: UInt = #line) -> HTTPClient {
+        let client = URLSessionHTTPClient(session: URLSession(configuration: .ephemeral))
+        trackForMemoryLeaks(client, file: file, line: line)
+        return client
+    }
+    
 }
