@@ -6,7 +6,7 @@
 //
 
 import XCTest
-@testable import BeerListiOS
+import BeerList
 
 class BeerListLocalizationTests: XCTestCase {
 

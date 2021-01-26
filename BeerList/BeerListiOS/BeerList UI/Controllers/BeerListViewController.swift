@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import BeerList
 
 protocol BeerListViewControllerDelegate {
     func didRequestBeerListRefresh()
@@ -27,11 +28,11 @@ final public class BeerListViewController: UITableViewController, UITableViewDat
         delegate?.didRequestBeerListRefresh()
     }
     
-    func display(_ viewModel: BeerListLoadingViewModel) {
+    public func display(_ viewModel: BeerListLoadingViewModel) {
         viewModel.isLoading ? refreshControl?.beginRefreshing() : refreshControl?.endRefreshing()
     }
     
-    func display(_ viewModel: BeerListErrorViewModel) {
+    public func display(_ viewModel: BeerListErrorViewModel) {
         errorView.message = viewModel.message
     }
     
