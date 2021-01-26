@@ -43,7 +43,8 @@
 		D28E5CB325BF850B006BEEFE /* BeerList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D28E5CB225BF850A006BEEFE /* BeerList.storyboard */; };
 		D28E5CC425BF8E72006BEEFE /* UITableView+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28E5CC325BF8E72006BEEFE /* UITableView+Helpers.swift */; };
 		D28E5CD025BF8F77006BEEFE /* UIImageView+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28E5CCF25BF8F77006BEEFE /* UIImageView+Helpers.swift */; };
-		D28E5CE625BF94F9006BEEFE /* BeerList.strings in Resources */ = {isa = PBXBuildFile; fileRef = D28E5CE525BF94F9006BEEFE /* BeerList.strings */; };
+		D28E5CEE25BF9600006BEEFE /* BeerListLocalizationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28E5CED25BF9600006BEEFE /* BeerListLocalizationTests.swift */; };
+		D28E5CF925BF96AD006BEEFE /* BeerList.strings in Resources */ = {isa = PBXBuildFile; fileRef = D28E5CFB25BF96AD006BEEFE /* BeerList.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -112,7 +113,8 @@
 		D28E5CB225BF850A006BEEFE /* BeerList.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = BeerList.storyboard; sourceTree = "<group>"; };
 		D28E5CC325BF8E72006BEEFE /* UITableView+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Helpers.swift"; sourceTree = "<group>"; };
 		D28E5CCF25BF8F77006BEEFE /* UIImageView+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Helpers.swift"; sourceTree = "<group>"; };
-		D28E5CE525BF94F9006BEEFE /* BeerList.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = BeerList.strings; sourceTree = "<group>"; };
+		D28E5CED25BF9600006BEEFE /* BeerListLocalizationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeerListLocalizationTests.swift; sourceTree = "<group>"; };
+		D28E5CFA25BF96AD006BEEFE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/BeerList.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -173,7 +175,7 @@
 				D209AD6B25BF4DB900956918 /* BeerListPresenter.swift */,
 				D28E5C8425BF6400006BEEFE /* BeerListViewModel.swift */,
 				D28E5C7D25BF63F3006BEEFE /* BeerListLoadingViewModel.swift */,
-				D28E5CE525BF94F9006BEEFE /* BeerList.strings */,
+				D28E5CFB25BF96AD006BEEFE /* BeerList.strings */,
 			);
 			path = "BeerList Presentation";
 			sourceTree = "<group>";
@@ -262,6 +264,7 @@
 		D232EFF425BE3BA300F272BB /* BeerListiOSTests */ = {
 			isa = PBXGroup;
 			children = (
+				D28E5CEC25BF95EC006BEEFE /* Presentation */,
 				D22E8C4925BF1EF500B1F606 /* Controllers */,
 				D232EFF725BE3BA300F272BB /* Info.plist */,
 			);
@@ -339,6 +342,14 @@
 				D232EF4325BDED5D00F272BB /* URLSessionHTTPClient.swift */,
 			);
 			path = "BeerList API";
+			sourceTree = "<group>";
+		};
+		D28E5CEC25BF95EC006BEEFE /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				D28E5CED25BF9600006BEEFE /* BeerListLocalizationTests.swift */,
+			);
+			path = Presentation;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -515,7 +526,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D28E5CE625BF94F9006BEEFE /* BeerList.strings in Resources */,
+				D28E5CF925BF96AD006BEEFE /* BeerList.strings in Resources */,
 				D28E5CB325BF850B006BEEFE /* BeerList.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -578,6 +589,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D232F01225BE42F900F272BB /* BeerListUIIntegrationsTests.swift in Sources */,
+				D28E5CEE25BF9600006BEEFE /* BeerListLocalizationTests.swift in Sources */,
 				D22E8C7A25BF207800B1F606 /* BeerListViewControllerTests+Assertions.swift in Sources */,
 				D22E8C6525BF1FB300B1F606 /* BeerListViewController+TestHelpers.swift in Sources */,
 				D22E8C3E25BF1E5900B1F606 /* UIControl+TestHelpers.swift in Sources */,
@@ -630,6 +642,17 @@
 			targetProxy = D256A39225BA47F10010C33F /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		D28E5CFB25BF96AD006BEEFE /* BeerList.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D28E5CFA25BF96AD006BEEFE /* en */,
+			);
+			name = BeerList.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		D232EF5425BDFD7300F272BB /* Debug */ = {
