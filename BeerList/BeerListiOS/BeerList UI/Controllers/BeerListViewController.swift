@@ -22,6 +22,12 @@ final public class BeerListViewController: UITableViewController, UITableViewDat
     public override func viewDidLoad() {
         super.viewDidLoad()
         refresh()
+        setupErrorView()
+    }
+    
+    private func setupErrorView() {
+        view.addSubview(errorView)
+        errorView.frame = view.frame
     }
     
     @IBAction func refresh() {
