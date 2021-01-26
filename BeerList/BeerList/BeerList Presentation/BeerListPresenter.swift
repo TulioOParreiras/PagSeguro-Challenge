@@ -15,14 +15,6 @@ public protocol BeerListLoadingView {
     func display(_ viewModel: BeerListLoadingViewModel)
 }
 
-public struct BeerListErrorViewModel {
-    public let message: String?
-    
-    public static var noError: BeerListErrorViewModel {
-        return BeerListErrorViewModel(message: nil)
-    }
-}
-
 public protocol BeerListErrorView {
     func display(_ viewModel: BeerListErrorViewModel)
 }
