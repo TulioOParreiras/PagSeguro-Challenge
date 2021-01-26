@@ -11,10 +11,6 @@ public protocol BeerListView {
     func display(_ viewModel: BeerListViewModel)
 }
 
-public struct BeerListLoadingViewModel {
-    public let isLoading: Bool
-}
-
 public protocol BeerListLoadingView {
     func display(_ viewModel: BeerListLoadingViewModel)
 }
