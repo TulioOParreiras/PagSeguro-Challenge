@@ -36,28 +36,6 @@ private extension BeerListViewController {
     }
 }
 
-final class BeerListLoaderPresentationAdapter: BeerListViewControllerDelegate {
-    private let beerListLoader: BeerListLoader
-    var presenter: BeerListPresenter?
-    
-    init(beerListLoader: BeerListLoader) {
-        self.beerListLoader = beerListLoader
-    }
-    
-    func didRequestBeerListRefresh() {
-        presenter?.didStartLoadingBeerList()
-        
-        beerListLoader.load { [weak self] result in
-            switch result {
-            case let .success(beerList):
-                self?.presenter?.didFinishLoadingBeerList(with: beerList)
-            case let .failure(error):
-                self?.presenter?.didFinishLoadingBeerList(with: error)
-            }
-        }
-    }
-}
-
 final class BeerDataLoaderPresentationAdapter<View: BeerView, Image>: BeerCellControllerDelegate where View.Image == Image {
     private let model: Beer
     private let imageLoader: BeerImageDataLoader
