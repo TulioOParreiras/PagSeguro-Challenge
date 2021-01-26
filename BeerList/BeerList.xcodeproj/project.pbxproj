@@ -59,6 +59,7 @@
 		D2BA5B3B25C03B8500912BD9 /* HTTPClientSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BA5B3A25C03B8500912BD9 /* HTTPClientSpy.swift */; };
 		D2BA5B4225C03BC700912BD9 /* RemoteBeerImageDataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BA5B4125C03BC700912BD9 /* RemoteBeerImageDataLoader.swift */; };
 		D2BA5B4A25C03ECF00912BD9 /* HTTPURLResponse+StatusCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BA5B4925C03ECF00912BD9 /* HTTPURLResponse+StatusCode.swift */; };
+		D2BA5B5725C03F4400912BD9 /* URLProtocolStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BA5B5625C03F4400912BD9 /* URLProtocolStub.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -144,6 +145,7 @@
 		D2BA5B3A25C03B8500912BD9 /* HTTPClientSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClientSpy.swift; sourceTree = "<group>"; };
 		D2BA5B4125C03BC700912BD9 /* RemoteBeerImageDataLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteBeerImageDataLoader.swift; sourceTree = "<group>"; };
 		D2BA5B4925C03ECF00912BD9 /* HTTPURLResponse+StatusCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HTTPURLResponse+StatusCode.swift"; sourceTree = "<group>"; };
+		D2BA5B5625C03F4400912BD9 /* URLProtocolStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLProtocolStub.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -388,6 +390,7 @@
 		D2740A4B25C0342800EFBE6F /* API */ = {
 			isa = PBXGroup;
 			children = (
+				D2BA5B5525C03F3E00912BD9 /* Helpers */,
 				D2740A4C25C0343700EFBE6F /* RemoteBeerImageDataLoaderTests.swift */,
 				D256A3B825BA4DDE0010C33F /* RemoteBeerListLoaderTests.swift */,
 				D251F0A325BB992C003FED5F /* URLSessionHTTPClientTests.swift */,
@@ -399,6 +402,14 @@
 			isa = PBXGroup;
 			children = (
 				D2BA5B4925C03ECF00912BD9 /* HTTPURLResponse+StatusCode.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		D2BA5B5525C03F3E00912BD9 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				D2BA5B5625C03F4400912BD9 /* URLProtocolStub.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -686,6 +697,7 @@
 				D2740A0025C02A5B00EFBE6F /* BeerListLocalizationTests.swift in Sources */,
 				D2BA5B3B25C03B8500912BD9 /* HTTPClientSpy.swift in Sources */,
 				D251F0A425BB992C003FED5F /* URLSessionHTTPClientTests.swift in Sources */,
+				D2BA5B5725C03F4400912BD9 /* URLProtocolStub.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
