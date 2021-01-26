@@ -7,11 +7,16 @@
 
 import UIKit
 
+final public class ErrorView: UIView {
+    public var message: String?
+}
+
 protocol BeerListViewControllerDelegate {
     func didRequestBeerListRefresh()
 }
 
 final public class BeerListViewController: UITableViewController, UITableViewDataSourcePrefetching, BeerListLoadingView {
+    public let errorView = ErrorView()
     var tableModel: [BeerCellController] = [] {
         didSet { tableView.reloadData() }
     }
