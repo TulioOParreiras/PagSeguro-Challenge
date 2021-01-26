@@ -7,22 +7,27 @@
 
 import UIKit
 
-final public class BeerListViewController: UITableViewController, UITableViewDataSourcePrefetching {
-    private var refreshController: BeerListRefreshViewController?
+protocol BeerListViewControllerDelegate {
+    func didRequestBeerListRefresh()
+}
+
+final public class BeerListViewController: UITableViewController, UITableViewDataSourcePrefetching, BeerListLoadingView {
     var tableModel: [BeerCellController] = [] {
         didSet { tableView.reloadData() }
     }
-    
-    public convenience init(refreshController: BeerListRefreshViewController) {
-        self.init()
-        self.refreshController = refreshController
-    }
+    var delegate: BeerListViewControllerDelegate?
     
     public override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.refreshControl = refreshController?.view
-        tableView.prefetchDataSource = self
-        refreshController?.refresh()
+        refresh()
+    }
+    
+    @IBAction func refresh() {
+        delegate?.didRequestBeerListRefresh()
+    }
+    
+    func display(_ viewModel: BeerListLoadingViewModel) {
+        viewModel.isLoading ? refreshControl?.beginRefreshing() : refreshControl?.endRefreshing()
     }
     
     public override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -30,7 +35,7 @@ final public class BeerListViewController: UITableViewController, UITableViewDat
     }
     
     public override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return cellController(forRowAt: indexPath).view()
+        return cellController(forRowAt: indexPath).view(tableView)
     }
     
     public override func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
