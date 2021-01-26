@@ -1,5 +1,5 @@
 //
-//  RemoteBeerImageDataLoaderTests.swift
+//  LoadBeerImageDataFromRemoteUseCaseTests.swift
 //  BeerListTests
 //
 //  Created by Tulio Parreiras on 26/01/21.
@@ -8,7 +8,7 @@
 import XCTest
 import BeerList
 
-class RemoteBeerImageDataLoaderTests: XCTestCase {
+class LoadBeerImageDataFromRemoteUseCaseTests: XCTestCase {
 
     func test_init_doesNotPerformAnyURLRequest() {
         let (_, client) = makeSUT()
