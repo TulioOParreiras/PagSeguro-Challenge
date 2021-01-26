@@ -3,6 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -126,8 +127,32 @@
                             <action selector="refresh" destination="l1Q-zP-kDQ" eventType="valueChanged" id="A4T-NK-IQN"/>
                         </connections>
                     </refreshControl>
+                    <connections>
+                        <outlet property="errorView" destination="MYj-fB-fxo" id="qVq-H4-Fkr"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9zf-PK-hxJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <view contentMode="scaleToFill" id="MYj-fB-fxo" customClass="ErrorView" customModule="BeerListiOS" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="414"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M1E-Nb-yIW">
+                            <rect key="frame" x="186" y="196.5" width="42" height="21"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <viewLayoutGuide key="safeArea" id="Syj-eY-o5c"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstItem="M1E-Nb-yIW" firstAttribute="centerY" secondItem="MYj-fB-fxo" secondAttribute="centerY" id="DJw-Z9-2yD"/>
+                        <constraint firstItem="M1E-Nb-yIW" firstAttribute="centerX" secondItem="MYj-fB-fxo" secondAttribute="centerX" id="dVG-pU-d8m"/>
+                    </constraints>
+                    <connections>
+                        <outlet property="label" destination="M1E-Nb-yIW" id="ZW5-em-Iak"/>
+                    </connections>
+                </view>
             </objects>
             <point key="canvasLocation" x="-965.21739130434787" y="35.491071428571423"/>
         </scene>

@@ -62,4 +62,8 @@ extension BeerListViewController {
     private var beerCellsSection: Int {
         return 0
     }
+    
+    var errorMessage: String? {
+        return errorView.message
+    }
 }
