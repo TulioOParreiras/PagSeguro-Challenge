@@ -1,5 +1,5 @@
 //
-//  BeerListViewControllerTests.swift
+//  BeerListUIIntegrationsTests.swift
 //  BeerListiOSTests
 //
 //  Created by Tulio Parreiras on 24/01/21.
@@ -9,7 +9,7 @@ import XCTest
 import BeerListiOS
 import BeerList
 
-class BeerListViewControllerTests: XCTestCase {
+class BeerListUIIntegrationsTests: XCTestCase {
 
     func test_loadBeerListActions_requestBeerListFromLoader() {
         let (sut, loader) = makeSUT()
