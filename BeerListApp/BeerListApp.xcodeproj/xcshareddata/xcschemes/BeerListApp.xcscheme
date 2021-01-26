@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D256A38625BA47F10010C33F"
-               BuildableName = "BeerList.framework"
-               BlueprintName = "BeerList"
-               ReferencedContainer = "container:BeerList.xcodeproj">
+               BlueprintIdentifier = "D2BA5B7425C0445400912BD9"
+               BuildableName = "BeerListApp.app"
+               BlueprintName = "BeerListApp"
+               ReferencedContainer = "container:BeerListApp.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -32,24 +32,10 @@
       <CodeCoverageTargets>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "D256A38625BA47F10010C33F"
-            BuildableName = "BeerList.framework"
-            BlueprintName = "BeerList"
-            ReferencedContainer = "container:BeerList.xcodeproj">
-         </BuildableReference>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "D232EFE725BE3BA200F272BB"
-            BuildableName = "BeerListiOS.framework"
-            BlueprintName = "BeerListiOS"
-            ReferencedContainer = "container:BeerList.xcodeproj">
-         </BuildableReference>
-         <BuildableReference
-            BuildableIdentifier = "primary"
             BlueprintIdentifier = "D2BA5B7425C0445400912BD9"
             BuildableName = "BeerListApp.app"
             BlueprintName = "BeerListApp"
-            ReferencedContainer = "container:../BeerListApp/BeerListApp.xcodeproj">
+            ReferencedContainer = "container:BeerListApp.xcodeproj">
          </BuildableReference>
       </CodeCoverageTargets>
       <Testables>
@@ -58,43 +44,21 @@
             testExecutionOrdering = "random">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D232EF4A25BDFD7300F272BB"
-               BuildableName = "BeerListAPIEndToEndTests.xctest"
-               BlueprintName = "BeerListAPIEndToEndTests"
-               ReferencedContainer = "container:BeerList.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO"
-            testExecutionOrdering = "random">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D256A38F25BA47F10010C33F"
-               BuildableName = "BeerListTests.xctest"
-               BlueprintName = "BeerListTests"
-               ReferencedContainer = "container:BeerList.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO"
-            testExecutionOrdering = "random">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D232EFEF25BE3BA300F272BB"
-               BuildableName = "BeerListiOSTests.xctest"
-               BlueprintName = "BeerListiOSTests"
-               ReferencedContainer = "container:BeerList.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO"
-            testExecutionOrdering = "random">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D2BA5C5B25C04F9A00912BD9"
+               BlueprintIdentifier = "D2BA5B8A25C0445700912BD9"
                BuildableName = "BeerListAppTests.xctest"
                BlueprintName = "BeerListAppTests"
-               ReferencedContainer = "container:../BeerListApp/BeerListApp.xcodeproj">
+               ReferencedContainer = "container:BeerListApp.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            testExecutionOrdering = "random">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "D2BA5B9525C0445700912BD9"
+               BuildableName = "BeerListAppUITests.xctest"
+               BlueprintName = "BeerListAppUITests"
+               ReferencedContainer = "container:BeerListApp.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -109,6 +73,16 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "D2BA5B7425C0445400912BD9"
+            BuildableName = "BeerListApp.app"
+            BlueprintName = "BeerListApp"
+            ReferencedContainer = "container:BeerListApp.xcodeproj">
+         </BuildableReference>
+      </BuildableProductRunnable>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
@@ -116,15 +90,16 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <MacroExpansion>
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "D256A38625BA47F10010C33F"
-            BuildableName = "BeerList.framework"
-            BlueprintName = "BeerList"
-            ReferencedContainer = "container:BeerList.xcodeproj">
+            BlueprintIdentifier = "D2BA5B7425C0445400912BD9"
+            BuildableName = "BeerListApp.app"
+            BlueprintName = "BeerListApp"
+            ReferencedContainer = "container:BeerListApp.xcodeproj">
          </BuildableReference>
-      </MacroExpansion>
+      </BuildableProductRunnable>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

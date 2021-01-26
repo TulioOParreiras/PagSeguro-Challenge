@@ -13,29 +13,14 @@
 		D2BA5B8025C0445400912BD9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D2BA5B7E25C0445400912BD9 /* Main.storyboard */; };
 		D2BA5B8225C0445700912BD9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D2BA5B8125C0445700912BD9 /* Assets.xcassets */; };
 		D2BA5B8525C0445700912BD9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D2BA5B8325C0445700912BD9 /* LaunchScreen.storyboard */; };
-		D2BA5B9025C0445700912BD9 /* BeerListAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BA5B8F25C0445700912BD9 /* BeerListAppTests.swift */; };
-		D2BA5B9B25C0445700912BD9 /* BeerListAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BA5B9A25C0445700912BD9 /* BeerListAppUITests.swift */; };
 		D2BA5BB325C0454C00912BD9 /* BeerList.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2BA5BB125C0454C00912BD9 /* BeerList.framework */; };
 		D2BA5BB425C0454C00912BD9 /* BeerList.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D2BA5BB125C0454C00912BD9 /* BeerList.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D2BA5BB525C0454C00912BD9 /* BeerListiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2BA5BB225C0454C00912BD9 /* BeerListiOS.framework */; };
 		D2BA5BB625C0454C00912BD9 /* BeerListiOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D2BA5BB225C0454C00912BD9 /* BeerListiOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D2BA5C6F25C04FD100912BD9 /* BeerListAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BA5C6E25C04FD100912BD9 /* BeerListAppTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		D2BA5B8C25C0445700912BD9 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D2BA5B6D25C0445400912BD9 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = D2BA5B7425C0445400912BD9;
-			remoteInfo = BeerListApp;
-		};
-		D2BA5B9725C0445700912BD9 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D2BA5B6D25C0445400912BD9 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = D2BA5B7425C0445400912BD9;
-			remoteInfo = BeerListApp;
-		};
 		D2BA5BEC25C0496700912BD9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D2BA5BE425C0496700912BD9 /* BeerList.xcodeproj */;
@@ -71,6 +56,13 @@
 			remoteGlobalIDString = D232EFF025BE3BA300F272BB;
 			remoteInfo = BeerListiOSTests;
 		};
+		D2BA5C6125C04F9A00912BD9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D2BA5B6D25C0445400912BD9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D2BA5B7425C0445400912BD9;
+			remoteInfo = BeerListApp;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -97,15 +89,12 @@
 		D2BA5B8125C0445700912BD9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D2BA5B8425C0445700912BD9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D2BA5B8625C0445700912BD9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D2BA5B8B25C0445700912BD9 /* BeerListAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BeerListAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		D2BA5B8F25C0445700912BD9 /* BeerListAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeerListAppTests.swift; sourceTree = "<group>"; };
-		D2BA5B9125C0445700912BD9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D2BA5B9625C0445700912BD9 /* BeerListAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BeerListAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		D2BA5B9A25C0445700912BD9 /* BeerListAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeerListAppUITests.swift; sourceTree = "<group>"; };
-		D2BA5B9C25C0445700912BD9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D2BA5BB125C0454C00912BD9 /* BeerList.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = BeerList.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2BA5BB225C0454C00912BD9 /* BeerListiOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = BeerListiOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2BA5BE425C0496700912BD9 /* BeerList.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = BeerList.xcodeproj; path = ../BeerList/BeerList.xcodeproj; sourceTree = "<group>"; };
+		D2BA5C5C25C04F9A00912BD9 /* BeerListAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BeerListAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D2BA5C6025C04F9A00912BD9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D2BA5C6E25C04FD100912BD9 /* BeerListAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeerListAppTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,14 +107,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D2BA5B8825C0445700912BD9 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		D2BA5B9325C0445700912BD9 /* Frameworks */ = {
+		D2BA5C5925C04F9A00912BD9 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -139,8 +121,7 @@
 			isa = PBXGroup;
 			children = (
 				D2BA5B7725C0445400912BD9 /* BeerListApp */,
-				D2BA5B8E25C0445700912BD9 /* BeerListAppTests */,
-				D2BA5B9925C0445700912BD9 /* BeerListAppUITests */,
+				D2BA5C5D25C04F9A00912BD9 /* BeerListAppTests */,
 				D2BA5B7625C0445400912BD9 /* Products */,
 				D2BA5BB025C0454B00912BD9 /* Frameworks */,
 			);
@@ -150,8 +131,7 @@
 			isa = PBXGroup;
 			children = (
 				D2BA5B7525C0445400912BD9 /* BeerListApp.app */,
-				D2BA5B8B25C0445700912BD9 /* BeerListAppTests.xctest */,
-				D2BA5B9625C0445700912BD9 /* BeerListAppUITests.xctest */,
+				D2BA5C5C25C04F9A00912BD9 /* BeerListAppTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -168,24 +148,6 @@
 				D2BA5B8625C0445700912BD9 /* Info.plist */,
 			);
 			path = BeerListApp;
-			sourceTree = "<group>";
-		};
-		D2BA5B8E25C0445700912BD9 /* BeerListAppTests */ = {
-			isa = PBXGroup;
-			children = (
-				D2BA5B8F25C0445700912BD9 /* BeerListAppTests.swift */,
-				D2BA5B9125C0445700912BD9 /* Info.plist */,
-			);
-			path = BeerListAppTests;
-			sourceTree = "<group>";
-		};
-		D2BA5B9925C0445700912BD9 /* BeerListAppUITests */ = {
-			isa = PBXGroup;
-			children = (
-				D2BA5B9A25C0445700912BD9 /* BeerListAppUITests.swift */,
-				D2BA5B9C25C0445700912BD9 /* Info.plist */,
-			);
-			path = BeerListAppUITests;
 			sourceTree = "<group>";
 		};
 		D2BA5BB025C0454B00912BD9 /* Frameworks */ = {
@@ -210,6 +172,15 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		D2BA5C5D25C04F9A00912BD9 /* BeerListAppTests */ = {
+			isa = PBXGroup;
+			children = (
+				D2BA5C6E25C04FD100912BD9 /* BeerListAppTests.swift */,
+				D2BA5C6025C04F9A00912BD9 /* Info.plist */,
+			);
+			path = BeerListAppTests;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -231,41 +202,23 @@
 			productReference = D2BA5B7525C0445400912BD9 /* BeerListApp.app */;
 			productType = "com.apple.product-type.application";
 		};
-		D2BA5B8A25C0445700912BD9 /* BeerListAppTests */ = {
+		D2BA5C5B25C04F9A00912BD9 /* BeerListAppTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D2BA5BA225C0445700912BD9 /* Build configuration list for PBXNativeTarget "BeerListAppTests" */;
+			buildConfigurationList = D2BA5C6325C04F9A00912BD9 /* Build configuration list for PBXNativeTarget "BeerListAppTests" */;
 			buildPhases = (
-				D2BA5B8725C0445700912BD9 /* Sources */,
-				D2BA5B8825C0445700912BD9 /* Frameworks */,
-				D2BA5B8925C0445700912BD9 /* Resources */,
+				D2BA5C5825C04F9A00912BD9 /* Sources */,
+				D2BA5C5925C04F9A00912BD9 /* Frameworks */,
+				D2BA5C5A25C04F9A00912BD9 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				D2BA5B8D25C0445700912BD9 /* PBXTargetDependency */,
+				D2BA5C6225C04F9A00912BD9 /* PBXTargetDependency */,
 			);
 			name = BeerListAppTests;
 			productName = BeerListAppTests;
-			productReference = D2BA5B8B25C0445700912BD9 /* BeerListAppTests.xctest */;
+			productReference = D2BA5C5C25C04F9A00912BD9 /* BeerListAppTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		D2BA5B9525C0445700912BD9 /* BeerListAppUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = D2BA5BA525C0445700912BD9 /* Build configuration list for PBXNativeTarget "BeerListAppUITests" */;
-			buildPhases = (
-				D2BA5B9225C0445700912BD9 /* Sources */,
-				D2BA5B9325C0445700912BD9 /* Frameworks */,
-				D2BA5B9425C0445700912BD9 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				D2BA5B9825C0445700912BD9 /* PBXTargetDependency */,
-			);
-			name = BeerListAppUITests;
-			productName = BeerListAppUITests;
-			productReference = D2BA5B9625C0445700912BD9 /* BeerListAppUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
 
@@ -279,12 +232,9 @@
 					D2BA5B7425C0445400912BD9 = {
 						CreatedOnToolsVersion = 12.2;
 					};
-					D2BA5B8A25C0445700912BD9 = {
+					D2BA5C5B25C04F9A00912BD9 = {
 						CreatedOnToolsVersion = 12.2;
-						TestTargetID = D2BA5B7425C0445400912BD9;
-					};
-					D2BA5B9525C0445700912BD9 = {
-						CreatedOnToolsVersion = 12.2;
+						LastSwiftMigration = 1220;
 						TestTargetID = D2BA5B7425C0445400912BD9;
 					};
 				};
@@ -309,8 +259,7 @@
 			projectRoot = "";
 			targets = (
 				D2BA5B7425C0445400912BD9 /* BeerListApp */,
-				D2BA5B8A25C0445700912BD9 /* BeerListAppTests */,
-				D2BA5B9525C0445700912BD9 /* BeerListAppUITests */,
+				D2BA5C5B25C04F9A00912BD9 /* BeerListAppTests */,
 			);
 		};
 /* End PBXProject section */
@@ -364,14 +313,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D2BA5B8925C0445700912BD9 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		D2BA5B9425C0445700912BD9 /* Resources */ = {
+		D2BA5C5A25C04F9A00912BD9 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -391,34 +333,21 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D2BA5B8725C0445700912BD9 /* Sources */ = {
+		D2BA5C5825C04F9A00912BD9 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D2BA5B9025C0445700912BD9 /* BeerListAppTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		D2BA5B9225C0445700912BD9 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				D2BA5B9B25C0445700912BD9 /* BeerListAppUITests.swift in Sources */,
+				D2BA5C6F25C04FD100912BD9 /* BeerListAppTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		D2BA5B8D25C0445700912BD9 /* PBXTargetDependency */ = {
+		D2BA5C6225C04F9A00912BD9 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = D2BA5B7425C0445400912BD9 /* BeerListApp */;
-			targetProxy = D2BA5B8C25C0445700912BD9 /* PBXContainerItemProxy */;
-		};
-		D2BA5B9825C0445700912BD9 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = D2BA5B7425C0445400912BD9 /* BeerListApp */;
-			targetProxy = D2BA5B9725C0445700912BD9 /* PBXContainerItemProxy */;
+			targetProxy = D2BA5C6125C04F9A00912BD9 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -596,15 +525,36 @@
 			};
 			name = Release;
 		};
-		D2BA5BA325C0445700912BD9 /* Debug */ = {
+		D2BA5C6425C04F9A00912BD9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 9QRTB5MNL3;
 				INFOPLIST_FILE = BeerListAppTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = br.com.tulioparreiras.BeerListAppTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BeerListApp.app/BeerListApp";
+			};
+			name = Debug;
+		};
+		D2BA5C6525C04F9A00912BD9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 9QRTB5MNL3;
+				INFOPLIST_FILE = BeerListAppTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -615,68 +565,6 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BeerListApp.app/BeerListApp";
-			};
-			name = Debug;
-		};
-		D2BA5BA425C0445700912BD9 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 9QRTB5MNL3;
-				INFOPLIST_FILE = BeerListAppTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = br.com.tulioparreiras.BeerListAppTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BeerListApp.app/BeerListApp";
-			};
-			name = Release;
-		};
-		D2BA5BA625C0445700912BD9 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 9QRTB5MNL3;
-				INFOPLIST_FILE = BeerListAppUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = br.com.tulioparreiras.BeerListAppUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = BeerListApp;
-			};
-			name = Debug;
-		};
-		D2BA5BA725C0445700912BD9 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 9QRTB5MNL3;
-				INFOPLIST_FILE = BeerListAppUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = br.com.tulioparreiras.BeerListAppUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = BeerListApp;
 			};
 			name = Release;
 		};
@@ -701,20 +589,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D2BA5BA225C0445700912BD9 /* Build configuration list for PBXNativeTarget "BeerListAppTests" */ = {
+		D2BA5C6325C04F9A00912BD9 /* Build configuration list for PBXNativeTarget "BeerListAppTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				D2BA5BA325C0445700912BD9 /* Debug */,
-				D2BA5BA425C0445700912BD9 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		D2BA5BA525C0445700912BD9 /* Build configuration list for PBXNativeTarget "BeerListAppUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				D2BA5BA625C0445700912BD9 /* Debug */,
-				D2BA5BA725C0445700912BD9 /* Release */,
+				D2BA5C6425C04F9A00912BD9 /* Debug */,
+				D2BA5C6525C04F9A00912BD9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

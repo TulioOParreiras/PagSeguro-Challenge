@@ -6,7 +6,6 @@
 //
 
 import XCTest
-@testable import BeerListApp
 
 class BeerListAppTests: XCTestCase {
 

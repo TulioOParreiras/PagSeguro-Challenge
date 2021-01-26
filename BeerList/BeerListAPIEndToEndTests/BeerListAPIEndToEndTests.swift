@@ -53,7 +53,7 @@ class BeerListAPIEndToEndTests: XCTestCase {
     
     private func getBeerImageDataResult(file: StaticString = #file, line: UInt = #line) -> BeerImageDataLoader.Result? {
         let testServerURL = URL(string: "https://images.punkapi.com/v2/keg.png")!
-        let loader = RemoteBeerListLoader(url: testServerURL, client: ephemeralClient(file: file, line: line))
+        let loader = RemoteBeerImageDataLoader(client: ephemeralClient(file: file, line: line))
         trackForMemoryLeaks(loader, file: file, line: line)
         
         let exp = expectation(description: "Wait for load completion")
