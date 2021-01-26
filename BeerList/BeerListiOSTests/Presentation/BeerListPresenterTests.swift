@@ -16,14 +16,20 @@ final class BeerListPresenter {
 class BeerListPresenterTests: XCTestCase {
 
     func test_init_doesNotSendMessagesToView() {
-        let view = ViewSpy()
-
-        _ = BeerListPresenter(view: view)
+        let (_, view) = makeSUT()
 
         XCTAssertTrue(view.messages.isEmpty, "Expected no view messages")
     }
     
     // MARK: - Helpers
+    
+    private func makeSUT(file: StaticString = #file, line: UInt = #line) -> (sut: BeerListPresenter, view: ViewSpy) {
+        let view = ViewSpy()
+        let sut = BeerListPresenter(view: view)
+        trackForMemoryLeaks(view, file: file, line: line)
+        trackForMemoryLeaks(sut, file: file, line: line)
+        return (sut, view)
+    }
 
     private class ViewSpy {
         let messages = [Any]()
