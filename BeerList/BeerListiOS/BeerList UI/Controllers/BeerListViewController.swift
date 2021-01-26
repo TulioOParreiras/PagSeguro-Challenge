@@ -16,7 +16,7 @@ protocol BeerListViewControllerDelegate {
 }
 
 final public class BeerListViewController: UITableViewController, UITableViewDataSourcePrefetching, BeerListLoadingView, BeerListErrorView {
-    public let errorView = ErrorView()
+    @IBOutlet private(set) public var errorView: ErrorView!
     var tableModel: [BeerCellController] = [] {
         didSet { tableView.reloadData() }
     }

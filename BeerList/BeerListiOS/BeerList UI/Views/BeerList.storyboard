@@ -127,6 +127,9 @@
                             <action selector="refresh" destination="l1Q-zP-kDQ" eventType="valueChanged" id="A4T-NK-IQN"/>
                         </connections>
                     </refreshControl>
+                    <connections>
+                        <outlet property="errorView" destination="MYj-fB-fxo" id="8tj-OU-I56"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9zf-PK-hxJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <view contentMode="scaleToFill" id="MYj-fB-fxo" customClass="BeerListFailureView" customModule="BeerListiOS" customModuleProvider="target">
