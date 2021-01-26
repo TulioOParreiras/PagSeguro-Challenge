@@ -9,6 +9,10 @@ import XCTest
 import BeerList
 
 class BeerListPresenterTests: XCTestCase {
+    
+    func test_title_isLocalized() {
+        XCTAssertEqual(BeerListPresenter.title, localized("BEER_LIST_VIEW_TITLE"))
+    }
 
     func test_init_doesNotSendMessagesToView() {
         let (_, view) = makeSUT()

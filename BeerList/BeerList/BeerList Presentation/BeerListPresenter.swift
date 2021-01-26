@@ -24,6 +24,13 @@ public final class BeerListPresenter {
     private let loadingView: BeerListLoadingView
     private let errorView: BeerListErrorView
     
+    public static var title: String {
+        return NSLocalizedString("BEER_LIST_VIEW_TITLE",
+                                 tableName: "BeerList",
+                                 bundle: Bundle(for: BeerListPresenter.self),
+                                 comment: "Title for the beer list view")
+    }
+    
     private var beerListLoadError: String {
         return NSLocalizedString("BEER_LIST_CONNECTION_ERROR",
                                  tableName: "BeerList",
