@@ -27,6 +27,14 @@ class BeerListSnapshotTests: XCTestCase {
         record(snapshot: sut.snapshot(), named: "BEER_LIST_WITH_CONTENT")
     }
     
+    func test_beerListWithErrorMessage() {
+        let sut = makeSUT()
+        
+        sut.display(.error(message: "This is a really long error message text to check how the view\nhandles multi-line\ntexts"))
+        
+        record(snapshot: sut.snapshot(), named: "BEER_LIST_WITH_ERROR_MESSAAGE")
+    }
+    
     // MARK: - Helpers
     
     private func makeSUT() -> BeerListViewController {
