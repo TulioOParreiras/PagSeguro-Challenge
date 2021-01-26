@@ -59,6 +59,15 @@ class BeerPresenter<View: BeerView, Image> where View.Image == Image {
                         isLoading: false,
                         shouldRetry: image == nil))
     }
+    
+    func didFinishLoadingImageData(with error: Error, for model: Beer) {
+        view.display(BeerViewModel(
+                        name: model.name,
+                        ibuValue: model.ibu,
+                        image: nil,
+                        isLoading: false,
+                        shouldRetry: true))
+    }
 }
 
 class BeerPresenterTests: XCTestCase {
@@ -117,6 +126,21 @@ class BeerPresenterTests: XCTestCase {
         XCTAssertEqual(message?.image, transformedData)
     }
     
+    func test_didFinishLoadingImageDataWithError_displaysRetry() {
+        let beer = makeBeer()
+        let (sut, view) = makeSUT()
+        
+        sut.didFinishLoadingImageData(with: anyNSError(), for: beer)
+        
+        let message = view.messages.first
+        XCTAssertEqual(view.messages.count, 1)
+        XCTAssertEqual(message?.name, beer.name)
+        XCTAssertEqual(message?.ibuValue, beer.ibu)
+        XCTAssertEqual(message?.isLoading, false)
+        XCTAssertEqual(message?.shouldRetry, true)
+        XCTAssertNil(message?.image)
+    }
+    
     // MARK: - Helpers
     
     private func makeSUT(
@@ -132,6 +156,10 @@ class BeerPresenterTests: XCTestCase {
     
     func makeBeer(name: String = "A name", imageURL: URL = URL(string: "https://a-url.com")!, ibu: Double? = nil) -> Beer {
         return Beer(id: Int.random(in: 0...100), name: name, tagline: "a tagline", description: "a description", imageURL: imageURL, abv: Double.random(in: 1...10), ibu: ibu)
+    }
+    
+    func anyNSError() -> NSError {
+        return NSError(domain: "a error", code: 1)
     }
     
     private var fail: (Data) -> AnyImage? {
