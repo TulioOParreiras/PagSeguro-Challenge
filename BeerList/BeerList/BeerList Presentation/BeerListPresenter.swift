@@ -7,10 +7,6 @@
 
 import Foundation
 
-public struct BeerListViewModel {
-    public let beerList: [Beer]
-}
-
 public protocol BeerListView {
     func display(_ viewModel: BeerListViewModel)
 }
