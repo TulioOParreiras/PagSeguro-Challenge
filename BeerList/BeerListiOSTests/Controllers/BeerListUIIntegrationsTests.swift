@@ -96,7 +96,7 @@ class BeerListUIIntegrationsTests: XCTestCase {
         assertThat(sut, isRendering: [beer0])
     }
     
-    func test_loadFeedCompletion_rendersErrorMessageOnErrorUntilNextReload() {
+    func test_loadBeerListCompletion_rendersErrorMessageOnErrorUntilNextReload() {
         let (sut, loader) = makeSUT()
         
         sut.loadViewIfNeeded()

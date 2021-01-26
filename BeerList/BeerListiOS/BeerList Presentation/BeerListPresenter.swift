@@ -18,6 +18,15 @@ protocol BeerListView {
 
 struct BeerListErrorViewModel {
     let message: String?
+    
+    static var noError: BeerListErrorViewModel {
+        return BeerListErrorViewModel(message: nil)
+    }
+    
+    static func error(message: String) -> BeerListErrorViewModel {
+        return BeerListErrorViewModel(message: message)
+    }
+
 }
 
 protocol BeerListErrorView {
@@ -50,7 +59,7 @@ final class BeerListPresenter {
     }
     
     func didStartLoadingBeerList() {
-        errorView.display(BeerListErrorViewModel(message: nil))
+        errorView.display(.noError)
         loadingView.display(BeerListLoadingViewModel(isLoading: true))
     }
     
@@ -60,7 +69,7 @@ final class BeerListPresenter {
     }
     
     func didFinishLoadingBeerList(with error: Error) {
-        errorView.display(BeerListErrorViewModel(message: beerListLoadError))
+        errorView.display(.error(message: beerListLoadError))
         loadingView.display(BeerListLoadingViewModel(isLoading: false))
     }
 }
