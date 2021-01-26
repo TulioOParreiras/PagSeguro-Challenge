@@ -24,6 +24,13 @@ public final class BeerListPresenter {
     private let loadingView: BeerListLoadingView
     private let errorView: BeerListErrorView
     
+    private var beerListLoadError: String {
+        return NSLocalizedString("BEER_LIST_CONNECTION_ERROR",
+                                 tableName: "BeerList",
+                                 bundle: Bundle(for: BeerListPresenter.self),
+                                 comment: "Error message presented when the beer list load from server fail")
+    }
+    
     public init(beerListView: BeerListView, loadingView: BeerListLoadingView,errorView: BeerListErrorView) {
         self.beerListView = beerListView
         self.loadingView = loadingView
@@ -37,6 +44,11 @@ public final class BeerListPresenter {
     
     public func didFinishLoadingBeerList(with beerList: [Beer]) {
         beerListView.display(BeerListViewModel(beerList: beerList))
+        loadingView.display(BeerListLoadingViewModel(isLoading: false))
+    }
+    
+    public func didFinishLoadingBeerList(with error: Error) {
+        errorView.display(.error(message: beerListLoadError))
         loadingView.display(BeerListLoadingViewModel(isLoading: false))
     }
 }

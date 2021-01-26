@@ -13,4 +13,8 @@ public struct BeerListErrorViewModel {
     public static var noError: BeerListErrorViewModel {
         return BeerListErrorViewModel(message: nil)
     }
+    
+    public static func error(message: String) -> BeerListErrorViewModel {
+        return BeerListErrorViewModel(message: message)
+    }
 }

@@ -39,6 +39,17 @@ class BeerListPresenterTests: XCTestCase {
         ])
     }
     
+    func test_didFinishLoadingBeerListWithError_displaysLocalizedErrorMessageAndStopsLoading() {
+        let (sut, view) = makeSUT()
+        
+        sut.didFinishLoadingBeerList(with: anyNSError())
+        
+        XCTAssertEqual(view.messages, [
+            .display(errorMessage: localized("BEER_LIST_CONNECTION_ERROR")),
+            .display(isLoading: false)
+        ])
+    }
+    
     // MARK: - Helpers
     
     private func makeSUT(file: StaticString = #file, line: UInt = #line) -> (sut: BeerListPresenter, view: ViewSpy) {
@@ -51,6 +62,20 @@ class BeerListPresenterTests: XCTestCase {
     
     func makeBeer(name: String = "A name", imageURL: URL = URL(string: "https://a-url.com")!, ibu: Double? = nil) -> Beer {
         return Beer(id: Int.random(in: 0...100), name: name, tagline: "a tagline", description: "a description", imageURL: imageURL, abv: Double.random(in: 1...10), ibu: ibu)
+    }
+    
+    func anyNSError() -> NSError {
+        return NSError(domain: "A domain", code: 1)
+    }
+
+    private func localized(_ key: String, file: StaticString = #file, line: UInt = #line) -> String {
+        let table = "BeerList"
+        let bundle = Bundle(for: BeerListPresenter.self)
+        let value = bundle.localizedString(forKey: key, value: nil, table: table)
+        if value == key {
+            XCTFail("Missing localized string for key: \(key) in table: \(table)", file: file, line: line)
+        }
+        return value
     }
 
     private class ViewSpy: BeerListView, BeerListLoadingView, BeerListErrorView {
