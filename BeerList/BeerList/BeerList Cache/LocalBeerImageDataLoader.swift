@@ -7,6 +7,12 @@
 
 import Foundation
 
+public protocol BeerImageDataCache {
+    typealias Result = Swift.Result<Void, Error>
+
+    func save(_ data: Data, for url: URL, completion: @escaping (Result) -> Void)
+}
+
 public final class LocalBeerImageDataLoader {
     private let store: BeerImageDataStore
     
@@ -15,8 +21,8 @@ public final class LocalBeerImageDataLoader {
     }
 }
 
-extension LocalBeerImageDataLoader {
-    public typealias SaveResult = Result<Void, Error>
+extension LocalBeerImageDataLoader: BeerImageDataCache {
+    public typealias SaveResult = BeerImageDataCache.Result
 
     public enum SaveError: Error {
         case failed

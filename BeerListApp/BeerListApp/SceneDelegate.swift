@@ -6,8 +6,8 @@
 //
 
 import UIKit
+import CoreData
 import BeerList
-import BeerListiOS
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -15,6 +15,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     private lazy var httpClient: HTTPClient = {
         URLSessionHTTPClient(session: URLSession(configuration: .ephemeral))
+    }()
+    
+    private lazy var store: BeerImageDataStore = {
+        try! CoreDataBeerStore(
+            storeURL: NSPersistentContainer
+                .defaultDirectoryURL()
+                .appendingPathComponent("Beer-store.sqlite"))
     }()
     
     private lazy var baseURL = URL(string: "https://api.punkapi.com/v2/beers")!
@@ -53,7 +60,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     private func makeRemoteImageLoader() -> BeerImageDataLoader {
-        let imageLoader = RemoteBeerImageDataLoader(client: httpClient)
+        let remoteImageLoader = RemoteBeerImageDataLoader(client: httpClient)
+        let localImageLoader = LocalBeerImageDataLoader(store: store)
+        let imageLoader = BeerImageDataLoaderWithFallbackComposite(
+            primary: localImageLoader,
+            fallback: BeerImageDataLoaderCacheDecorator(
+                decoratee: remoteImageLoader,
+                cache: localImageLoader))
         return imageLoader
     }
 
