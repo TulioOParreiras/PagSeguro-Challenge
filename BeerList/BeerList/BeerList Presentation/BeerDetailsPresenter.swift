@@ -16,6 +16,13 @@ public protocol BeerDetailsView {
 public final class BeerDetailsPresenter<View: BeerDetailsView, Image> where View.Image == Image {
     private let view: View
     private let imageTransformer: (Data) -> Image?
+    
+    public static var title: String {
+        return NSLocalizedString("BEER_DETAILS_VIEW_TITLE",
+                                 tableName: "BeerList",
+                                 bundle: Bundle(for: BeerDetailsPresenter.self),
+                                 comment: "Title for the beer details view")
+    }
 
     public init(view: View, imageTransformer: @escaping(Data) -> Image?) {
         self.view = view

@@ -17,6 +17,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         URLSessionHTTPClient(session: URLSession(configuration: .ephemeral))
     }()
     
+    private lazy var baseURL = URL(string: "https://api.punkapi.com/v2/beers")!
+    
+    private lazy var navigationController = UINavigationController(
+        rootViewController: BeerListUIComposer.beerListComposedWith(
+            beerListLoader: makeRemoteBeerListLoader(),
+            imageLoader: makeRemoteImageLoader(),
+            selection: showDetails))
+    
     convenience init(httpClient: HTTPClient) {
         self.init()
         self.httpClient = httpClient
@@ -30,18 +38,24 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     func configureWindow() {
-        let url = URL(string: "https://api.punkapi.com/v2/beers")!
-        let beerListLoader = RemoteBeerListLoader(url: url, client: httpClient)
-        let imageLoader = RemoteBeerImageDataLoader(client: httpClient)
-        
-        let beerListController = BeerListUIComposer.beerListComposedWith(
-            beerListLoader: beerListLoader,
-            imageLoader: imageLoader)
-        
-        self.window?.rootViewController = UINavigationController(rootViewController: beerListController)
+        self.window?.rootViewController = navigationController
         self.window?.makeKeyAndVisible()
     }
+    
+    private func showDetails(for beer: Beer) {
+        let details = BeerDetailsUIComposer.beerDetailsComposedWith(beer: beer, imageLoader: makeRemoteImageLoader())
+        navigationController.pushViewController(details, animated: true)
+    }
 
+    private func makeRemoteBeerListLoader() -> BeerListLoader {
+        let beerListLoader = RemoteBeerListLoader(url: baseURL, client: httpClient)
+        return beerListLoader
+    }
+    
+    private func makeRemoteImageLoader() -> BeerImageDataLoader {
+        let imageLoader = RemoteBeerImageDataLoader(client: httpClient)
+        return imageLoader
+    }
 
 }
 

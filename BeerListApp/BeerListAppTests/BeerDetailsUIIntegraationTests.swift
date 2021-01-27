@@ -18,7 +18,7 @@ class BeerDetailsUIIntegraationTests: XCTestCase {
         
         sut.loadViewIfNeeded()
         
-        XCTAssertEqual(sut.title, beer.name)
+        XCTAssertEqual(sut.title, localized("BEER_DETAILS_VIEW_TITLE"))
     }
     
     func test_loadView_doesRequestImageLoad() {
@@ -32,7 +32,6 @@ class BeerDetailsUIIntegraationTests: XCTestCase {
     
     func test_loadingBeerImageIndicator_isVisibleWhileLoadingImage() {
         let (sut, loader) = makeSUT()
-        XCTAssertFalse(sut.isShowingImageLoadingIndicator)
         
         sut.loadViewIfNeeded()
         XCTAssertTrue(sut.isShowingImageLoadingIndicator)
@@ -89,6 +88,7 @@ class BeerDetailsUIIntegraationTests: XCTestCase {
         let (sut, _) = makeSUT(with: beer)
         sut.loadViewIfNeeded()
         
+        XCTAssertEqual(sut.nameText, beer.name)
         XCTAssertEqual(sut.taglineText, beer.tagline)
         XCTAssertEqual(sut.abvText, "ABV: \(beer.abv)")
         XCTAssertEqual(sut.isShowingIbu, beer.ibu != nil)
@@ -150,6 +150,10 @@ extension BeerDetailsViewController {
     
     func simulateRetryAction() {
         retryButton.simulateEvent(.touchUpInside)
+    }
+    
+    var nameText: String? {
+        return nameLabel.text
     }
     
     var taglineText: String? {
