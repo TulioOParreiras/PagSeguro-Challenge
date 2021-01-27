@@ -49,6 +49,10 @@ final public class BeerListViewController: UITableViewController, UITableViewDat
         errorView.message = viewModel.message
     }
     
+    public override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableModel[indexPath.row].selection()
+    }
+    
     public override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return tableModel.count
     }

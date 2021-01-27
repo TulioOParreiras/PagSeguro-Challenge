@@ -12,7 +12,11 @@ import BeerListiOS
 public final class BeerListUIComposer {
     private init() { }
     
-    public static func beerListComposedWith(beerListLoader: BeerListLoader, imageLoader: BeerImageDataLoader) -> BeerListViewController {
+    public static func beerListComposedWith(
+        beerListLoader: BeerListLoader,
+        imageLoader: BeerImageDataLoader,
+        selection: @escaping (Beer) -> Void = { _ in }
+    ) -> BeerListViewController {
         let presentationAdapter = BeerListLoaderPresentationAdapter(beerListLoader: MainQueueDispatchDecorator(decoratee: beerListLoader))
         
         let beerListController = BeerListViewController.makeWith(
@@ -22,7 +26,8 @@ public final class BeerListUIComposer {
         presentationAdapter.presenter = BeerListPresenter(
             beerListView: BeerListViewAdapter(
                 controller: beerListController,
-                imageLoader: MainQueueDispatchDecorator(decoratee: imageLoader)),
+                imageLoader: MainQueueDispatchDecorator(decoratee: imageLoader),
+                selection: selection),
             loadingView: WeakRefVirtualProxy(beerListController),
             errorView: WeakRefVirtualProxy(beerListController))
         return beerListController

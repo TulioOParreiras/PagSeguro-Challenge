@@ -15,10 +15,12 @@ public protocol BeerCellControllerDelegate {
 
 public final class BeerCellController: BeerView {
     private let delegate: BeerCellControllerDelegate
+    public let selection: () -> Void
     private var cell: BeerCell?
     
-    public init(delegate: BeerCellControllerDelegate) {
+    public init(delegate: BeerCellControllerDelegate, selection: @escaping() -> Void) {
         self.delegate = delegate
+        self.selection = selection
     }
     
     func view(_ tableView: UITableView) -> UITableViewCell {

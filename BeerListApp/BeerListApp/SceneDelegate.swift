@@ -22,7 +22,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     private lazy var navigationController = UINavigationController(
         rootViewController: BeerListUIComposer.beerListComposedWith(
             beerListLoader: makeRemoteBeerListLoader(),
-            imageLoader: makeRemoteImageLoader()))
+            imageLoader: makeRemoteImageLoader(),
+            selection: showDetails))
     
     convenience init(httpClient: HTTPClient) {
         self.init()
@@ -39,6 +40,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func configureWindow() {
         self.window?.rootViewController = navigationController
         self.window?.makeKeyAndVisible()
+    }
+    
+    private func showDetails(for beer: Beer) {
+        let details = BeerDetailsUIComposer.beerDetailsComposedWith(beer: beer, imageLoader: makeRemoteImageLoader())
+        navigationController.pushViewController(details, animated: true)
     }
 
     private func makeRemoteBeerListLoader() -> BeerListLoader {
