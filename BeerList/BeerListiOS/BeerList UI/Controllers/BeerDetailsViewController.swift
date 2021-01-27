@@ -13,25 +13,16 @@ public protocol BeerDetailsViewControllerDelegate {
 }
 
 public final class BeerDetailsViewController: UIViewController, BeerDetailsView {
-    public let imageContainer = UIView()
-    public let imageView = UIImageView()
-    public let taglineLabel = UILabel()
-    public let abvLabel = UILabel()
-    public let ibuLabel = UILabel()
-    public let descriptionLabel = UILabel()
+    @IBOutlet private(set) public var imageContainer: UIView!
+    @IBOutlet private(set) public var imageView: UIImageView!
+    @IBOutlet private(set) public var nameLabel: UILabel!
+    @IBOutlet private(set) public var taglineLabel: UILabel!
+    @IBOutlet private(set) public var abvLabel: UILabel!
+    @IBOutlet private(set) public var ibuLabel: UILabel!
+    @IBOutlet private(set) public var descriptionLabel: UILabel!
+    @IBOutlet private(set) public var retryButton: UIButton!
     
-    private(set) public lazy var retryButton: UIButton = {
-        let button = UIButton()
-        button.addTarget(self, action: #selector(retryButtonTapped), for: .touchUpInside)
-        return button
-    }()
-    
-    private var delegate: BeerDetailsViewControllerDelegate?
-    
-    public convenience init(delegate: BeerDetailsViewControllerDelegate) {
-        self.init()
-        self.delegate = delegate
-    }
+    public var delegate: BeerDetailsViewControllerDelegate?
     
     public override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,7 +30,7 @@ public final class BeerDetailsViewController: UIViewController, BeerDetailsView 
     }
     
     public func display(_ model: BeerDetailsViewModel<UIImage>) {
-        self.title = model.name
+        self.nameLabel.text = model.name
         self.taglineLabel.text = model.tagline
         self.abvLabel.text = model.abv
         self.ibuLabel.text = model.ibu
@@ -54,7 +45,7 @@ public final class BeerDetailsViewController: UIViewController, BeerDetailsView 
         delegate?.didRequestBeerImageLoad()
     }
     
-    @objc func retryButtonTapped() {
+    @IBAction private func retryButtonTapped() {
         loadImage()
     }
 }
