@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		D295390725C10D9400E27934 /* BeerDetailsUIComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D295390625C10D9400E27934 /* BeerDetailsUIComposer.swift */; };
+		D295390F25C10E0000E27934 /* BeerDetailsImageLoaderPresentationAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D295390E25C10E0000E27934 /* BeerDetailsImageLoaderPresentationAdapter.swift */; };
 		D2BA5B7925C0445400912BD9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BA5B7825C0445400912BD9 /* AppDelegate.swift */; };
 		D2BA5B7B25C0445400912BD9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BA5B7A25C0445400912BD9 /* SceneDelegate.swift */; };
 		D2BA5B8225C0445700912BD9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D2BA5B8125C0445700912BD9 /* Assets.xcassets */; };
@@ -96,6 +97,7 @@
 
 /* Begin PBXFileReference section */
 		D295390625C10D9400E27934 /* BeerDetailsUIComposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeerDetailsUIComposer.swift; sourceTree = "<group>"; };
+		D295390E25C10E0000E27934 /* BeerDetailsImageLoaderPresentationAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeerDetailsImageLoaderPresentationAdapter.swift; sourceTree = "<group>"; };
 		D2BA5B7525C0445400912BD9 /* BeerListApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BeerListApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2BA5B7825C0445400912BD9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D2BA5B7A25C0445400912BD9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -221,6 +223,7 @@
 				D2BA5CC225C056DF00912BD9 /* BeerListLoaderPresentationAdapter.swift */,
 				D2BA5CC325C056DF00912BD9 /* BeerListViewAdapter.swift */,
 				D295390625C10D9400E27934 /* BeerDetailsUIComposer.swift */,
+				D295390E25C10E0000E27934 /* BeerDetailsImageLoaderPresentationAdapter.swift */,
 			);
 			path = Composer;
 			sourceTree = "<group>";
@@ -389,6 +392,7 @@
 				D2BA5B7925C0445400912BD9 /* AppDelegate.swift in Sources */,
 				D2BA5CC525C056DF00912BD9 /* BeerListUIComposer.swift in Sources */,
 				D2BA5CC425C056DF00912BD9 /* BeerDataLoaderPresentationAdapter.swift in Sources */,
+				D295390F25C10E0000E27934 /* BeerDetailsImageLoaderPresentationAdapter.swift in Sources */,
 				D2BA5CC625C056DF00912BD9 /* MainQueueDispatchDecorator.swift in Sources */,
 				D2BA5CC725C056DF00912BD9 /* WeakRefVirtualProxy.swift in Sources */,
 				D2BA5CC925C056DF00912BD9 /* BeerListViewAdapter.swift in Sources */,
