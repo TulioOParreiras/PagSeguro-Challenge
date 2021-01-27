@@ -39,8 +39,7 @@ public final class BeerCellController: BeerView {
     }
     
     public func display(_ viewModel: BeerViewModel<UIImage>) {
-        cell?.ibuLabel.isHidden = !viewModel.hasIbu
-        cell?.ibuLabel.text = viewModel.ibu
+        cell?.abvLabel.text = viewModel.abv
         cell?.nameLabel.text = viewModel.name
         cell?.beerImageView?.setImageAnimated(viewModel.image)
         cell?.imageContainer.isShimmering = viewModel.isLoading

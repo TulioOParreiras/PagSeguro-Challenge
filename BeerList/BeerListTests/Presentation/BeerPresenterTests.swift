@@ -25,7 +25,7 @@ class BeerPresenterTests: XCTestCase {
         let message = view.messages.first
         XCTAssertEqual(view.messages.count, 1)
         XCTAssertEqual(message?.name, beer.name)
-        XCTAssertEqual(message?.ibuValue, beer.ibu)
+        XCTAssertEqual(message?.abvValue, beer.abv)
         XCTAssertEqual(message?.isLoading, true)
         XCTAssertEqual(message?.shouldRetry, false)
         XCTAssertNil(message?.image)
@@ -41,7 +41,7 @@ class BeerPresenterTests: XCTestCase {
         let message = view.messages.first
         XCTAssertEqual(view.messages.count, 1)
         XCTAssertEqual(message?.name, beer.name)
-        XCTAssertEqual(message?.ibuValue, beer.ibu)
+        XCTAssertEqual(message?.abvValue, beer.abv)
         XCTAssertEqual(message?.isLoading, false)
         XCTAssertEqual(message?.shouldRetry, true)
         XCTAssertNil(message?.image)
@@ -58,7 +58,7 @@ class BeerPresenterTests: XCTestCase {
         let message = view.messages.first
         XCTAssertEqual(view.messages.count, 1)
         XCTAssertEqual(message?.name, beer.name)
-        XCTAssertEqual(message?.ibuValue, beer.ibu)
+        XCTAssertEqual(message?.abvValue, beer.abv)
         XCTAssertEqual(message?.isLoading, false)
         XCTAssertEqual(message?.shouldRetry, false)
         XCTAssertEqual(message?.image, transformedData)
@@ -73,7 +73,7 @@ class BeerPresenterTests: XCTestCase {
         let message = view.messages.first
         XCTAssertEqual(view.messages.count, 1)
         XCTAssertEqual(message?.name, beer.name)
-        XCTAssertEqual(message?.ibuValue, beer.ibu)
+        XCTAssertEqual(message?.abvValue, beer.abv)
         XCTAssertEqual(message?.isLoading, false)
         XCTAssertEqual(message?.shouldRetry, true)
         XCTAssertNil(message?.image)

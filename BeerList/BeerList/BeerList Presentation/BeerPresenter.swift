@@ -26,7 +26,7 @@ public final class BeerPresenter<View: BeerView, Image> where View.Image == Imag
     public func didStartLoadingImageData(for model: Beer) {
         view.display(BeerViewModel(
                         name: model.name,
-                        ibuValue: model.ibu,
+                        abvValue: model.abv,
                         image: nil,
                         isLoading: true,
                         shouldRetry: false))
@@ -36,7 +36,7 @@ public final class BeerPresenter<View: BeerView, Image> where View.Image == Imag
         let image = imageTransformer(data)
         view.display(BeerViewModel(
                         name: model.name,
-                        ibuValue: model.ibu,
+                        abvValue: model.abv,
                         image: image,
                         isLoading: false,
                         shouldRetry: image == nil))
@@ -45,7 +45,7 @@ public final class BeerPresenter<View: BeerView, Image> where View.Image == Imag
     public func didFinishLoadingImageData(with error: Error, for model: Beer) {
         view.display(BeerViewModel(
                         name: model.name,
-                        ibuValue: model.ibu,
+                        abvValue: model.abv,
                         image: nil,
                         isLoading: false,
                         shouldRetry: true))

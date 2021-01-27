@@ -8,7 +8,7 @@
 import UIKit
 
 final public class BeerCell: UITableViewCell {
-    @IBOutlet private(set) public var ibuLabel: UILabel!
+    @IBOutlet private(set) public var abvLabel: UILabel!
     @IBOutlet private(set) public var nameLabel: UILabel!
     @IBOutlet private(set) public var imageContainer: UIView!
     @IBOutlet private(set) public var beerImageView: UIImageView!
