@@ -21,4 +21,15 @@ extension ManagedBeerImage {
         request.fetchLimit = 1
         return try context.fetch(request).first
     }
+    
+    static func find(in context: NSManagedObjectContext) throws -> ManagedBeerImage? {
+        let request = NSFetchRequest<ManagedBeerImage>(entityName: entity().name!)
+        request.returnsObjectsAsFaults = false
+        return try context.fetch(request).first
+    }
+    
+    static func newUniqueInstance(in context: NSManagedObjectContext) throws -> ManagedBeerImage {
+        try find(in: context).map(context.delete)
+        return ManagedBeerImage(context: context)
+    }
 }

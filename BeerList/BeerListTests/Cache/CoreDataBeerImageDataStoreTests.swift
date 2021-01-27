@@ -6,16 +6,27 @@
 //
 
 import XCTest
-import BeerList
+@testable import BeerList
 
 extension CoreDataBeerStore: BeerImageDataStore {
     
     public func insert(_ data: Data, for url: URL, completion: @escaping (BeerImageDataStore.InsertionResult) -> Void) {
-        
+        perform { context in
+            completion(Result {
+                let managedBeerImage = try ManagedBeerImage.newUniqueInstance(in: context)
+                managedBeerImage.data = data
+                managedBeerImage.url = url
+                try context.save()
+            })
+        }
     }
     
     public func retrieve(dataForURL url: URL, completion: @escaping (BeerImageDataStore.RetrievalResult) -> Void) {
-        completion(.success(.none))
+        perform { context in
+            completion(Result {
+                try ManagedBeerImage.first(with: url, in: context)?.data
+            })
+        }
     }
     
 }
@@ -28,6 +39,16 @@ class CoreDataBeerImageDataStoreTests: XCTestCase {
         expect(sut, toCompleteRetrievalWith: notFound(), for: anyURL())
     }
     
+    func test_retrieveImageData_deliversNotFoundWhenStoredDataURLDoesNotMatch() {
+        let sut = makeSUT()
+        let url = URL(string: "http://a-url.com")!
+        let nonMatchingURL = URL(string: "http://another-url.com")!
+        
+        insert(anyData(), for: url, into: sut)
+        
+        expect(sut, toCompleteRetrievalWith: notFound(), for: nonMatchingURL)
+    }
+
     // - MARK: Helpers
     
     private func makeSUT(file: StaticString = #file, line: UInt = #line) -> CoreDataBeerStore {
@@ -40,7 +61,7 @@ class CoreDataBeerImageDataStoreTests: XCTestCase {
     private func notFound() -> BeerImageDataStore.RetrievalResult {
         return .success(.none)
     }
-
+    
     private func expect(_ sut: CoreDataBeerStore, toCompleteRetrievalWith expectedResult: BeerImageDataStore.RetrievalResult, for url: URL,  file: StaticString = #file, line: UInt = #line) {
         let exp = expectation(description: "Wait for load completion")
         sut.retrieve(dataForURL: url) { receivedResult in
@@ -55,5 +76,25 @@ class CoreDataBeerImageDataStoreTests: XCTestCase {
         }
         wait(for: [exp], timeout: 1.0)
     }
+    
+    private func insert(_ data: Data, for url: URL, into sut: CoreDataBeerStore, file: StaticString = #file, line: UInt = #line) {
+        let exp = expectation(description: "Wait for cache insertion")
+        sut.insert(data, for: url) { result in
+            switch result {
+            case let .failure(error):
+                XCTFail("Failed to save image with error \(error)", file: file, line: line)
+                
+            case .success:
+                sut.insert(data, for: url) { result in
+                    if case let Result.failure(error) = result {
+                        XCTFail("Failed to insert \(data) with error \(error)", file: file, line: line)
+                    }
+                }
+            }
+            exp.fulfill()
+        }
+        wait(for: [exp], timeout: 1.0)
+    }
+
 
 }

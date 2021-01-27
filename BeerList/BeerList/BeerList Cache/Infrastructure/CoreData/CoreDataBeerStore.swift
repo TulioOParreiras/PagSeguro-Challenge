@@ -32,7 +32,7 @@ public final class CoreDataBeerStore {
         }
     }
 
-    func perform(_ action: @escaping (NSManagedObjectContext) -> Void) {
+    public func perform(_ action: @escaping (NSManagedObjectContext) -> Void) {
         let context = self.context
         context.perform { action(context) }
     }
