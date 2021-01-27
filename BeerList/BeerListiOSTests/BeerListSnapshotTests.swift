@@ -80,7 +80,7 @@ class BeerListSnapshotTests: XCTestCase {
 private extension BeerListViewController {
     func display(_ stubs: [BeerStub]) {
         let cells: [BeerCellController] = stubs.map { stub in
-            let cellController = BeerCellController(delegate: stub)
+            let cellController = BeerCellController(delegate: stub, selection: { })
             stub.controller = cellController
             return cellController
         }

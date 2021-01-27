@@ -27,6 +27,10 @@
 		D256A3C725BB0C030010C33F /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D256A3C625BB0C030010C33F /* HTTPClient.swift */; };
 		D256A3CB25BB0E4A0010C33F /* RemoteBeerListMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D256A3CA25BB0E4A0010C33F /* RemoteBeerListMapper.swift */; };
 		D2694A5125C1707A00D6B748 /* BeerDetails.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D2694A5025C1707A00D6B748 /* BeerDetails.storyboard */; };
+		D2694A6025C17EFE00D6B748 /* LoadBeerImageDataFromCacheUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2694A5F25C17EFE00D6B748 /* LoadBeerImageDataFromCacheUseCaseTests.swift */; };
+		D2694A6B25C181FC00D6B748 /* BeerImageDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2694A6A25C181FC00D6B748 /* BeerImageDataStore.swift */; };
+		D2694A7125C1821700D6B748 /* LocalBeerImageDataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2694A7025C1821700D6B748 /* LocalBeerImageDataLoader.swift */; };
+		D2694A7B25C184B200D6B748 /* BeerImageDataStoreSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2694A7A25C184B200D6B748 /* BeerImageDataStoreSpy.swift */; };
 		D27409B025C0248F00EFBE6F /* BeerListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D27409AF25C0248F00EFBE6F /* BeerListPresenter.swift */; };
 		D27409B725C0255000EFBE6F /* BeerListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D27409B625C0255000EFBE6F /* BeerListViewModel.swift */; };
 		D27409BE25C0256A00EFBE6F /* BeerListLoadingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D27409BD25C0256A00EFBE6F /* BeerListLoadingViewModel.swift */; };
@@ -56,6 +60,12 @@
 		D2BA5B5725C03F4400912BD9 /* URLProtocolStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BA5B5625C03F4400912BD9 /* URLProtocolStub.swift */; };
 		D2BA5BB925C0456400912BD9 /* BeerList.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D256A38725BA47F10010C33F /* BeerList.framework */; platformFilter = ios; };
 		D2BA5BBA25C0456400912BD9 /* BeerList.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D256A38725BA47F10010C33F /* BeerList.framework */; platformFilter = ios; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		D2BC827425C185A3008358C0 /* CacheBeerImageDataUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BC827325C185A3008358C0 /* CacheBeerImageDataUseCaseTests.swift */; };
+		D2BC828225C18E30008358C0 /* BeerStore.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D2BC828025C18E30008358C0 /* BeerStore.xcdatamodeld */; };
+		D2BC828925C18EE9008358C0 /* ManagedBeerImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BC828825C18EE9008358C0 /* ManagedBeerImage.swift */; };
+		D2BC829325C18F22008358C0 /* CoreDataBeerStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BC829225C18F22008358C0 /* CoreDataBeerStore.swift */; };
+		D2BC829925C18FB5008358C0 /* CoreDataBeerImageDataStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BC829825C18FB5008358C0 /* CoreDataBeerImageDataStoreTests.swift */; };
+		D2BC829F25C194FE008358C0 /* CoreDataBeerStore+BeerImageDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BC829E25C194FE008358C0 /* CoreDataBeerStore+BeerImageDataStore.swift */; };
 		D2C2E8DB25C08D710027C40F /* BeerListSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C2E8DA25C08D710027C40F /* BeerListSnapshotTests.swift */; };
 /* End PBXBuildFile section */
 
@@ -131,6 +141,10 @@
 		D256A3C625BB0C030010C33F /* HTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
 		D256A3CA25BB0E4A0010C33F /* RemoteBeerListMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteBeerListMapper.swift; sourceTree = "<group>"; };
 		D2694A5025C1707A00D6B748 /* BeerDetails.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = BeerDetails.storyboard; sourceTree = "<group>"; };
+		D2694A5F25C17EFE00D6B748 /* LoadBeerImageDataFromCacheUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadBeerImageDataFromCacheUseCaseTests.swift; sourceTree = "<group>"; };
+		D2694A6A25C181FC00D6B748 /* BeerImageDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeerImageDataStore.swift; sourceTree = "<group>"; };
+		D2694A7025C1821700D6B748 /* LocalBeerImageDataLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalBeerImageDataLoader.swift; sourceTree = "<group>"; };
+		D2694A7A25C184B200D6B748 /* BeerImageDataStoreSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeerImageDataStoreSpy.swift; sourceTree = "<group>"; };
 		D27409AF25C0248F00EFBE6F /* BeerListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeerListPresenter.swift; sourceTree = "<group>"; };
 		D27409B625C0255000EFBE6F /* BeerListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeerListViewModel.swift; sourceTree = "<group>"; };
 		D27409BD25C0256A00EFBE6F /* BeerListLoadingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeerListLoadingViewModel.swift; sourceTree = "<group>"; };
@@ -158,6 +172,12 @@
 		D2BA5B4125C03BC700912BD9 /* RemoteBeerImageDataLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteBeerImageDataLoader.swift; sourceTree = "<group>"; };
 		D2BA5B4925C03ECF00912BD9 /* HTTPURLResponse+StatusCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HTTPURLResponse+StatusCode.swift"; sourceTree = "<group>"; };
 		D2BA5B5625C03F4400912BD9 /* URLProtocolStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLProtocolStub.swift; sourceTree = "<group>"; };
+		D2BC827325C185A3008358C0 /* CacheBeerImageDataUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheBeerImageDataUseCaseTests.swift; sourceTree = "<group>"; };
+		D2BC828125C18E30008358C0 /* BeerStore.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BeerStore.xcdatamodel; sourceTree = "<group>"; };
+		D2BC828825C18EE9008358C0 /* ManagedBeerImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagedBeerImage.swift; sourceTree = "<group>"; };
+		D2BC829225C18F22008358C0 /* CoreDataBeerStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataBeerStore.swift; sourceTree = "<group>"; };
+		D2BC829825C18FB5008358C0 /* CoreDataBeerImageDataStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataBeerImageDataStoreTests.swift; sourceTree = "<group>"; };
+		D2BC829E25C194FE008358C0 /* CoreDataBeerStore+BeerImageDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreDataBeerStore+BeerImageDataStore.swift"; sourceTree = "<group>"; };
 		D2C2E8DA25C08D710027C40F /* BeerListSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeerListSnapshotTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -303,6 +323,7 @@
 		D256A38925BA47F10010C33F /* BeerList */ = {
 			isa = PBXGroup;
 			children = (
+				D2694A6925C181EF00D6B748 /* BeerList Cache */,
 				D27409AE25C0248100EFBE6F /* BeerList Presentation */,
 				D256A3BF25BB0B3D0010C33F /* BeerList API */,
 				D256A3BC25BB09000010C33F /* BeerList Feature */,
@@ -314,6 +335,7 @@
 		D256A39425BA47F10010C33F /* BeerListTests */ = {
 			isa = PBXGroup;
 			children = (
+				D2694A5E25C17EB200D6B748 /* Cache */,
 				D2740A4B25C0342800EFBE6F /* API */,
 				D27409EF25C02A0200EFBE6F /* Presentation */,
 				D251F0A725BDCDB9003FED5F /* Helpers */,
@@ -343,6 +365,35 @@
 				D2BA5B4125C03BC700912BD9 /* RemoteBeerImageDataLoader.swift */,
 			);
 			path = "BeerList API";
+			sourceTree = "<group>";
+		};
+		D2694A5E25C17EB200D6B748 /* Cache */ = {
+			isa = PBXGroup;
+			children = (
+				D2694A8025C184CF00D6B748 /* Helpers */,
+				D2694A5F25C17EFE00D6B748 /* LoadBeerImageDataFromCacheUseCaseTests.swift */,
+				D2BC827325C185A3008358C0 /* CacheBeerImageDataUseCaseTests.swift */,
+				D2BC829825C18FB5008358C0 /* CoreDataBeerImageDataStoreTests.swift */,
+			);
+			path = Cache;
+			sourceTree = "<group>";
+		};
+		D2694A6925C181EF00D6B748 /* BeerList Cache */ = {
+			isa = PBXGroup;
+			children = (
+				D2BC827F25C18E18008358C0 /* Infrastructure */,
+				D2694A6A25C181FC00D6B748 /* BeerImageDataStore.swift */,
+				D2694A7025C1821700D6B748 /* LocalBeerImageDataLoader.swift */,
+			);
+			path = "BeerList Cache";
+			sourceTree = "<group>";
+		};
+		D2694A8025C184CF00D6B748 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				D2694A7A25C184B200D6B748 /* BeerImageDataStoreSpy.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 		D27409AE25C0248100EFBE6F /* BeerList Presentation */ = {
@@ -413,6 +464,25 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D2BC827F25C18E18008358C0 /* Infrastructure */ = {
+			isa = PBXGroup;
+			children = (
+				D2BC828725C18E32008358C0 /* CoreData */,
+			);
+			path = Infrastructure;
+			sourceTree = "<group>";
+		};
+		D2BC828725C18E32008358C0 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				D2BC828025C18E30008358C0 /* BeerStore.xcdatamodeld */,
+				D2BC828825C18EE9008358C0 /* ManagedBeerImage.swift */,
+				D2BC829225C18F22008358C0 /* CoreDataBeerStore.swift */,
+				D2BC829E25C194FE008358C0 /* CoreDataBeerStore+BeerImageDataStore.swift */,
+			);
+			path = CoreData;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -667,18 +737,24 @@
 				D2BA5B4225C03BC700912BD9 /* RemoteBeerImageDataLoader.swift in Sources */,
 				D2740A4025C033E700EFBE6F /* BeerImageDataLoader.swift in Sources */,
 				D27409B725C0255000EFBE6F /* BeerListViewModel.swift in Sources */,
+				D2694A6B25C181FC00D6B748 /* BeerImageDataStore.swift in Sources */,
 				D29538F725C10CD400E27934 /* BeerDetailsViewModel.swift in Sources */,
 				D256A3AA25BA4C2E0010C33F /* BeerListLoader.swift in Sources */,
+				D2694A7125C1821700D6B748 /* LocalBeerImageDataLoader.swift in Sources */,
 				D27409B025C0248F00EFBE6F /* BeerListPresenter.swift in Sources */,
 				D2BA5B4A25C03ECF00912BD9 /* HTTPURLResponse+StatusCode.swift in Sources */,
+				D2BC828925C18EE9008358C0 /* ManagedBeerImage.swift in Sources */,
 				D27409BE25C0256A00EFBE6F /* BeerListLoadingViewModel.swift in Sources */,
 				D256A3A625BA4B4A0010C33F /* Beer.swift in Sources */,
 				D27409C525C0259100EFBE6F /* BeerListErrorViewModel.swift in Sources */,
 				D256A3CB25BB0E4A0010C33F /* RemoteBeerListMapper.swift in Sources */,
+				D2BC829325C18F22008358C0 /* CoreDataBeerStore.swift in Sources */,
 				D256A3C725BB0C030010C33F /* HTTPClient.swift in Sources */,
 				D29538FD25C10D1500E27934 /* BeerDetailsPresenter.swift in Sources */,
+				D2BC828225C18E30008358C0 /* BeerStore.xcdatamodeld in Sources */,
 				D256A3C125BB0B480010C33F /* RemoteBeerListLoader.swift in Sources */,
 				D232EF4425BDED5D00F272BB /* URLSessionHTTPClient.swift in Sources */,
+				D2BC829F25C194FE008358C0 /* CoreDataBeerStore+BeerImageDataStore.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -688,13 +764,17 @@
 			files = (
 				D2740A4D25C0343700EFBE6F /* LoadBeerImageDataFromRemoteUseCaseTests.swift in Sources */,
 				D27409F525C02A3900EFBE6F /* BeerListPresenterTests.swift in Sources */,
+				D2694A7B25C184B200D6B748 /* BeerImageDataStoreSpy.swift in Sources */,
 				D256A3B925BA4DDE0010C33F /* RemoteBeerListLoaderTests.swift in Sources */,
 				D2740A1725C02AFB00EFBE6F /* BeerPresenterTests.swift in Sources */,
 				D2BA5B3425C03B4800912BD9 /* SharedTestHelpers.swift in Sources */,
 				D251F0A925BDCDCF003FED5F /* XCTest+MemoryLeakTracking.swift in Sources */,
+				D2BC827425C185A3008358C0 /* CacheBeerImageDataUseCaseTests.swift in Sources */,
 				D2740A0025C02A5B00EFBE6F /* BeerListLocalizationTests.swift in Sources */,
 				D2BA5B3B25C03B8500912BD9 /* HTTPClientSpy.swift in Sources */,
+				D2694A6025C17EFE00D6B748 /* LoadBeerImageDataFromCacheUseCaseTests.swift in Sources */,
 				D251F0A425BB992C003FED5F /* URLSessionHTTPClientTests.swift in Sources */,
+				D2BC829925C18FB5008358C0 /* CoreDataBeerImageDataStoreTests.swift in Sources */,
 				D2BA5B5725C03F4400912BD9 /* URLProtocolStub.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1155,6 +1235,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		D2BC828025C18E30008358C0 /* BeerStore.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				D2BC828125C18E30008358C0 /* BeerStore.xcdatamodel */,
+			);
+			currentVersion = D2BC828125C18E30008358C0 /* BeerStore.xcdatamodel */;
+			path = BeerStore.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = D256A37E25BA47F10010C33F /* Project object */;
 }

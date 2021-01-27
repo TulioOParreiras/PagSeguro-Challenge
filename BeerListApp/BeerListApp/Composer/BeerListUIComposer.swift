@@ -35,6 +35,7 @@ public final class BeerListUIComposer {
 
 }
 
+
 private extension BeerListViewController {
     static func makeWith(delegate: BeerListViewControllerDelegate, title: String) -> BeerListViewController {
         let bundle = Bundle(for: BeerListViewController.self)
