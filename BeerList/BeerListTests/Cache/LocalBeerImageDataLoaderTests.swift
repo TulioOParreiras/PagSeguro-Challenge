@@ -21,6 +21,7 @@ final class LocalBeerImageDataLoader {
     
     public enum Error: Swift.Error {
         case failed
+        case notFound
     }
     
     private let store: BeerImageDataStore
@@ -31,7 +32,9 @@ final class LocalBeerImageDataLoader {
     
     func loadImageData(from url: URL, completion: @escaping (BeerImageDataLoader.Result) -> Void) -> BeerImageDataLoaderTask {
         store.retrieve(dataForURL: url) { result in
-            completion(.failure(Error.failed))
+            completion(result
+                .mapError { _ in Error.failed }
+                .flatMap { _ in .failure(Error.notFound) })
         }
         return Task()
     }
@@ -63,6 +66,14 @@ class LocalBeerImageDataLoaderTests: XCTestCase {
         })
     }
 
+    func test_loadImageDataFromURL_deliversNotFoundErrorOnNotFound() {
+        let (sut, store) = makeSUT()
+        
+        expect(sut, toCompleteWith: notFound(), when: {
+            store.complete(with: .none)
+        })
+    }
+    
     // MARK: - Helpers
     
     private func makeSUT(currentDate: @escaping () -> Date = Date.init, file: StaticString = #file, line: UInt = #line) -> (sut: LocalBeerImageDataLoader, store: StoreSpy) {
@@ -77,6 +88,10 @@ class LocalBeerImageDataLoaderTests: XCTestCase {
         return .failure(LocalBeerImageDataLoader.Error.failed)
     }
     
+    private func notFound() -> BeerImageDataLoader.Result {
+        return .failure(LocalBeerImageDataLoader.Error.notFound)
+    }
+
     private func expect(_ sut: LocalBeerImageDataLoader, toCompleteWith expectedResult: BeerImageDataLoader.Result, when action: () -> Void, file: StaticString = #file, line: UInt = #line) {
         let exp = expectation(description: "Wait for load completion")
         
@@ -114,6 +129,10 @@ class LocalBeerImageDataLoaderTests: XCTestCase {
         
         func complete(with error: Error, at index: Int = 0) {
             completions[index](.failure(error))
+        }
+        
+        func complete(with data: Data?, at index: Int = 0) {
+            completions[index](.success(data))
         }
     }
 
