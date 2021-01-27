@@ -320,7 +320,7 @@ class BeerListUIIntegrationsTests: XCTestCase {
         
         let exp = expectation(description: "Wait for background queue")
         DispatchQueue.global().async {
-            loader.completeImageLoading(with: self.anyImageData(), at: 0)
+            loader.completeImageLoading(with: anyImageData(), at: 0)
             exp.fulfill()
         }
         wait(for: [exp], timeout: 1.0)
@@ -334,14 +334,6 @@ class BeerListUIIntegrationsTests: XCTestCase {
         trackForMemoryLeaks(loader)
         trackForMemoryLeaks(sut)
         return (sut, loader)
-    }
-    
-    func makeBeer(name: String = "A name", imageURL: URL = URL(string: "https://a-url.com")!, ibu: Double? = nil) -> Beer {
-        return Beer(id: Int.random(in: 0...100), name: name, tagline: "a tagline", description: "a description", imageURL: imageURL, abv: Double.random(in: 1...10), ibu: ibu)
-    }
-    
-    private func anyImageData() -> Data {
-        return UIImage.make(withColor: .red).pngData()!
     }
 
 }
