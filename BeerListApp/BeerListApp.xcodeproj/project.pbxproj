@@ -35,6 +35,7 @@
 		D2BA5CDD25C056F900912BD9 /* BeerListUIIntegrationsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BA5CD625C056F900912BD9 /* BeerListUIIntegrationsTests.swift */; };
 		D2BA5CE525C057B300912BD9 /* XCTest+MemoryLeakTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BA5CE425C057B300912BD9 /* XCTest+MemoryLeakTracking.swift */; };
 		D2BA5CE825C0587F00912BD9 /* BeerListAcceptanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BA5CE725C0587F00912BD9 /* BeerListAcceptanceTests.swift */; };
+		D2BC82AC25C199B2008358C0 /* BeerImageDataLoaderWithFallbackComposite.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BC82AB25C199B2008358C0 /* BeerImageDataLoaderWithFallbackComposite.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -129,6 +130,7 @@
 		D2BA5CD625C056F900912BD9 /* BeerListUIIntegrationsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeerListUIIntegrationsTests.swift; sourceTree = "<group>"; };
 		D2BA5CE425C057B300912BD9 /* XCTest+MemoryLeakTracking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "XCTest+MemoryLeakTracking.swift"; sourceTree = "<group>"; };
 		D2BA5CE725C0587F00912BD9 /* BeerListAcceptanceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeerListAcceptanceTests.swift; sourceTree = "<group>"; };
+		D2BC82AB25C199B2008358C0 /* BeerImageDataLoaderWithFallbackComposite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeerImageDataLoaderWithFallbackComposite.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -229,6 +231,7 @@
 				D2BA5CC325C056DF00912BD9 /* BeerListViewAdapter.swift */,
 				D295390625C10D9400E27934 /* BeerDetailsUIComposer.swift */,
 				D295390E25C10E0000E27934 /* BeerDetailsImageLoaderPresentationAdapter.swift */,
+				D2BC82AB25C199B2008358C0 /* BeerImageDataLoaderWithFallbackComposite.swift */,
 			);
 			path = Composer;
 			sourceTree = "<group>";
@@ -393,6 +396,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D2BC82AC25C199B2008358C0 /* BeerImageDataLoaderWithFallbackComposite.swift in Sources */,
 				D295390725C10D9400E27934 /* BeerDetailsUIComposer.swift in Sources */,
 				D2BA5CC825C056DF00912BD9 /* BeerListLoaderPresentationAdapter.swift in Sources */,
 				D2BA5B7925C0445400912BD9 /* AppDelegate.swift in Sources */,
