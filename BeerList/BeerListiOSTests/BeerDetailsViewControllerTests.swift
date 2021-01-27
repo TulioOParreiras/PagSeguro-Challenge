@@ -11,6 +11,11 @@ import BeerList
 final class BeerDetailsViewController: UIViewController {
     private let imageContainer = UIView()
     private let imageView = UIImageView()
+    private let taglineLabel = UILabel()
+    private let abvLabel = UILabel()
+    private let ibuLabel = UILabel()
+    private let descriptionLabel = UILabel()
+    
     private lazy var retryButton: UIButton = {
         let button = UIButton()
         button.addTarget(self, action: #selector(retryButtonTapped), for: .touchUpInside)
@@ -19,6 +24,7 @@ final class BeerDetailsViewController: UIViewController {
     
     private var imageLoader: BeerImageDataLoader?
     private var model: Beer!
+    private var task: BeerImageDataLoaderTask?
     convenience init(model: Beer, imageLoader: BeerImageDataLoader) {
         self.init()
         self.model = model
@@ -28,13 +34,18 @@ final class BeerDetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = model.name
-        loadImage()
+        display(model: model)
+    }
+    
+    deinit {
+        task?.cancel()
     }
     
     func loadImage() {
         retryButton.isHidden = true
         imageContainer.isShimmering = true
-        _ = imageLoader?.loadImageData(from: model.imageURL) { result in
+        task = imageLoader?.loadImageData(from: model.imageURL) { [weak self] result in
+            guard let self = self else { return }
             self.imageContainer.isShimmering = false
             if let data = try? result.get(), let image = UIImage(data: data) {
                 self.imageView.image = image
@@ -42,6 +53,15 @@ final class BeerDetailsViewController: UIViewController {
                 self.retryButton.isHidden = false
             }
         }
+    }
+    
+    func display(model: Beer) {
+        self.taglineLabel.text = model.tagline
+        self.abvLabel.text = "ABV: " + String(describing: model.abv)
+        self.ibuLabel.text = "IBU: " + String(describing: model.ibu)
+        self.descriptionLabel.text = model.description
+        self.ibuLabel.isHidden = model.ibu == nil
+        loadImage()
     }
     
     @objc func retryButtonTapped() {
@@ -131,11 +151,27 @@ class BeerDetailsViewControllerTests: XCTestCase {
         XCTAssertEqual(loader.loadedURLs, [beer.imageURL, beer.imageURL])
     }
     
+    func test_beerDetailsView_rendersBeerSuccessfully() {
+        let beer = makeBeer()
+        let (sut, _) = makeSUT(with: beer)
+        sut.loadViewIfNeeded()
+        
+        XCTAssertEqual(sut.taglineText, beer.tagline)
+        XCTAssertEqual(sut.abvText, "ABV: \(beer.abv)")
+        XCTAssertEqual(sut.isShowingIbu, beer.ibu != nil)
+        XCTAssertEqual(sut.descriptionText, beer.description)
+        if let ibu = beer.ibu {
+            XCTAssertEqual(sut.ibuText, "IBU: \(ibu)")
+        }
+    }
+    
     // MARK: - Helpers
     
-    private func makeSUT(with beer: Beer = makeBeer()) -> (sut: BeerDetailsViewController, loader: LoaderSpy) {
+    private func makeSUT(with beer: Beer = makeBeer(), file: StaticString = #file, line: UInt = #line) -> (sut: BeerDetailsViewController, loader: LoaderSpy) {
         let loader = LoaderSpy()
         let sut = BeerDetailsViewController(model: beer, imageLoader: loader)
+        trackForMemoryLeaks(loader, file: file, line: line)
+        trackForMemoryLeaks(sut, file: file, line: line)
         return (sut, loader)
     }
     
@@ -146,12 +182,17 @@ class BeerDetailsViewControllerTests: XCTestCase {
         }
         
         private struct TaskSpy: BeerImageDataLoaderTask {
-            func cancel() { }
+            let cancelCallback: () -> Void
+            func cancel() {
+                cancelCallback()
+            }
         }
         
         func loadImageData(from url: URL, completion: @escaping (BeerImageDataLoader.Result) -> Void) -> BeerImageDataLoaderTask {
             loadRequests.append((url, completion))
-            return TaskSpy()
+            return TaskSpy {
+                self.cancelledURL = url
+            }
         }
         
         func completeImageLoading(with data: Data = Data(), at index: Int = 0) {
@@ -181,6 +222,26 @@ extension BeerDetailsViewController {
     
     func simulateRetryAction() {
         retryButton.simulateEvent(.touchUpInside)
+    }
+    
+    var taglineText: String? {
+        return taglineLabel.text
+    }
+    
+    var abvText: String? {
+        return abvLabel.text
+    }
+    
+    var isShowingIbu: Bool {
+        return !ibuLabel.isHidden
+    }
+    
+    var ibuText: String? {
+        return ibuLabel.text
+    }
+    
+    var descriptionText: String? {
+        return descriptionLabel.text
     }
     
 }
