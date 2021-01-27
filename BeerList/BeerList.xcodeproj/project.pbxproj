@@ -60,6 +60,7 @@
 		D2BA5B5725C03F4400912BD9 /* URLProtocolStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BA5B5625C03F4400912BD9 /* URLProtocolStub.swift */; };
 		D2BA5BB925C0456400912BD9 /* BeerList.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D256A38725BA47F10010C33F /* BeerList.framework */; platformFilter = ios; };
 		D2BA5BBA25C0456400912BD9 /* BeerList.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D256A38725BA47F10010C33F /* BeerList.framework */; platformFilter = ios; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		D2BC827425C185A3008358C0 /* CacheBeerImageDataUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BC827325C185A3008358C0 /* CacheBeerImageDataUseCaseTests.swift */; };
 		D2C2E8DB25C08D710027C40F /* BeerListSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C2E8DA25C08D710027C40F /* BeerListSnapshotTests.swift */; };
 /* End PBXBuildFile section */
 
@@ -166,6 +167,7 @@
 		D2BA5B4125C03BC700912BD9 /* RemoteBeerImageDataLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteBeerImageDataLoader.swift; sourceTree = "<group>"; };
 		D2BA5B4925C03ECF00912BD9 /* HTTPURLResponse+StatusCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HTTPURLResponse+StatusCode.swift"; sourceTree = "<group>"; };
 		D2BA5B5625C03F4400912BD9 /* URLProtocolStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLProtocolStub.swift; sourceTree = "<group>"; };
+		D2BC827325C185A3008358C0 /* CacheBeerImageDataUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheBeerImageDataUseCaseTests.swift; sourceTree = "<group>"; };
 		D2C2E8DA25C08D710027C40F /* BeerListSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeerListSnapshotTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -360,6 +362,7 @@
 			children = (
 				D2694A8025C184CF00D6B748 /* Helpers */,
 				D2694A5F25C17EFE00D6B748 /* LoadBeerImageDataFromCacheUseCaseTests.swift */,
+				D2BC827325C185A3008358C0 /* CacheBeerImageDataUseCaseTests.swift */,
 			);
 			path = Cache;
 			sourceTree = "<group>";
@@ -731,6 +734,7 @@
 				D2740A1725C02AFB00EFBE6F /* BeerPresenterTests.swift in Sources */,
 				D2BA5B3425C03B4800912BD9 /* SharedTestHelpers.swift in Sources */,
 				D251F0A925BDCDCF003FED5F /* XCTest+MemoryLeakTracking.swift in Sources */,
+				D2BC827425C185A3008358C0 /* CacheBeerImageDataUseCaseTests.swift in Sources */,
 				D2740A0025C02A5B00EFBE6F /* BeerListLocalizationTests.swift in Sources */,
 				D2BA5B3B25C03B8500912BD9 /* HTTPClientSpy.swift in Sources */,
 				D2694A6025C17EFE00D6B748 /* LoadBeerImageDataFromCacheUseCaseTests.swift in Sources */,
