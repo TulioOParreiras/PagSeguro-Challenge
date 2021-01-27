@@ -67,7 +67,7 @@ class LoadBeerImageDataFromCacheUseCaseTests: XCTestCase {
     }
     
     func test_loadImageDataFromURL_doesNotDeliverResultAfterSUTInstanceHasBeenDeallocated() {
-        let store = StoreSpy()
+        let store = BeerImageDataStoreSpy()
         var sut: LocalBeerImageDataLoader? = LocalBeerImageDataLoader(store: store)
         
         var received = [BeerImageDataLoader.Result]()
@@ -91,8 +91,8 @@ class LoadBeerImageDataFromCacheUseCaseTests: XCTestCase {
 
     // MARK: - Helpers
     
-    private func makeSUT(currentDate: @escaping () -> Date = Date.init, file: StaticString = #file, line: UInt = #line) -> (sut: LocalBeerImageDataLoader, store: StoreSpy) {
-        let store = StoreSpy()
+    private func makeSUT(currentDate: @escaping () -> Date = Date.init, file: StaticString = #file, line: UInt = #line) -> (sut: LocalBeerImageDataLoader, store: BeerImageDataStoreSpy) {
+        let store = BeerImageDataStoreSpy()
         let sut = LocalBeerImageDataLoader(store: store)
         trackForMemoryLeaks(store, file: file, line: line)
         trackForMemoryLeaks(sut, file: file, line: line)
@@ -129,32 +129,5 @@ class LoadBeerImageDataFromCacheUseCaseTests: XCTestCase {
         action()
         wait(for: [exp], timeout: 1.0)
     }
-    
-    private class StoreSpy: BeerImageDataStore {
-        enum Message: Equatable {
-            case insert(data: Data, for: URL)
-            case retrieve(dataFor: URL)
-        }
-        private var retrievalCompletions = [(BeerImageDataStore.RetrievalResult) -> Void]()
-        private(set) var receivedMessages = [Message]()
-        
-        func insert(_ data: Data, for url: URL, completion: @escaping (BeerImageDataStore.InsertionResult) -> Void) {
-            receivedMessages.append(.insert(data: data, for: url))
-        }
-
-        func retrieve(dataForURL url: URL, completion: @escaping (BeerImageDataStore.RetrievalResult) -> Void) {
-            receivedMessages.append(.retrieve(dataFor: url))
-            retrievalCompletions.append(completion)
-        }
-        
-        func completeRetrieval(with error: Error, at index: Int = 0) {
-            retrievalCompletions[index](.failure(error))
-        }
-        
-        func completeRetrieval(with data: Data?, at index: Int = 0) {
-            retrievalCompletions[index](.success(data))
-        }
-    }
-
 
 }
