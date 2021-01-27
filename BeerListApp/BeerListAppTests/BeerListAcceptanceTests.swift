@@ -11,29 +11,6 @@ import BeerListiOS
 @testable import BeerListApp
 
 
-class InMemoryBeerStore {
-    private var BeerImageDataCache: [URL: Data] = [:]
-    
-}
-
-extension InMemoryBeerStore: BeerImageDataStore {
-    func insert(_ data: Data, for url: URL, completion: @escaping (BeerImageDataStore.InsertionResult) -> Void) {
-        BeerImageDataCache[url] = data
-        completion(.success(()))
-    }
-    
-    func retrieve(dataForURL url: URL, completion: @escaping (BeerImageDataStore.RetrievalResult) -> Void) {
-        completion(.success(BeerImageDataCache[url]))
-    }
-}
-
-extension InMemoryBeerStore {
-    static var empty: InMemoryBeerStore {
-        InMemoryBeerStore()
-    }
-}
-
-
 class BeerListAcceptanceTests: XCTestCase {
 
     func test_onLaunch_displaysRemoteBeerListWhenCustomerHasConnectivity() {
