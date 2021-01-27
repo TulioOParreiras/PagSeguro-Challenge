@@ -11,7 +11,11 @@ import BeerList
 final class BeerDetailsViewController: UIViewController {
     private let imageContainer = UIView()
     private let imageView = UIImageView()
-    private let retryButton = UIButton()
+    private lazy var retryButton: UIButton = {
+        let button = UIButton()
+        button.addTarget(self, action: #selector(retryButtonTapped), for: .touchUpInside)
+        return button
+    }()
     
     private var imageLoader: BeerImageDataLoader?
     convenience init(model: Beer, imageLoader: BeerImageDataLoader) {
@@ -36,6 +40,10 @@ final class BeerDetailsViewController: UIViewController {
                 self.retryButton.isHidden = false
             }
         }
+    }
+    
+    @objc func retryButtonTapped() {
+        loadImage()
     }
 }
 
@@ -106,6 +114,19 @@ class BeerDetailsViewControllerTests: XCTestCase {
         XCTAssertTrue(sut.isShowingRetryButton)
     }
     
+    func test_retryAction_retriesImageLoad() {
+        let (sut, loader) = makeSUT()
+        
+        XCTAssertEqual(loader.loadImageCallCount, 0)
+        sut.loadViewIfNeeded()
+        
+        loader.completeImageLoadingWithError()
+        XCTAssertEqual(loader.loadImageCallCount, 1)
+        
+        sut.simulateRetryAction()
+        XCTAssertEqual(loader.loadImageCallCount, 2)
+    }
+    
     // MARK: - Helpers
     
     private func makeSUT(with model: Beer = makeBeer()) -> (sut: BeerDetailsViewController, loader: LoaderSpy) {
@@ -152,6 +173,22 @@ extension BeerDetailsViewController {
     
     var isShowingRetryButton: Bool {
         return !retryButton.isHidden
+    }
+    
+    func simulateRetryAction() {
+        retryButton.simulateEvent(.touchUpInside)
+    }
+    
+}
+
+extension UIControl {
+    
+    func simulateEvent(_ event: UIControl.Event) {
+        allTargets.forEach { target in
+            actions(forTarget: target, forControlEvent: event)?.forEach {
+                (target as NSObject).perform(Selector($0))
+            }
+        }
     }
     
 }
