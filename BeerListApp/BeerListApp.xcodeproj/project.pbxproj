@@ -37,6 +37,7 @@
 		D2BA5CE825C0587F00912BD9 /* BeerListAcceptanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BA5CE725C0587F00912BD9 /* BeerListAcceptanceTests.swift */; };
 		D2BC82AC25C199B2008358C0 /* BeerImageDataLoaderWithFallbackComposite.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BC82AB25C199B2008358C0 /* BeerImageDataLoaderWithFallbackComposite.swift */; };
 		D2BC82B425C19B17008358C0 /* InMemoryBeerStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BC82B325C19B16008358C0 /* InMemoryBeerStore.swift */; };
+		D2BC82B725C19B57008358C0 /* BeerImageDataLoaderCacheDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BC82B625C19B56008358C0 /* BeerImageDataLoaderCacheDecorator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -133,6 +134,7 @@
 		D2BA5CE725C0587F00912BD9 /* BeerListAcceptanceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeerListAcceptanceTests.swift; sourceTree = "<group>"; };
 		D2BC82AB25C199B2008358C0 /* BeerImageDataLoaderWithFallbackComposite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeerImageDataLoaderWithFallbackComposite.swift; sourceTree = "<group>"; };
 		D2BC82B325C19B16008358C0 /* InMemoryBeerStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InMemoryBeerStore.swift; sourceTree = "<group>"; };
+		D2BC82B625C19B56008358C0 /* BeerImageDataLoaderCacheDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeerImageDataLoaderCacheDecorator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -227,6 +229,7 @@
 			children = (
 				D2BA5CBE25C056DF00912BD9 /* BeerDataLoaderPresentationAdapter.swift */,
 				D2BA5CBF25C056DF00912BD9 /* BeerListUIComposer.swift */,
+				D2BC82B625C19B56008358C0 /* BeerImageDataLoaderCacheDecorator.swift */,
 				D2BA5CC025C056DF00912BD9 /* MainQueueDispatchDecorator.swift */,
 				D2BA5CC125C056DF00912BD9 /* WeakRefVirtualProxy.swift */,
 				D2BA5CC225C056DF00912BD9 /* BeerListLoaderPresentationAdapter.swift */,
@@ -402,6 +405,7 @@
 				D2BC82AC25C199B2008358C0 /* BeerImageDataLoaderWithFallbackComposite.swift in Sources */,
 				D295390725C10D9400E27934 /* BeerDetailsUIComposer.swift in Sources */,
 				D2BA5CC825C056DF00912BD9 /* BeerListLoaderPresentationAdapter.swift in Sources */,
+				D2BC82B725C19B57008358C0 /* BeerImageDataLoaderCacheDecorator.swift in Sources */,
 				D2BA5B7925C0445400912BD9 /* AppDelegate.swift in Sources */,
 				D2BA5CC525C056DF00912BD9 /* BeerListUIComposer.swift in Sources */,
 				D2BA5CC425C056DF00912BD9 /* BeerDataLoaderPresentationAdapter.swift in Sources */,
