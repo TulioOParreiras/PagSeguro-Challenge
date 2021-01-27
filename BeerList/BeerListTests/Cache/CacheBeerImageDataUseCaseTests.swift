@@ -42,6 +42,19 @@ class CacheBeerImageDataUseCaseTests: XCTestCase {
             store.completeInsertionSuccessfully()
         })
     }
+    
+    func test_saveImageDataFromURL_doesNotDeliverResultAfterSUTInstanceHasBeenDeallocated() {
+        let store = BeerImageDataStoreSpy()
+        var sut: LocalBeerImageDataLoader? = LocalBeerImageDataLoader(store: store)
+        
+        var received = [LocalBeerImageDataLoader.SaveResult]()
+        sut?.save(anyData(), for: anyURL()) { received.append($0) }
+        
+        sut = nil
+        store.completeInsertionSuccessfully()
+
+        XCTAssertTrue(received.isEmpty, "Expected no received results after instance has been deallocated")
+    }
 
     // MARK: - Helpers
     
