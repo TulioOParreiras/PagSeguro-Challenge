@@ -23,8 +23,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        guard let _ = (scene as? UIWindowScene) else { return }
+        guard let windowScene = (scene as? UIWindowScene) else { return }
         
+        window = UIWindow(windowScene: windowScene)
         configureWindow()
     }
     
@@ -38,6 +39,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             imageLoader: imageLoader)
         
         self.window?.rootViewController = UINavigationController(rootViewController: beerListController)
+        self.window?.makeKeyAndVisible()
     }
 
 
