@@ -10,6 +10,7 @@ import BeerList
 
 final class BeerDetailsViewController: UIViewController {
     private let imageContainer = UIView()
+    private let imageView = UIImageView()
     
     private var imageLoader: BeerImageDataLoader?
     convenience init(model: Beer, imageLoader: BeerImageDataLoader) {
@@ -25,8 +26,11 @@ final class BeerDetailsViewController: UIViewController {
     
     func loadImage() {
         imageContainer.isShimmering = true
-        imageLoader?.loadImageData(from: URL(string: "https://a-url.com")!) { _ in
+        imageLoader?.loadImageData(from: URL(string: "https://a-url.com")!) { result in
             self.imageContainer.isShimmering = false
+            if let data = try? result.get() {
+                self.imageView.image = UIImage(data: data)
+            }
         }
     }
 }
@@ -66,6 +70,17 @@ class BeerDetailsViewControllerTests: XCTestCase {
         XCTAssertFalse(sut.isShowingImageLoadingIndicator)
     }
     
+    func test_loadImageCompletion_rendersLoadedImageSuccessfully() {
+        let model = makeBeer()
+        let loader = LoaderSpy()
+        let sut = BeerDetailsViewController(model: model, imageLoader: loader)
+        
+        let imageData = UIImage.make(withColor: .red).pngData()!
+        sut.loadViewIfNeeded()
+        loader.completeImageLoading(with: imageData)
+        XCTAssertEqual(sut.renderedImage, imageData)
+    }
+    
     func makeBeer(name: String = "A name", imageURL: URL = URL(string: "https://a-url.com")!, ibu: Double? = nil) -> Beer {
         return Beer(id: Int.random(in: 0...100), name: name, tagline: "a tagline", description: "a description", imageURL: imageURL, abv: Double.random(in: 1...10), ibu: ibu)
     }
@@ -96,6 +111,10 @@ extension BeerDetailsViewController {
     
     var isShowingImageLoadingIndicator: Bool {
         return imageContainer.isShimmering
+    }
+    
+    var renderedImage: Data? {
+        return imageView.image?.pngData()
     }
     
 }
