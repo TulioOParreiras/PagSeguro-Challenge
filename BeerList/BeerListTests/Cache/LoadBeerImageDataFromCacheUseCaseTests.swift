@@ -1,5 +1,5 @@
 //
-//  LocalBeerImageDataLoaderTests.swift
+//  LoadBeerImageDataFromCacheUseCaseTests.swift
 //  BeerListTests
 //
 //  Created by Tulio Parreiras on 27/01/21.
@@ -8,7 +8,7 @@
 import XCTest
 import BeerList
 
-class LocalBeerImageDataLoaderTests: XCTestCase {
+class LoadBeerImageDataFromCacheUseCaseTests: XCTestCase {
 
     func test_init_doesNotMessageStoreUponCreation() {
         let (_, store) = makeSUT()
