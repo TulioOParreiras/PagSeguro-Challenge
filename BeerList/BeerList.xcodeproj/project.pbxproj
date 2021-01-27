@@ -45,6 +45,7 @@
 		D29538B325C0C2BB00E27934 /* UIViewController+TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29538B225C0C2BB00E27934 /* UIViewController+TestHelpers.swift */; };
 		D29538C125C0C30F00E27934 /* UIImage+TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29538C025C0C30F00E27934 /* UIImage+TestHelpers.swift */; };
 		D29538C725C0C36600E27934 /* XCTestCase+TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29538C625C0C36600E27934 /* XCTestCase+TestHelpers.swift */; };
+		D29538E525C0E75700E27934 /* BeerDetailsViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29538E425C0E75700E27934 /* BeerDetailsViewControllerTests.swift */; };
 		D2BA5B3425C03B4800912BD9 /* SharedTestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BA5B3325C03B4800912BD9 /* SharedTestHelpers.swift */; };
 		D2BA5B3B25C03B8500912BD9 /* HTTPClientSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BA5B3A25C03B8500912BD9 /* HTTPClientSpy.swift */; };
 		D2BA5B4225C03BC700912BD9 /* RemoteBeerImageDataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BA5B4125C03BC700912BD9 /* RemoteBeerImageDataLoader.swift */; };
@@ -144,6 +145,7 @@
 		D29538B225C0C2BB00E27934 /* UIViewController+TestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+TestHelpers.swift"; sourceTree = "<group>"; };
 		D29538C025C0C30F00E27934 /* UIImage+TestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+TestHelpers.swift"; sourceTree = "<group>"; };
 		D29538C625C0C36600E27934 /* XCTestCase+TestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+TestHelpers.swift"; sourceTree = "<group>"; };
+		D29538E425C0E75700E27934 /* BeerDetailsViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeerDetailsViewControllerTests.swift; sourceTree = "<group>"; };
 		D2A97C9E25C01E87000AE465 /* BeerListPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeerListPresenterTests.swift; sourceTree = "<group>"; };
 		D2BA5B3325C03B4800912BD9 /* SharedTestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedTestHelpers.swift; sourceTree = "<group>"; };
 		D2BA5B3A25C03B8500912BD9 /* HTTPClientSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClientSpy.swift; sourceTree = "<group>"; };
@@ -251,6 +253,7 @@
 				D232EFF725BE3BA300F272BB /* Info.plist */,
 				D2C2E8DA25C08D710027C40F /* BeerListSnapshotTests.swift */,
 				D29538B125C0C2B200E27934 /* Helpers */,
+				D29538E425C0E75700E27934 /* BeerDetailsViewControllerTests.swift */,
 			);
 			path = BeerListiOSTests;
 			sourceTree = "<group>";
@@ -639,6 +642,7 @@
 				D29538B325C0C2BB00E27934 /* UIViewController+TestHelpers.swift in Sources */,
 				D232F01825BE458800F272BB /* XCTest+MemoryLeakTracking.swift in Sources */,
 				D2C2E8DB25C08D710027C40F /* BeerListSnapshotTests.swift in Sources */,
+				D29538E525C0E75700E27934 /* BeerDetailsViewControllerTests.swift in Sources */,
 				D29538C725C0C36600E27934 /* XCTestCase+TestHelpers.swift in Sources */,
 				D29538C125C0C30F00E27934 /* UIImage+TestHelpers.swift in Sources */,
 			);
