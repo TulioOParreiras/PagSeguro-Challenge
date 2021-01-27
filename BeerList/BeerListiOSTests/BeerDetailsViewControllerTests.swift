@@ -7,67 +7,7 @@
 
 import XCTest
 import BeerList
-
-final class BeerDetailsViewController: UIViewController {
-    private let imageContainer = UIView()
-    private let imageView = UIImageView()
-    private let taglineLabel = UILabel()
-    private let abvLabel = UILabel()
-    private let ibuLabel = UILabel()
-    private let descriptionLabel = UILabel()
-    
-    private lazy var retryButton: UIButton = {
-        let button = UIButton()
-        button.addTarget(self, action: #selector(retryButtonTapped), for: .touchUpInside)
-        return button
-    }()
-    
-    private var imageLoader: BeerImageDataLoader?
-    private var model: Beer!
-    private var task: BeerImageDataLoaderTask?
-    convenience init(model: Beer, imageLoader: BeerImageDataLoader) {
-        self.init()
-        self.model = model
-        self.imageLoader = imageLoader
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.title = model.name
-        display(model: model)
-    }
-    
-    deinit {
-        task?.cancel()
-    }
-    
-    func loadImage() {
-        retryButton.isHidden = true
-        imageContainer.isShimmering = true
-        task = imageLoader?.loadImageData(from: model.imageURL) { [weak self] result in
-            guard let self = self else { return }
-            self.imageContainer.isShimmering = false
-            if let data = try? result.get(), let image = UIImage(data: data) {
-                self.imageView.image = image
-            } else {
-                self.retryButton.isHidden = false
-            }
-        }
-    }
-    
-    func display(model: Beer) {
-        self.taglineLabel.text = model.tagline
-        self.abvLabel.text = "ABV: " + String(describing: model.abv)
-        self.ibuLabel.text = "IBU: " + String(describing: model.ibu)
-        self.descriptionLabel.text = model.description
-        self.ibuLabel.isHidden = model.ibu == nil
-        loadImage()
-    }
-    
-    @objc func retryButtonTapped() {
-        loadImage()
-    }
-}
+import BeerListiOS
 
 func makeBeer(name: String = "A name", imageURL: URL = URL(string: "https://a-url.com")!, ibu: Double? = nil) -> Beer {
     return Beer(id: Int.random(in: 0...100), name: name, tagline: "a tagline", description: "a description", imageURL: imageURL, abv: Double.random(in: 1...10), ibu: ibu)
@@ -182,17 +122,12 @@ class BeerDetailsViewControllerTests: XCTestCase {
         }
         
         private struct TaskSpy: BeerImageDataLoaderTask {
-            let cancelCallback: () -> Void
-            func cancel() {
-                cancelCallback()
-            }
+            func cancel() { }
         }
         
         func loadImageData(from url: URL, completion: @escaping (BeerImageDataLoader.Result) -> Void) -> BeerImageDataLoaderTask {
             loadRequests.append((url, completion))
-            return TaskSpy {
-                self.cancelledURL = url
-            }
+            return TaskSpy()
         }
         
         func completeImageLoading(with data: Data = Data(), at index: Int = 0) {
