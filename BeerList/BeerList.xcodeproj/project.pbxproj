@@ -66,6 +66,7 @@
 		D2BC829325C18F22008358C0 /* CoreDataBeerStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BC829225C18F22008358C0 /* CoreDataBeerStore.swift */; };
 		D2BC829925C18FB5008358C0 /* CoreDataBeerImageDataStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BC829825C18FB5008358C0 /* CoreDataBeerImageDataStoreTests.swift */; };
 		D2BC829F25C194FE008358C0 /* CoreDataBeerStore+BeerImageDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BC829E25C194FE008358C0 /* CoreDataBeerStore+BeerImageDataStore.swift */; };
+		D2BC82C125C1A186008358C0 /* BeerDetailsSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BC82C025C1A186008358C0 /* BeerDetailsSnapshotTests.swift */; };
 		D2C2E8DB25C08D710027C40F /* BeerListSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C2E8DA25C08D710027C40F /* BeerListSnapshotTests.swift */; };
 /* End PBXBuildFile section */
 
@@ -178,6 +179,7 @@
 		D2BC829225C18F22008358C0 /* CoreDataBeerStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataBeerStore.swift; sourceTree = "<group>"; };
 		D2BC829825C18FB5008358C0 /* CoreDataBeerImageDataStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataBeerImageDataStoreTests.swift; sourceTree = "<group>"; };
 		D2BC829E25C194FE008358C0 /* CoreDataBeerStore+BeerImageDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreDataBeerStore+BeerImageDataStore.swift"; sourceTree = "<group>"; };
+		D2BC82C025C1A186008358C0 /* BeerDetailsSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeerDetailsSnapshotTests.swift; sourceTree = "<group>"; };
 		D2C2E8DA25C08D710027C40F /* BeerListSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeerListSnapshotTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -280,6 +282,7 @@
 			children = (
 				D232EFF725BE3BA300F272BB /* Info.plist */,
 				D2C2E8DA25C08D710027C40F /* BeerListSnapshotTests.swift */,
+				D2BC82C025C1A186008358C0 /* BeerDetailsSnapshotTests.swift */,
 				D29538B125C0C2B200E27934 /* Helpers */,
 			);
 			path = BeerListiOSTests;
@@ -722,6 +725,7 @@
 			files = (
 				D29538B325C0C2BB00E27934 /* UIViewController+TestHelpers.swift in Sources */,
 				D232F01825BE458800F272BB /* XCTest+MemoryLeakTracking.swift in Sources */,
+				D2BC82C125C1A186008358C0 /* BeerDetailsSnapshotTests.swift in Sources */,
 				D2C2E8DB25C08D710027C40F /* BeerListSnapshotTests.swift in Sources */,
 				D29538C725C0C36600E27934 /* XCTestCase+TestHelpers.swift in Sources */,
 				D29538C125C0C30F00E27934 /* UIImage+TestHelpers.swift in Sources */,
