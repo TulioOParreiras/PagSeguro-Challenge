@@ -32,9 +32,8 @@ extension BeerListUIIntegrationsTests {
             return XCTFail("Expected \(BeerCell.self) instance, got \(String(describing: view)) instead", file: file, line: line)
         }
         
-        let shouldIbuBeVisible = beer.ibu != nil
-        XCTAssertEqual(cell.isShowingIbu, shouldIbuBeVisible, "Expected `isShowingIbu` to be \(shouldIbuBeVisible) for beer cell at index (\(index))", file: file, line: line)
-        
+        let expectedAbvText = "ABV: \(beer.abv)"
+        XCTAssertEqual(cell.abvText, expectedAbvText, "Expected abv text to be \(expectedAbvText) for beer cell at index (\(index))", file: file, line: line)
         XCTAssertEqual(cell.nameText, beer.name, "Expected name text to be \(beer.name) for beer cell at index (\(index))", file: file, line: line)
     }
     
