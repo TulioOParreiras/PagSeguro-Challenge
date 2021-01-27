@@ -8,58 +8,6 @@
 import XCTest
 import BeerList
 
-protocol BeerImageDataStore {
-    typealias Result = Swift.Result<Data?, Error>
-
-    func retrieve(dataForURL url: URL, completion: @escaping (Result) -> Void)
-}
-
-final class LocalBeerImageDataLoader {
-    private final class Task: BeerImageDataLoaderTask {
-        private var completion: ((BeerImageDataLoader.Result) -> Void)?
-        
-        init(_ completion: @escaping (BeerImageDataLoader.Result) -> Void) {
-            self.completion = completion
-        }
-        
-        func complete(with result: BeerImageDataLoader.Result) {
-            completion?(result)
-        }
-        
-        func cancel() {
-            preventFurtherCompletions()
-        }
-        
-        private func preventFurtherCompletions() {
-            completion = nil
-        }
-    }
-    
-    public enum Error: Swift.Error {
-        case failed
-        case notFound
-    }
-    
-    private let store: BeerImageDataStore
-    
-    init(store: BeerImageDataStore) {
-        self.store = store
-    }
-    
-    func loadImageData(from url: URL, completion: @escaping (BeerImageDataLoader.Result) -> Void) -> BeerImageDataLoaderTask {
-        let task = Task(completion)
-        store.retrieve(dataForURL: url) { [weak self] result in
-            guard self != nil else { return }
-            task.complete(with: result
-                            .mapError { _ in Error.failed }
-                            .flatMap { data in
-                                data.map { .success($0) } ?? .failure(Error.notFound)
-                            })
-        }
-        return task
-    }
-}
-
 class LocalBeerImageDataLoaderTests: XCTestCase {
 
     func test_init_doesNotMessageStoreUponCreation() {
