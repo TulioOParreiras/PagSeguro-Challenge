@@ -1,5 +1,5 @@
 //
-//  BeerDetailsViewControllerTests.swift
+//  BeerDetailsUIIntegraationTests.swift
 //  BeerListiOSTests
 //
 //  Created by Tulio Parreiras on 26/01/21.
@@ -8,16 +8,9 @@
 import XCTest
 import BeerList
 import BeerListiOS
+import BeerListApp
 
-func makeBeer(name: String = "A name", imageURL: URL = URL(string: "https://a-url.com")!, ibu: Double? = nil) -> Beer {
-    return Beer(id: Int.random(in: 0...100), name: name, tagline: "a tagline", description: "a description", imageURL: imageURL, abv: Double.random(in: 1...10), ibu: ibu)
-}
-
-func anyNSError() -> NSError {
-    return NSError(domain: "A domain", code: 1)
-}
-
-class BeerDetailsViewControllerTests: XCTestCase {
+class BeerDetailsUIIntegraationTests: XCTestCase {
 
     func test_beerDetailsView_hasTitle() {
         let beer = makeBeer()
@@ -109,7 +102,7 @@ class BeerDetailsViewControllerTests: XCTestCase {
     
     private func makeSUT(with beer: Beer = makeBeer(), file: StaticString = #file, line: UInt = #line) -> (sut: BeerDetailsViewController, loader: LoaderSpy) {
         let loader = LoaderSpy()
-        let sut = BeerDetailsViewController(model: beer, imageLoader: loader)
+        let sut = BeerDetailsUIComposer.beerDetailsComposedWith(beer: beer, imageLoader: loader)
         trackForMemoryLeaks(loader, file: file, line: line)
         trackForMemoryLeaks(sut, file: file, line: line)
         return (sut, loader)
@@ -177,18 +170,6 @@ extension BeerDetailsViewController {
     
     var descriptionText: String? {
         return descriptionLabel.text
-    }
-    
-}
-
-extension UIControl {
-    
-    func simulateEvent(_ event: UIControl.Event) {
-        allTargets.forEach { target in
-            actions(forTarget: target, forControlEvent: event)?.forEach {
-                (target as NSObject).perform(Selector($0))
-            }
-        }
     }
     
 }

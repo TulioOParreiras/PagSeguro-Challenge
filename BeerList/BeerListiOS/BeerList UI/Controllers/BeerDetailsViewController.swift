@@ -8,7 +8,11 @@
 import UIKit
 import BeerList
 
-public final class BeerDetailsViewController: UIViewController {
+public protocol BeerDetailsViewControllerDelegate {
+    func didRequestBeerImageLoad()
+}
+
+public final class BeerDetailsViewController: UIViewController, BeerDetailsView {
     public let imageContainer = UIView()
     public let imageView = UIImageView()
     public let taglineLabel = UILabel()
@@ -22,47 +26,32 @@ public final class BeerDetailsViewController: UIViewController {
         return button
     }()
     
-    private var imageLoader: BeerImageDataLoader?
-    private var model: Beer!
-    private var task: BeerImageDataLoaderTask?
+    private var delegate: BeerDetailsViewControllerDelegate?
     
-    public convenience init(model: Beer, imageLoader: BeerImageDataLoader) {
+    public convenience init(delegate: BeerDetailsViewControllerDelegate) {
         self.init()
-        self.model = model
-        self.imageLoader = imageLoader
+        self.delegate = delegate
     }
     
     public override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = model.name
-        display(model: model)
+        loadImage()
     }
     
-    deinit {
-        task?.cancel()
+    public func display(_ model: BeerDetailsViewModel<UIImage>) {
+        self.title = model.name
+        self.taglineLabel.text = model.tagline
+        self.abvLabel.text = model.abv
+        self.ibuLabel.text = model.ibu
+        self.descriptionLabel.text = model.description
+        self.ibuLabel.isHidden = model.ibu == nil
+        self.retryButton.isHidden = !model.shouldRetry
+        self.imageView.setImageAnimated(model.image)
+        self.imageContainer.isShimmering = model.isLoading
     }
     
     func loadImage() {
-        retryButton.isHidden = true
-        imageContainer.isShimmering = true
-        task = imageLoader?.loadImageData(from: model.imageURL) { [weak self] result in
-            guard let self = self else { return }
-            self.imageContainer.isShimmering = false
-            if let data = try? result.get(), let image = UIImage(data: data) {
-                self.imageView.image = image
-            } else {
-                self.retryButton.isHidden = false
-            }
-        }
-    }
-    
-    func display(model: Beer) {
-        self.taglineLabel.text = model.tagline
-        self.abvLabel.text = "ABV: " + String(describing: model.abv)
-        self.ibuLabel.text = "IBU: " + String(describing: model.ibu)
-        self.descriptionLabel.text = model.description
-        self.ibuLabel.isHidden = model.ibu == nil
-        loadImage()
+        delegate?.didRequestBeerImageLoad()
     }
     
     @objc func retryButtonTapped() {
