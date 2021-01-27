@@ -18,21 +18,23 @@ final class BeerDetailsViewController: UIViewController {
     }()
     
     private var imageLoader: BeerImageDataLoader?
+    private var model: Beer!
     convenience init(model: Beer, imageLoader: BeerImageDataLoader) {
         self.init()
-        self.title = model.name
+        self.model = model
         self.imageLoader = imageLoader
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.title = model.name
         loadImage()
     }
     
     func loadImage() {
         retryButton.isHidden = true
         imageContainer.isShimmering = true
-        _ = imageLoader?.loadImageData(from: URL(string: "https://a-url.com")!) { result in
+        _ = imageLoader?.loadImageData(from: model.imageURL) { result in
             self.imageContainer.isShimmering = false
             if let data = try? result.get(), let image = UIImage(data: data) {
                 self.imageView.image = image
@@ -58,20 +60,21 @@ func anyNSError() -> NSError {
 class BeerDetailsViewControllerTests: XCTestCase {
 
     func test_beerDetailsView_hasTitle() {
-        let model = makeBeer()
-        let (sut, _) = makeSUT(with: model)
+        let beer = makeBeer()
+        let (sut, _) = makeSUT(with: beer)
         
         sut.loadViewIfNeeded()
         
-        XCTAssertEqual(sut.title, model.name)
+        XCTAssertEqual(sut.title, beer.name)
     }
     
     func test_loadView_doesRequestImageLoad() {
-        let (sut, loader) = makeSUT()
-        XCTAssertEqual(loader.loadImageCallCount, 0)
+        let beer = makeBeer()
+        let (sut, loader) = makeSUT(with: beer)
+        XCTAssertEqual(loader.loadedURLs, [])
         
         sut.loadViewIfNeeded()
-        XCTAssertEqual(loader.loadImageCallCount, 1)
+        XCTAssertEqual(loader.loadedURLs, [beer.imageURL])
     }
     
     func test_loadingBeerImageIndicator_isVisibleWhileLoadingImage() {
@@ -115,30 +118,31 @@ class BeerDetailsViewControllerTests: XCTestCase {
     }
     
     func test_retryAction_retriesImageLoad() {
-        let (sut, loader) = makeSUT()
+        let beer = makeBeer()
+        let (sut, loader) = makeSUT(with: beer)
         
-        XCTAssertEqual(loader.loadImageCallCount, 0)
+        XCTAssertEqual(loader.loadedURLs, [])
         sut.loadViewIfNeeded()
         
         loader.completeImageLoadingWithError()
-        XCTAssertEqual(loader.loadImageCallCount, 1)
+        XCTAssertEqual(loader.loadedURLs, [beer.imageURL])
         
         sut.simulateRetryAction()
-        XCTAssertEqual(loader.loadImageCallCount, 2)
+        XCTAssertEqual(loader.loadedURLs, [beer.imageURL, beer.imageURL])
     }
     
     // MARK: - Helpers
     
-    private func makeSUT(with model: Beer = makeBeer()) -> (sut: BeerDetailsViewController, loader: LoaderSpy) {
+    private func makeSUT(with beer: Beer = makeBeer()) -> (sut: BeerDetailsViewController, loader: LoaderSpy) {
         let loader = LoaderSpy()
-        let sut = BeerDetailsViewController(model: model, imageLoader: loader)
+        let sut = BeerDetailsViewController(model: beer, imageLoader: loader)
         return (sut, loader)
     }
     
     final class LoaderSpy: BeerImageDataLoader {
         private var loadRequests = [(url: URL, completion: (BeerImageDataLoader.Result) -> Void)]()
-        var loadImageCallCount: Int {
-            return loadRequests.count
+        var loadedURLs: [URL] {
+            return loadRequests.map { $0.url }
         }
         
         private struct TaskSpy: BeerImageDataLoaderTask {
