@@ -6,6 +6,8 @@
 //
 
 import Foundation
+import BeerList
+import BeerListiOS
 
 final class BeerDetailsImageLoaderPresentationAdapter<View: BeerDetailsView, Image>: BeerDetailsViewControllerDelegate where View.Image == Image {
     private let imageLoader: BeerImageDataLoader
