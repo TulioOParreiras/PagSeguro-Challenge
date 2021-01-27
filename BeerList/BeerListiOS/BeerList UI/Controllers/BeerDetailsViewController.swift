@@ -89,12 +89,6 @@ public protocol BeerDetailsViewControllerDelegate {
     func didRequestBeerImageLoad()
 }
 
-public protocol BeerDetailsView {
-    associatedtype Image
-    
-    func display(_ model: BeerDetailsViewModel<Image>)
-}
-
 public struct BeerDetailsViewModel<Image> {
     public let name: String
     public let description: String
