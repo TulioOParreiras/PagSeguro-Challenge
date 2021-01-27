@@ -11,6 +11,7 @@ import BeerList
 final class BeerDetailsViewController: UIViewController {
     private let imageContainer = UIView()
     private let imageView = UIImageView()
+    private let retryButton = UIButton()
     
     private var imageLoader: BeerImageDataLoader?
     convenience init(model: Beer, imageLoader: BeerImageDataLoader) {
@@ -25,11 +26,15 @@ final class BeerDetailsViewController: UIViewController {
     }
     
     func loadImage() {
+        retryButton.isHidden = true
         imageContainer.isShimmering = true
-        imageLoader?.loadImageData(from: URL(string: "https://a-url.com")!) { result in
+        _ = imageLoader?.loadImageData(from: URL(string: "https://a-url.com")!) { result in
             self.imageContainer.isShimmering = false
-            if let data = try? result.get() {
+            switch result {
+            case let .success(data):
                 self.imageView.image = UIImage(data: data)
+            case .failure:
+                self.retryButton.isHidden = false
             }
         }
     }
@@ -37,6 +42,10 @@ final class BeerDetailsViewController: UIViewController {
 
 func makeBeer(name: String = "A name", imageURL: URL = URL(string: "https://a-url.com")!, ibu: Double? = nil) -> Beer {
     return Beer(id: Int.random(in: 0...100), name: name, tagline: "a tagline", description: "a description", imageURL: imageURL, abv: Double.random(in: 1...10), ibu: ibu)
+}
+
+func anyNSError() -> NSError {
+    return NSError(domain: "A domain", code: 1)
 }
 
 class BeerDetailsViewControllerTests: XCTestCase {
@@ -78,6 +87,16 @@ class BeerDetailsViewControllerTests: XCTestCase {
         XCTAssertEqual(sut.renderedImage, imageData)
     }
     
+    func test_imageRetryButton_isVisibleOnImageLoadError() {
+        let (sut, loader) = makeSUT()
+        
+        let imageData = UIImage.make(withColor: .red).pngData()!
+        sut.loadViewIfNeeded()
+        XCTAssertFalse(sut.isShowingRetryButton)
+        loader.completeImageLoadingWithError()
+        XCTAssertTrue(sut.isShowingRetryButton)
+    }
+    
     // MARK: - Helpers
     
     private func makeSUT(with model: Beer = makeBeer()) -> (sut: BeerDetailsViewController, loader: LoaderSpy) {
@@ -104,6 +123,10 @@ class BeerDetailsViewControllerTests: XCTestCase {
         func completeImageLoading(with data: Data = Data(), at index: Int = 0) {
             loadRequests[index].completion(.success(data))
         }
+        
+        func completeImageLoadingWithError(error: NSError = anyNSError(), at index: Int = 0) {
+            loadRequests[index].completion(.failure(error))
+        }
     }
 
 }
@@ -116,6 +139,10 @@ extension BeerDetailsViewController {
     
     var renderedImage: Data? {
         return imageView.image?.pngData()
+    }
+    
+    var isShowingRetryButton: Bool {
+        return !retryButton.isHidden
     }
     
 }
