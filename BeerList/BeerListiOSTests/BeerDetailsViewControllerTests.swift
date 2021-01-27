@@ -109,7 +109,7 @@ class BeerDetailsViewControllerTests: XCTestCase {
     
     private func makeSUT(with beer: Beer = makeBeer(), file: StaticString = #file, line: UInt = #line) -> (sut: BeerDetailsViewController, loader: LoaderSpy) {
         let loader = LoaderSpy()
-        let sut = BeerDetailsViewController(model: beer, imageLoader: loader)
+        let sut = BeerDetailsUIComposer.beerDetailsComposedWith(beer: beer, imageLoader: loader)
         trackForMemoryLeaks(loader, file: file, line: line)
         trackForMemoryLeaks(sut, file: file, line: line)
         return (sut, loader)
