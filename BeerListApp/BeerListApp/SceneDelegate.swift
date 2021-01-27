@@ -32,9 +32,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             imageLoader: makeRemoteImageLoader(),
             selection: showDetails))
     
-    convenience init(httpClient: HTTPClient) {
+    convenience init(httpClient: HTTPClient, store: BeerImageDataStore) {
         self.init()
         self.httpClient = httpClient
+        self.store = store
     }
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
