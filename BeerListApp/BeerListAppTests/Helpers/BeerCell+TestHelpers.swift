@@ -10,7 +10,7 @@ import BeerListiOS
 
 extension BeerCell {
     var isShowingIbu: Bool {
-        return !ibuLabel.isHidden
+        return !abvLabel.isHidden
     }
     
     var isShowingImageLoadingIndicator: Bool {

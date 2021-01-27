@@ -105,9 +105,9 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="abvLabel" destination="vNU-t2-ZR8" id="2gr-bD-lRi"/>
                                     <outlet property="beerImageReturnButton" destination="831-fM-vee" id="FgY-CJ-dAx"/>
                                     <outlet property="beerImageView" destination="yhR-vq-f3l" id="coI-p2-bpG"/>
-                                    <outlet property="ibuLabel" destination="vNU-t2-ZR8" id="2gr-bD-lRi"/>
                                     <outlet property="imageContainer" destination="5bJ-KR-6SU" id="9gE-5m-uvJ"/>
                                     <outlet property="nameLabel" destination="ulR-ug-ybO" id="HRZ-Qh-r96"/>
                                 </connections>

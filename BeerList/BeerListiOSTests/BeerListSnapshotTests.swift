@@ -63,15 +63,15 @@ class BeerListSnapshotTests: XCTestCase {
     
     private func beerListWithContent() -> [BeerStub] {
         return [
-            BeerStub(name: "Buzz", ibu: 60.0, image: UIImage.make(withColor: .red)),
-            BeerStub(name: "Trashy Blonde", ibu: 41.5, image: UIImage.make(withColor: .blue))
+            BeerStub(name: "Buzz", abv: 60.0, image: UIImage.make(withColor: .red)),
+            BeerStub(name: "Trashy Blonde", abv: 41.5, image: UIImage.make(withColor: .blue))
         ]
     }
     
     private func beerWithFailedImageLoading() -> [BeerStub] {
         return [
-            BeerStub(name: "Buzz", ibu: 60.0, image: nil),
-            BeerStub(name: "Trashy Blonde", ibu: 41.5, image: nil)
+            BeerStub(name: "Buzz", abv: 60.0, image: nil),
+            BeerStub(name: "Trashy Blonde", abv: 41.5, image: nil)
         ]
     }
     
@@ -93,10 +93,10 @@ private class BeerStub: BeerCellControllerDelegate {
     let viewModel: BeerViewModel<UIImage>
     weak var controller: BeerCellController?
     
-    init(name: String, ibu: Double?, image: UIImage?) {
+    init(name: String, abv: Double, image: UIImage?) {
         self.viewModel = BeerViewModel(
             name: name,
-            ibuValue: ibu,
+            abvValue: abv,
             image: image,
             isLoading: false,
             shouldRetry: image == nil)
