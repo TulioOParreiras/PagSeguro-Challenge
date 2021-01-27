@@ -9,12 +9,12 @@ import UIKit
 import BeerListiOS
 
 extension BeerCell {
-    var isShowingIbu: Bool {
-        return !abvLabel.isHidden
-    }
-    
     var isShowingImageLoadingIndicator: Bool {
         imageContainer.isShimmering
+    }
+    
+    var abvText: String? {
+        return abvLabel.text
     }
     
     var nameText: String? {
