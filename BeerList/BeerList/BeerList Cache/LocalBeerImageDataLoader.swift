@@ -39,6 +39,12 @@ public final class LocalBeerImageDataLoader {
         self.store = store
     }
     
+    public typealias SaveResult = Result<Void, Swift.Error>
+
+    public func save(_ data: Data, for url: URL, completion: @escaping (SaveResult) -> Void) {
+        store.insert(data, for: url) { _ in }
+    }
+    
     public func loadImageData(from url: URL, completion: @escaping (BeerImageDataLoader.Result) -> Void) -> BeerImageDataLoaderTask {
         let task = Task(completion)
         store.retrieve(dataForURL: url) { [weak self] result in
