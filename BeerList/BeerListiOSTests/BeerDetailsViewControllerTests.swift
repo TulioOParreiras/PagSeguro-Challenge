@@ -35,12 +35,15 @@ final class BeerDetailsViewController: UIViewController {
     }
 }
 
+func makeBeer(name: String = "A name", imageURL: URL = URL(string: "https://a-url.com")!, ibu: Double? = nil) -> Beer {
+    return Beer(id: Int.random(in: 0...100), name: name, tagline: "a tagline", description: "a description", imageURL: imageURL, abv: Double.random(in: 1...10), ibu: ibu)
+}
+
 class BeerDetailsViewControllerTests: XCTestCase {
 
     func test_beerDetailsView_hasTitle() {
         let model = makeBeer()
-        let loader = LoaderSpy()
-        let sut = BeerDetailsViewController(model: model, imageLoader: loader)
+        let (sut, _) = makeSUT(with: model)
         
         sut.loadViewIfNeeded()
         
@@ -48,9 +51,7 @@ class BeerDetailsViewControllerTests: XCTestCase {
     }
     
     func test_loadView_doesRequestImageLoad() {
-        let model = makeBeer()
-        let loader = LoaderSpy()
-        let sut = BeerDetailsViewController(model: model, imageLoader: loader)
+        let (sut, loader) = makeSUT()
         XCTAssertEqual(loader.loadImageCallCount, 0)
         
         sut.loadViewIfNeeded()
@@ -58,9 +59,7 @@ class BeerDetailsViewControllerTests: XCTestCase {
     }
     
     func test_loadingBeerImageIndicator_isVisibleWhileLoadingImage() {
-        let model = makeBeer()
-        let loader = LoaderSpy()
-        let sut = BeerDetailsViewController(model: model, imageLoader: loader)
+        let (sut, loader) = makeSUT()
         XCTAssertFalse(sut.isShowingImageLoadingIndicator)
         
         sut.loadViewIfNeeded()
@@ -71,9 +70,7 @@ class BeerDetailsViewControllerTests: XCTestCase {
     }
     
     func test_loadImageCompletion_rendersLoadedImageSuccessfully() {
-        let model = makeBeer()
-        let loader = LoaderSpy()
-        let sut = BeerDetailsViewController(model: model, imageLoader: loader)
+        let (sut, loader) = makeSUT()
         
         let imageData = UIImage.make(withColor: .red).pngData()!
         sut.loadViewIfNeeded()
@@ -81,8 +78,12 @@ class BeerDetailsViewControllerTests: XCTestCase {
         XCTAssertEqual(sut.renderedImage, imageData)
     }
     
-    func makeBeer(name: String = "A name", imageURL: URL = URL(string: "https://a-url.com")!, ibu: Double? = nil) -> Beer {
-        return Beer(id: Int.random(in: 0...100), name: name, tagline: "a tagline", description: "a description", imageURL: imageURL, abv: Double.random(in: 1...10), ibu: ibu)
+    // MARK: - Helpers
+    
+    private func makeSUT(with model: Beer = makeBeer()) -> (sut: BeerDetailsViewController, loader: LoaderSpy) {
+        let loader = LoaderSpy()
+        let sut = BeerDetailsViewController(model: model, imageLoader: loader)
+        return (sut, loader)
     }
     
     final class LoaderSpy: BeerImageDataLoader {
