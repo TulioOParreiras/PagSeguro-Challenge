@@ -30,10 +30,9 @@ final class BeerDetailsViewController: UIViewController {
         imageContainer.isShimmering = true
         _ = imageLoader?.loadImageData(from: URL(string: "https://a-url.com")!) { result in
             self.imageContainer.isShimmering = false
-            switch result {
-            case let .success(data):
-                self.imageView.image = UIImage(data: data)
-            case .failure:
+            if let data = try? result.get(), let image = UIImage(data: data) {
+                self.imageView.image = image
+            } else {
                 self.retryButton.isHidden = false
             }
         }
@@ -90,10 +89,20 @@ class BeerDetailsViewControllerTests: XCTestCase {
     func test_imageRetryButton_isVisibleOnImageLoadError() {
         let (sut, loader) = makeSUT()
         
-        let imageData = UIImage.make(withColor: .red).pngData()!
         sut.loadViewIfNeeded()
         XCTAssertFalse(sut.isShowingRetryButton)
         loader.completeImageLoadingWithError()
+        XCTAssertTrue(sut.isShowingRetryButton)
+    }
+    
+    func test_imageRetryButton_isVisibleOnInvalidImageData() {
+        let (sut, loader) = makeSUT()
+        
+        sut.loadViewIfNeeded()
+        XCTAssertFalse(sut.isShowingRetryButton)
+        
+        let invalidData = Data("invalid data".utf8)
+        loader.completeImageLoading(with: invalidData)
         XCTAssertTrue(sut.isShowingRetryButton)
     }
     
